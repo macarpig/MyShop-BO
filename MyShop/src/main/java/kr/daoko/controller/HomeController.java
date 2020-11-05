@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	// 로그인 페이지 출력
+	// 濡쒓렇�씤 �럹�씠吏� 異쒕젰
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getLogin() {
 		logger.info("from HomeController: getLogin()");
@@ -18,7 +18,7 @@ public class HomeController {
 		return "login";
 	}
 	
-	// 메인 페이지 출력
+	// 硫붿씤 �럹�씠吏� 異쒕젰
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String getMain() {
 		logger.info("from HomeController: getMain()");
