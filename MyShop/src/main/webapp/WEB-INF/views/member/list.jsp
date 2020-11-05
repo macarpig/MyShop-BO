@@ -69,6 +69,7 @@ pageEncoding="UTF-8"%>
                     <th>주소</th>
                     <th>등급</th>
                     <th>권한</th>
+                    <th>수정</th>
                   </tr>
                   </thead>
                   <tfoot>
@@ -79,6 +80,7 @@ pageEncoding="UTF-8"%>
 	                    <th>주소</th>
 	                    <th>등급</th>
 	                    <th>권한</th>
+	                    <th>수정</th>
 	                  </tr>
                   </tfoot>
                 </table>
@@ -147,12 +149,22 @@ var table = $('#list').DataTable({
 				}
 				
 				else {
-					return '<input type="checkbox" onclick="return false;" class="editor-active">';
+					return '<input type="checkbox" class="editor-active" onclick="return false;">';
 				}
 				return data;
 			}
 		},
+		{
+			"data": "userId",
+			"render": function(data, type, full, meta) {
+				return "<a href='edit?userId="+ data +"'>수정</a>";
+			}
+		}
 	]
+});
+
+$('#list tbody').on('click', 'tr', function() {
+	location.href="detail?userId=" + table.row(this).data().userId;
 });
 </script>
 </body>
