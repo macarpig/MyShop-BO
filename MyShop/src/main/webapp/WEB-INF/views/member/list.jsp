@@ -69,6 +69,7 @@ pageEncoding="UTF-8"%>
                     <th>주소</th>
                     <th>등급</th>
                     <th>권한</th>
+                    <th>수정</th>
                   </tr>
                   </thead>
                   <tfoot>
@@ -79,6 +80,7 @@ pageEncoding="UTF-8"%>
 	                    <th>주소</th>
 	                    <th>등급</th>
 	                    <th>권한</th>
+	                    <th>수정</th>
 	                  </tr>
                   </tfoot>
                 </table>
@@ -152,7 +154,17 @@ var table = $('#list').DataTable({
 				return data;
 			}
 		},
+		{
+			"targets": -1,
+			"data": null,
+			"defaultContent": "<button>수정</button>",
+		}
 	]
+});
+
+$('#list tbody').on('click', 'button', function() {
+	console.log(table.row($(this).parents('tr:first')).data().userId);
+	location.href="member/edit?userId=" + table.row($(this).parents('tr:first')).data().userId;
 });
 </script>
 </body>
