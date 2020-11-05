@@ -149,22 +149,22 @@ var table = $('#list').DataTable({
 				}
 				
 				else {
-					return '<input type="checkbox" onclick="return false;" class="editor-active">';
+					return '<input type="checkbox" class="editor-active" onclick="return false;">';
 				}
 				return data;
 			}
 		},
 		{
-			"targets": -1,
-			"data": null,
-			"defaultContent": "<button>수정</button>",
+			"data": "userId",
+			"render": function(data, type, full, meta) {
+				return "<a href='edit?userId="+ data +"'>수정</a>";
+			}
 		}
 	]
 });
 
-$('#list tbody').on('click', 'button', function() {
-	console.log(table.row($(this).parents('tr:first')).data().userId);
-	location.href="member/edit?userId=" + table.row($(this).parents('tr:first')).data().userId;
+$('#list tbody').on('click', 'tr', function() {
+	location.href="detail?userId=" + table.row(this).data().userId;
 });
 </script>
 </body>
