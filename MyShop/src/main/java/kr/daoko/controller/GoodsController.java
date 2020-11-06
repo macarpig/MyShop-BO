@@ -10,6 +10,6 @@ public class GoodsController {
 
 	@GetMapping("/manage")
 	public String getManage() {
-		return "goods/manage";
+		return "goods/manage";asd
 	}
 }
