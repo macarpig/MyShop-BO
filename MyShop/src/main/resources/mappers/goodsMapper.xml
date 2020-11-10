@@ -8,4 +8,9 @@
 		where g.cateCode = c.cateCode
 		group by gdsCode
 	</select>
+	<!-- 상품 등록 -->
+	<insert id="add">
+ 	insert into goods (cateCode, gdsCode, gdsName, gdsPrice, gdsImg, gdsThumbImg, gdsDesc)
+    	 values (#{cateCode}, #{gdsCode}, #{gdsName}, #{gdsPrice}, #{gdsImg}, #{gdsThumbImg}, #{gdsDesc})
+	</insert>
 </mapper>

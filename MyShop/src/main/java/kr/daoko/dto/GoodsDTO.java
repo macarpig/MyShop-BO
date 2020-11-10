@@ -1,19 +1,21 @@
 package kr.daoko.dto;
 
+import java.util.Date;
+
 public class GoodsDTO {
-	private String gdsCode;
+	private int gdsCode;
 	private String gdsName;
-	private String cateName;
-	private String gdsPrice;
+	private int cateCode;
+	private int gdsPrice;
 	private String gdsDesc;
 	private String gdsImg;
 	private String gdsThumbImg;
-	private String gdsDate;
+	private Date gdsDate;
 	private String gdsView;
-	public String getGdsCode() {
+	public int getGdsCode() {
 		return gdsCode;
 	}
-	public void setGdsCode(String gdsCode) {
+	public void setGdsCode(int gdsCode) {
 		this.gdsCode = gdsCode;
 	}
 	public String getGdsName() {
@@ -22,16 +24,16 @@ public class GoodsDTO {
 	public void setGdsName(String gdsName) {
 		this.gdsName = gdsName;
 	}
-	public String getCateName() {
-		return cateName;
+	public int getCateCode() {
+		return cateCode;
 	}
-	public void setCateName(String cateName) {
-		this.cateName = cateName;
+	public void setCateName(int cateCode) {
+		this.cateCode = cateCode;
 	}
-	public String getGdsPrice() {
+	public int getGdsPrice() {
 		return gdsPrice;
 	}
-	public void setGdsPrice(String gdsPrice) {
+	public void setGdsPrice(int gdsPrice) {
 		this.gdsPrice = gdsPrice;
 	}
 	public String getGdsDesc() {
@@ -52,10 +54,10 @@ public class GoodsDTO {
 	public void setGdsThumbImg(String gdsThumbImg) {
 		this.gdsThumbImg = gdsThumbImg;
 	}
-	public String getGdsDate() {
+	public Date getGdsDate() {
 		return gdsDate;
 	}
-	public void setGdsDate(String gdsDate) {
+	public void setGdsDate(Date gdsDate) {
 		this.gdsDate = gdsDate;
 	}
 	public String getGdsView() {
