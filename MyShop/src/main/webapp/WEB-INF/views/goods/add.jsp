@@ -66,18 +66,15 @@ pageEncoding="UTF-8"%>
 	<div class="inputArea"> 
 	<!-- 상품 추가 main area -->
  	<label>카테고리 분류</label>
- 	<select class="category1" name="cateCode" id="cateCode">
-  		<option value="100">의류</option>
-  		<option value="101">외투</option>
+ 	<select class="category" name="cateCode" id="cateCode">
+  		<option value="100">상하의</option>
+  		<option value="101">아우터</option>
   		<option value="200">악세서리</option>
-  		<option value="201">가방</option>
-  		<option value="202">신발</option>
+  		<option value="201">신발</option>
+  		<option value="202">가방</option>
  	</select>
-	</div>
-
-	<div class="inputArea">
- 	<label for="gdsName">상품코드</label>
- 	<input type="text" id="gdsCode" name="gdsCode" />
+ 	<label for="cateCode">카테코드</label>
+ 	<input type="text" id="cateCode" name="cateCode" />
 	</div>
 
 	<div class="inputArea">
