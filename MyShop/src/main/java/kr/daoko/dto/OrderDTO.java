@@ -1,6 +1,6 @@
 package kr.daoko.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class OrderDTO {
 
@@ -12,8 +12,8 @@ public class OrderDTO {
 	private String orderAddr2;
 	private String orderTel;
 	private Date orderDate;
-	private String orderStatus;
-	private String userrank;
+	private String status;
+	private String userRank;
 	private int totalPrice;
 	public String getOrderId() {
 		return orderId;
@@ -51,11 +51,24 @@ public class OrderDTO {
 	public void setOrderAddr2(String orderAddr2) {
 		this.orderAddr2 = orderAddr2;
 	}
+	
 	public String getOrderTel() {
 		return orderTel;
 	}
 	public void setOrderTel(String orderTel) {
 		this.orderTel = orderTel;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getUserRank() {
+		return userRank;
+	}
+	public void setUserRank(String userRank) {
+		this.userRank = userRank;
 	}
 	public Date getOrderDate() {
 		return orderDate;
@@ -63,17 +76,11 @@ public class OrderDTO {
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-	public String getOrderStatus() {
-		return orderStatus;
-	}
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
-	}
 	public String getUserrank() {
-		return userrank;
+		return userRank;
 	}
 	public void setUserrank(String userrank) {
-		this.userrank = userrank;
+		this.userRank = userrank;
 	}
 	public int getTotalPrice() {
 		return totalPrice;

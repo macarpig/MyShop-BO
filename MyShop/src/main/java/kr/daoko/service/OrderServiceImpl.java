@@ -10,6 +10,7 @@ import kr.daoko.dao.MemberDAO;
 import kr.daoko.dao.OrderDAO;
 import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
+import kr.daoko.dto.OrderDetailDTO;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -21,6 +22,15 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderDTO> orderInquiry() throws Exception {
 		return dao.orderInquiry();
 	}
-	
+
+	@Override
+	public List<OrderDetailDTO> orderDetail(String orderId) throws Exception {
+		return dao.orderDetail(orderId);
+	}
+
+	@Override
+	public OrderDTO orderInfo(String orderId) throws Exception {
+		return dao.orderInfo(orderId);
+	}
 	
 }

@@ -5,6 +5,9 @@ import java.util.List;
 import kr.daoko.dto.MemberDTO;
 
 public interface MemberDAO {
-	// íšŒì› ëª©ë¡
+	// È¸¿ø Á¶È¸
 	public List<MemberDTO> listMember() throws Exception;
+	
+	// ID¿¡ ÀÇÇÑ ÁÖ¹®¿¡ ´ëÇÑ Á¤º¸ Á¶È¸
+	public MemberDTO memberInfo(String userId) throws Exception;
 }

@@ -17,9 +17,14 @@ public class MemberDAOImpl implements MemberDAO {
 	// mapper
 	private static String NAMESPACE = "kr.daoko.mapper.memberMapper";
 
-	// íšŒì› ëª©ë¡
+	// È¸¿ø Á¶È¸
 	@Override
 	public List<MemberDTO> listMember() throws Exception {
 		return sql.selectList(NAMESPACE + ".listmember");
+	}
+
+	@Override
+	public MemberDTO memberInfo(String userId) throws Exception {
+		return sql.selectOne(NAMESPACE + ".memberInfo", userId);
 	}
 }

@@ -3,7 +3,14 @@
 <mapper namespace="kr.daoko.mapper.memberMapper">
 	<!-- 사용자 목록 -->
 	<select id="listmember" resultType="kr.daoko.dto.MemberDTO">
-		select userId, userName, userTel, userAddr1, userRank, userAuth
+		select userId, userName, userTel, userAddr1, userAddr2, userRank, userAuth
 		from member
+	</select>
+	
+	<!-- ID에 의해 회원 정보 조회 -->
+	<select id="memberInfo" parameterType="String" resultType="kr.daoko.dto.MemberDTO">
+		select userId, userName, userEmail, userTel, userAddr1, userAddr2, userRank, userAuth
+		from member
+		where userId = #{userId}
 	</select>
 </mapper>

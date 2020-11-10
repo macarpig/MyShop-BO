@@ -4,6 +4,7 @@ public class MemberDTO {
 	private String userId;
 	private String userName;
 	private String userTel;
+	private String userEmail;
 	private String userAddr1;
 	private String userRank;
 	private boolean userAuth;
@@ -12,6 +13,12 @@ public class MemberDTO {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	public String getUserName() {
 		return userName;
