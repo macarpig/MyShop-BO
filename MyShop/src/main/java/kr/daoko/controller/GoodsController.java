@@ -16,28 +16,27 @@ import kr.daoko.service.GoodsService;
 
 @Controller
 @RequestMapping("/goods/*")
-public class GoodsController {
-	private GoodsService g_service;
+public class GoodsController {	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
+	GoodsService g_service;
 	@GetMapping("/manage")
 	public String getManage() {
 		logger.info("getGoodsManage()");
 		return "goods/manage";
 	}
 	//상품 등록 창
-	/*
+	
 	@GetMapping("/addwindow")
 	public String getAddWindow(Model model) throws Exception {
 		logger.info("getGoodsaddWindow()");
 		return "goods/add";
-	}*/
+	}
 	//상품 등록
 	@PostMapping("/addwindow")
 	public String postGoodsAdd(GoodsDTO dto) throws Exception {
 		logger.info("postGoodsAdd()");
-		g_service.add(dto);
 		
+		g_service.add(dto);
 		return "redirect:/goods/manage";
 	}
 }
