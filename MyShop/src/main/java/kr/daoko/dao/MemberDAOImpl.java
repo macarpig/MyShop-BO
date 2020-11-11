@@ -17,13 +17,12 @@ public class MemberDAOImpl implements MemberDAO {
 	// mapper
 	private static String NAMESPACE = "kr.daoko.mapper.memberMapper";
 
-	// ȸ�� ��ȸ
+	// 회원 목록 조회
 	@Override
 	public List<MemberDTO> listMember() throws Exception {
 		return sql.selectList(NAMESPACE + ".listmember");
 	}
 
-<<<<<<< HEAD
 	// 회원 정보 조회
 	@Override
 	public MemberDTO viewMember(String userId) throws Exception {
@@ -34,10 +33,5 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void modifyMember(MemberDTO dto) throws Exception {
 		sql.update(NAMESPACE + ".modifymember", dto);
-=======
-	@Override
-	public MemberDTO memberInfo(String userId) throws Exception {
-		return sql.selectOne(NAMESPACE + ".memberInfo", userId);
->>>>>>> branch 'master' of https://github.com/macarpig/MyShop-BO
 	}
 }
