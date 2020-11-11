@@ -19,4 +19,16 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberDTO> listMember() throws Exception {
 		return dao.listMember();
 	}
+
+	// 회원 정보 조회
+	@Override
+	public MemberDTO viewMember(String userId) throws Exception {
+		return dao.viewMember(userId);
+	}
+
+	// 회원 정보 수정
+	@Override
+	public void modifyMember(MemberDTO dto) throws Exception {
+		dao.modifyMember(dto);
+	}
 }

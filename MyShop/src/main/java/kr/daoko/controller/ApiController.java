@@ -27,8 +27,10 @@ public class ApiController {
 
 	@Inject
 	private MemberService memberService;
+	
 	@Inject
 	private OrderService orderService;
+	
 	@Inject
 	private GoodsService goodsService;
 	

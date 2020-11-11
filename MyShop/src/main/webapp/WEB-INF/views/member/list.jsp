@@ -98,13 +98,8 @@ pageEncoding="UTF-8"%>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.5
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
-  </footer>
+  
+  <%@ include file="../include/footer.jsp" %>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -157,7 +152,7 @@ var table = $('#list').DataTable({
 		{
 			"data": "userId",
 			"render": function(data, type, full, meta) {
-				return "<a href='edit?userId="+ data +"'>수정</a>";
+				return "<a href='modify?userId="+ data +"'>수정</a>";
 			}
 		}
 	]
