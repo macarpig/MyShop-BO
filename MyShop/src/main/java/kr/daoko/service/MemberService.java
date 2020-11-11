@@ -13,4 +13,7 @@ public interface MemberService {
 	
 	// 회원 정보 수정
 	public void modifyMember(MemberDTO dto) throws Exception;
+	
+	// 회원 정보 삭제
+	public void deleteMember(String userId) throws Exception;
 }

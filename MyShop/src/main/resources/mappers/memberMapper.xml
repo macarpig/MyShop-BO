@@ -19,7 +19,7 @@
 		update member
 		set
 			userName = #{userName},
-			userEmail = #{userName},
+			userEmail = #{userEmail},
 			userTel = #{userTel},
 			userZipcode = #{userZipcode},
 			userAddr1 = #{userAddr1},
@@ -28,4 +28,10 @@
 			userAuth = #{userAuth}
 		where userId = #{userId}
 	</update>
+
+	<!-- 회원 정보 삭제 -->
+	<delete id="deletemember">
+		delete member
+		where userId = #{userId}
+	</delete>
 </mapper>

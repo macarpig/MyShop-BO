@@ -51,7 +51,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <form action="post">
+      <form role="form" method="post">
       	<div class="row">
 	        <div class="col-md-12">
 	          <div class="card card-primary">
@@ -61,35 +61,35 @@
 	            <div class="card-body">
 	              <div class="form-group">
 	                <label for="userId">회원 ID</label>
-	                <input type="text" id="userId" class="form-control" value="${member.userId}" readonly>
+	                <input type="text" id="userId" name="userId" class="form-control" value="${member.userId}" readonly="readonly">
 	              </div>
 	              <div class="form-group">
 	                <label for="userName">이름</label>
-	                <input type="text" id="userName" class="form-control" value="${member.userName}">
+	                <input type="text" id="userName" name="userName" class="form-control" value="${member.userName}">
 	              </div>
 	              <div class="form-group">
 	                <label for="userEmail">이메일</label>
-	                <input type="text" id="userEmail" class="form-control" value="${member.userEmail}">
+	                <input type="text" id="userEmail" name="userEmail" class="form-control" value="${member.userEmail}">
 	              </div>
 	              <div class="form-group">
 	                <label for="userTel">연락처</label>
-	                <input type="text" id="userTel" class="form-control" value="${member.userTel}">
+	                <input type="text" id="userTel" name="userTel" class="form-control" value="${member.userTel}">
 	              </div>
 	              <div class="form-group">
 	                <label for="userZipcode">우편번호</label>
-	                <input type="text" id="userZipcode" class="form-control" value="${member.userZipcode}">
+	                <input type="text" id="userZipcode" name="userZipcode" class="form-control" value="${member.userZipcode}">
 	              </div>
 	              <div class="form-group">
 	                <label for="userAddr1">주소</label>
-	                <input type="text" id="userAddr1" class="form-control" value="${member.userAddr1}">
+	                <input type="text" id="userAddr1" name="userAddr1" class="form-control" value="${member.userAddr1}">
 	              </div>
 	              <div class="form-group">
 	                <label for="userAddr2">상세 주소</label>
-	                <input type="text" id="userAddr2" class="form-control" value="${member.userAddr2}">
+	                <input type="text" id="userAddr2" name="userAddr2" class="form-control" value="${member.userAddr2}">
 	              </div>
 	              <div class="form-group">
 	                <label>등급</label>
-	                <select class="form-control custom-select">
+	                <select name="userRank" class="form-control custom-select">
 	                  <option selected disabled>선택</option>
 	                  <option value="VIP" <c:if test="${member.userRank == 'VIP'}">selected</c:if>>VIP</option>
 	                  <option value="우수회원" <c:if test="${member.userRank == '우수회원'}">selected</c:if>>우수회원</option>
@@ -98,7 +98,7 @@
 	              </div>
 	              <div class="form-group">
 	                <label>권한</label>
-	                <select class="form-control custom-select">
+	                <select name="userAuth" class="form-control custom-select">
 	                  <option selected disabled>선택</option>
 	                  <option value=false <c:if test="${member.userAuth == false}">selected</c:if>>사용자</option>
 	                  <option value=true <c:if test="${member.userAuth == true}">selected</c:if>>관리자</option>
@@ -112,9 +112,9 @@
 	      </div>
 	      <div class="row">
 	        <div class="col-12">
-	          <input type="reset" value="초기화" class="btn btn-secondary">
-	          <input type="submit" value="수정" class="btn btn-primary float-right ml-1">
-	          <a href="#" class="btn btn-danger float-right">삭제</a>
+	          <button type="reset" class="btn btn-secondary">초기화</button>
+	          <button id="modify_Btn" type="submit" class="btn btn-primary float-right ml-1">수정</button>
+	          <button id="delete_Btn" class="btn btn-danger float-right">삭제</button>
 	        </div>
 	      </div>
       </form>
@@ -141,5 +141,24 @@
 <script src="<%=request.getContextPath()%>/resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
+
+<script>
+	var formObj = $("form[role='form']");
+	
+	$("#modify_Btn").click(function(){
+		formObj.attr("action", "<%=request.getContextPath()%>/member/modify");
+		formObj.attr("method", "post")
+		formObj.submit();
+	});
+
+	$("#delete_Btn").click(function() {
+		var question = confirm("정말로 회원을 삭제하시겠습니까?");
+		
+		if(question) {
+			formObj.attr("action", "<%=request.getContextPath()%>/member/delete");
+			formObj.submit();
+		}
+	});
+</script>
 </body>
 </html>

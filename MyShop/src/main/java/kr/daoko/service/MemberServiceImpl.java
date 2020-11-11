@@ -31,4 +31,10 @@ public class MemberServiceImpl implements MemberService {
 	public void modifyMember(MemberDTO dto) throws Exception {
 		dao.modifyMember(dto);
 	}
+
+	// 회원 정보 삭제
+	@Override
+	public void deleteMember(String userId) throws Exception {
+		dao.deleteMember(userId);
+	}
 }

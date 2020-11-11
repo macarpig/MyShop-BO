@@ -49,4 +49,14 @@ public class MemberController {
 		
 		return "redirect:/member/list";
 	}
+	
+	// 회원정보 삭제 처리
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String postMemberDelete(@RequestParam("userId") String userId) throws Exception {
+		logger.info("from MemberController: postMemberDelete()");
+
+		service.deleteMember(userId);
+		
+		return "redirect:/member/list";
+	}
 }
