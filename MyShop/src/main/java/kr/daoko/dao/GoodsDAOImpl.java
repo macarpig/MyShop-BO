@@ -22,4 +22,9 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public List<GoodsDTO> goodsManage() throws Exception {
 		return sql.selectList(NAMESPACE + ".goodsManage");
 	}
+	
+	@Override
+	public void add(GoodsDTO dto) throws Exception {
+		sql.insert(NAMESPACE + ".add", dto);
+	}
 }

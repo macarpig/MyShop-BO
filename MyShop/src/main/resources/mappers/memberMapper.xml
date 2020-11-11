@@ -3,10 +3,11 @@
 <mapper namespace="kr.daoko.mapper.memberMapper">
 	<!-- 회원 목록 -->
 	<select id="listmember" resultType="kr.daoko.dto.MemberDTO">
-		select userId, userName, userTel, userAddr1, userRank, userAuth
+		select userId, userName, userTel, userAddr1, userAddr2, userRank, userAuth
 		from member
 	</select>
 	
+<<<<<<< HEAD
 	<!-- 회원 정보 조회 -->
 	<select id="viewmember" resultType="kr.daoko.dto.MemberDTO">
 		select userId, userName, userEmail, userTel, userZipcode, userAddr1, userAddr2, userRank, userAuth
@@ -28,4 +29,12 @@
 			userAuth = #{userAuth}
 		where userId = #{userId}
 	</update>
+=======
+	<!-- ID에 의해 회원 정보 조회 -->
+	<select id="memberInfo" parameterType="String" resultType="kr.daoko.dto.MemberDTO">
+		select userId, userName, userEmail, userTel, userAddr1, userAddr2, userRank, userAuth
+		from member
+		where userId = #{userId}
+	</select>
+>>>>>>> branch 'master' of https://github.com/macarpig/MyShop-BO
 </mapper>

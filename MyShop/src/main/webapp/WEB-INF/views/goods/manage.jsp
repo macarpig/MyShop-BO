@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>MyShop ::: 회원 관리</title>
+  <title>MyShop ::: 상품 관리</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@ pageEncoding="UTF-8"%>
                 <table id="goods" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>이미지</th>
+                    <th>썸네일 이미지</th>
                     <th>상품코드</th>
                     <th>상품명</th>
                     <th>카테고리</th>
@@ -73,7 +73,7 @@ pageEncoding="UTF-8"%>
                   </thead>
                   <tfoot>
                   <tr>
-                    <th>이미지</th>
+                    <th>썸네일 이미지</th>
                     <th>상품코드</th>
                     <th>상품명</th>
                     <th>카테고리</th>

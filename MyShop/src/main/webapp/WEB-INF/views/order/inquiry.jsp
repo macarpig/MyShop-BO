@@ -69,7 +69,7 @@ pageEncoding="UTF-8"%>
                     <th>회원ID</th>
                     <th>등급</th>
                     <th>총 구매금액</th>
-                    <th>상품상태</th>
+                    <th>상태</th>
                   </tr>
                   </thead>
                   <tfoot>
@@ -79,7 +79,7 @@ pageEncoding="UTF-8"%>
                     <th>회원ID</th>
                     <th>등급</th>
                     <th>총 구매금액</th>
-                    <th>상품상태</th>
+                    <th>상태</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -136,15 +136,18 @@ var table =  $('#order').DataTable({
 		
 		columns: [
 			{"data" : "orderId",
-				 'render': function (data, type, full, meta) {
-			           return '<a href="'+ data +'">'+data+'</a>';
-			           }},
-			{"data" : "orderDate"},
+				"render": function(data, type, full, meta) {
+					return "<a href='detail?orderId="+ data +"'>"+data+"</a>";
+				}},
+			{"data" : "orderDate",
+					"render": function(data, type, full, meta) {
+						return data;
+					}},
 			{"data" : "userId",
-				 'render': function (data, type, full, meta) {
-			           return '<a href="'+ data +'">'+data+'</a>';
-			           }},
-			{"data" : "userrank"},
+				"render": function(data, type, full, meta) {
+					return "<a href='../member/detail?userId="+ data +"'>"+data+"</a>";
+				}},
+			{"data" : "userRank"},
 			{"data" : "totalPrice"},
 			{"data" : "orderStatus"}
 		]

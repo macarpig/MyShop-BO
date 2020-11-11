@@ -5,7 +5,11 @@ public class MemberDTO {
 	private String userName;
 	private String userEmail;
 	private String userTel;
+<<<<<<< HEAD
 	private String userZipcode;
+=======
+	private String userEmail;
+>>>>>>> branch 'master' of https://github.com/macarpig/MyShop-BO
 	private String userAddr1;
 	private String userAddr2;
 	private String userRank;
@@ -16,6 +20,12 @@ public class MemberDTO {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	public String getUserName() {
 		return userName;

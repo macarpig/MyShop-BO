@@ -20,6 +20,7 @@ public class MemberServiceImpl implements MemberService {
 		return dao.listMember();
 	}
 
+<<<<<<< HEAD
 	// 회원 정보 조회
 	@Override
 	public MemberDTO viewMember(String userId) throws Exception {
@@ -30,5 +31,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void modifyMember(MemberDTO dto) throws Exception {
 		dao.modifyMember(dto);
+=======
+	@Override
+	public MemberDTO memberInfo(String userId) throws Exception {
+		return dao.memberInfo(userId);
+>>>>>>> branch 'master' of https://github.com/macarpig/MyShop-BO
 	}
 }

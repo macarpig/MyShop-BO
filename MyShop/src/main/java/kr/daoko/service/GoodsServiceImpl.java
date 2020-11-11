@@ -20,5 +20,9 @@ public class GoodsServiceImpl implements GoodsService {
 		return dao.goodsManage();
 	}
 	
-	
+	// 상품 추가
+	@Override
+	public void add(GoodsDTO dto) throws Exception {
+		dao.add(dto);
+	}
 }

@@ -9,4 +9,7 @@ import kr.daoko.dto.OrderDTO;
 public interface GoodsService {
 	// 상품 관리
 	public List<GoodsDTO> goodsManage() throws Exception;
+	
+	// 상품 추가
+	public void add(GoodsDTO dto) throws Exception;
 }

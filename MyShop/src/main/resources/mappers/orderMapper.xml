@@ -3,9 +3,25 @@
 <mapper namespace="kr.daoko.mapper.orderMapper">
 	<!-- 주문 조회 -->
 	<select id="orderInquiry" resultType="kr.daoko.dto.OrderDTO">
-		select o.orderId, o.orderDate, o.userId, m.userrank, sum(g.gdsPrice*d.cartStock) as totalPrice, o.orderStatus as orderStatus
-		from ordertbl o, orderDetail d, member m, goods g
+		select o.orderId, o.orderDate, o.userId, m.userRank, p.status, sum(g.gdsPrice*d.cartStock) as totalPrice
+		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
 		where o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode
 		group by o.orderId 
 	</select>
+	
+	<!-- 주문 번호에 의한 주문 정보 -->
+	<select id="orderInfo" parameterType="String" resultType="kr.daoko.dto.OrderDTO">
+		select o.orderId, o.userId, o.orderRecvr, o.orderZipCode, o.orderAddr1, o.orderAddr2, o.orderTel, o.orderDate, p.status, m.userRank, sum(g.gdsPrice*d.cartStock) as totalPrice
+		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
+		where o.orderId = #{orderId} and o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId
+		group by o.orderId
+	</select>
+	
+	<!-- 주문 번호에 의한 주문 상세 정보 -->
+	<select id="orderDetail" parameterType="String" resultType="kr.daoko.dto.OrderDetailDTO">
+		select d.orderDetailId, d.orderId, d.gdsCode, g.gdsName, g.gdsPrice, d.cartStock, d.orderRequest
+		from orderDetail d, goods g
+		where d.orderId = #{orderId} and d.gdsCode = g.gdsCode
+	</select>
+	
 </mapper>
