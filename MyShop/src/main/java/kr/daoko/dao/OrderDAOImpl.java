@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
 import kr.daoko.dto.OrderDetailDTO;
+import kr.daoko.dto.OrderStatusDTO;
 
 @Repository
 public class OrderDAOImpl implements OrderDAO {
@@ -33,6 +34,11 @@ public class OrderDAOImpl implements OrderDAO {
 	@Override
 	public OrderDTO orderInfo(String orderId) throws Exception {
 		return sql.selectOne(NAMESPACE + ".orderInfo", orderId);
+	}
+
+	@Override
+	public OrderStatusDTO orderStates() throws Exception {
+		return sql.selectOne(NAMESPACE + ".orderStates");
 	}
 	
 }

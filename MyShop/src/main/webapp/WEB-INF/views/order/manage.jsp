@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>MyShop ::: 회원 관리</title>
+  <title>MyShop ::: 주문 관리</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -58,50 +57,7 @@ pageEncoding="UTF-8"%>
 
             <div class="card">
               <div class="card-header">
-                <table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
-                	<tr>
-                		<th>주문접수</th>
-                	</tr>
-                	<tr>
-                		<td>${states.receipt}</td>
-                	</tr>
-				</table>
-					
-				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
-					<tr>
-                		<th>주문처리</th>
-                	</tr>
-                	<tr>
-                		<td>${states.processing}</td>
-                	</tr>
-				</table>
-				
-				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
-                	<tr>
-                		<th>교환접수</th>
-                	</tr>
-                	<tr>
-                		<td>${states.exchange}</td>
-                	</tr>
-				</table>
-				
-				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
-                	<tr>
-                		<th>반품접수</th>
-                	</tr>
-                	<tr>
-                		<td>${states.refund}</td>
-                	</tr>
-				</table>
-				
-				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
-                	<tr>
-                		<th>취소접수</th>
-                	</tr>
-                	<tr>
-                		<td>${states.cancel}</td>
-                	</tr>
-				</table>
+                <h3 class="card-title">DataTable with default features</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -114,6 +70,7 @@ pageEncoding="UTF-8"%>
                     <th>등급</th>
                     <th>총 구매금액</th>
                     <th>상태</th>
+                    <th></th>
                   </tr>
                   </thead>
                   <tfoot>
@@ -124,6 +81,7 @@ pageEncoding="UTF-8"%>
                     <th>등급</th>
                     <th>총 구매금액</th>
                     <th>상태</th>
+                    <th></th>
                   </tr>
                   </tfoot>
                 </table>
@@ -193,7 +151,12 @@ var table =  $('#order').DataTable({
 				}},
 			{"data" : "userRank"},
 			{"data" : "totalPrice"},
-			{"data" : "status"}
+			{"data" : "status"},
+			{"data" : "orderId",
+				"render":function(data, type, full, meta) {
+					return "<input type=\"button\" value=\"취소처리\" onclick=\"location.href='ExOfficioProcess?orderId='"+data+"'&d=0\"><input type=\"button\" value=\"반품처리\" onclick=\"location.href='ExOfficioProcess?orderId='"+data+"'&d=1\"><input type=\"button\" value=\"교환처리\" onclick=\"location.href='ExOfficioProcess?orderId='"+data+"'&d=2\">";
+				}
+			}
 		]
     });
 </script>

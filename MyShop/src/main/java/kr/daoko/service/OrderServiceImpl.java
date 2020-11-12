@@ -11,6 +11,7 @@ import kr.daoko.dao.OrderDAO;
 import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
 import kr.daoko.dto.OrderDetailDTO;
+import kr.daoko.dto.OrderStatusDTO;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -31,6 +32,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public OrderDTO orderInfo(String orderId) throws Exception {
 		return dao.orderInfo(orderId);
+	}
+
+	@Override
+	public OrderStatusDTO orderStates() throws Exception {
+		return dao.orderStates();
 	}
 	
 }

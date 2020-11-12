@@ -5,14 +5,18 @@ import java.util.List;
 import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
 import kr.daoko.dto.OrderDetailDTO;
+import kr.daoko.dto.OrderStatusDTO;
 
 public interface OrderDAO {
-	// 주문 조회
+	// 二쇰Ц 議고쉶
 	public List<OrderDTO> orderInquiry() throws Exception;
 	
-	// 주문 번호에 의한 상세 목록
+	// 二쇰Ц 踰덊샇�뿉 �쓽�븳 �긽�꽭 紐⑸줉
 	public List<OrderDetailDTO> orderDetail(String orderId) throws Exception;
 	
-	// 주문 번호에 의한 주문 정보
+	// 二쇰Ц 踰덊샇�뿉 �쓽�븳 二쇰Ц �젙蹂�
 	public OrderDTO orderInfo(String orderId) throws Exception;
+	
+	// 주문접수, 주문처리, 교환접수, 반품접수, 취소접수
+	public OrderStatusDTO orderStates() throws Exception;
 }
