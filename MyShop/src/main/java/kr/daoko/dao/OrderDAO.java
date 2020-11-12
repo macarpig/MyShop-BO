@@ -2,7 +2,6 @@ package kr.daoko.dao;
 
 import java.util.List;
 
-import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
 import kr.daoko.dto.OrderDetailDTO;
 import kr.daoko.dto.OrderStatusDTO;

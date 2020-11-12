@@ -6,9 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import kr.daoko.dao.MemberDAO;
 import kr.daoko.dao.OrderDAO;
-import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
 import kr.daoko.dto.OrderDetailDTO;
 import kr.daoko.dto.OrderStatusDTO;
