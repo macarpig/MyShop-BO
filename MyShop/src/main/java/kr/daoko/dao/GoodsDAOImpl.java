@@ -24,7 +24,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	
 	@Override
-	public void add(GoodsDTO dto) throws Exception {
-		sql.insert(NAMESPACE + ".add", dto);
+	public void addProduct(GoodsDTO dto) throws Exception {
+		sql.insert(NAMESPACE + ".addProduct", dto);
 	}
 }

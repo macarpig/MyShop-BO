@@ -22,7 +22,7 @@ public class GoodsServiceImpl implements GoodsService {
 	
 	// 상품 추가
 	@Override
-	public void add(GoodsDTO dto) throws Exception {
-		dao.add(dto);
+	public void addProduct(GoodsDTO dto) throws Exception {
+		dao.addProduct(dto);
 	}
 }

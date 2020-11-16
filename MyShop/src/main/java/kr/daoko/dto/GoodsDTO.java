@@ -10,7 +10,7 @@ public class GoodsDTO {
 	private String gdsDesc;
 	private String gdsImg;
 	private String gdsThumbImg;
-	private Date gdsDate;
+	private String gdsDate;
 	private String gdsView;
 	private int cateCode;
 	/**
@@ -100,13 +100,13 @@ public class GoodsDTO {
 	/**
 	 * @return the gdsDate
 	 */
-	public Date getGdsDate() {
+	public String getGdsDate() {
 		return gdsDate;
 	}
 	/**
 	 * @param gdsDate the gdsDate to set
 	 */
-	public void setGdsDate(Date gdsDate) {
+	public void setGdsDate(String gdsDate) {
 		this.gdsDate = gdsDate;
 	}
 	/**

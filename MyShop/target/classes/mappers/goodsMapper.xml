@@ -10,8 +10,8 @@
 		group by gdsCode
 	</select>
 	<!-- 상품 등록 -->
-	<insert id="add">
- 	insert into goods (cateCode, gdsCode, gdsName, gdsPrice, gdsImg, gdsThumbImg, gdsDesc)
-    	 values (#{cateCode}, #{gdsCode}, #{gdsName}, #{gdsPrice}, #{gdsImg}, #{gdsThumbImg}, #{gdsDesc})
+	<insert id="addProduct">
+		insert into goods(gdsCode, gdsName, cateCode, gdsPrice, gdsDesc, gdsImg, gdsThumbImg, gdsDate, gdsView)
+		values (#{gdsCode}, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsDesc}, #{gdsImg}, #{gdsThumbImg}, SYSDATE(), 0)
 	</insert>
 </mapper>

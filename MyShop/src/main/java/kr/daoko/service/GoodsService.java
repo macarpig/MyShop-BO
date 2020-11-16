@@ -11,5 +11,5 @@ public interface GoodsService {
 	public List<GoodsDTO> goodsManage() throws Exception;
 	
 	// 상품 추가
-	public void add(GoodsDTO dto) throws Exception;
+	public void addProduct(GoodsDTO dto) throws Exception;
 }

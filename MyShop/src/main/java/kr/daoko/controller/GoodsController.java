@@ -39,7 +39,7 @@ public class GoodsController {
 	public String postGoodsAdd(GoodsDTO dto) throws Exception {
 		logger.info("postGoodsAdd()");
 		
-		g_service.add(dto);
+		g_service.addProduct(dto);
 		return "redirect:/goods/manage";
 	}
 }

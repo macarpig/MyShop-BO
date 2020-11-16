@@ -73,8 +73,8 @@ pageEncoding="UTF-8"%>
   		<option value="201">신발</option>
   		<option value="202">가방</option>
  	</select>
- 	<label for="cateCode">카테코드</label>
- 	<input type="text" id="cateCode" name="cateCode" />
+ 	<label for="gdsCode">상품코드</label>
+ 	<input type="text" id="gdsCode" name="gdsCode" />
 	</div>
 
 	<div class="inputArea">
