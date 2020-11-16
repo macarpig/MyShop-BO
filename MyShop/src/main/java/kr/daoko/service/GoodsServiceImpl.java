@@ -20,9 +20,21 @@ public class GoodsServiceImpl implements GoodsService {
 		return dao.goodsManage();
 	}
 	
+	@Override
+	//상품 조회
+	public GoodsDTO goodsView(String gdsCode) throws Exception {
+		return dao.goodsView(gdsCode);
+	}
+	
 	// 상품 추가
 	@Override
 	public void addProduct(GoodsDTO dto) throws Exception {
 		dao.addProduct(dto);
+	}
+	
+	@Override
+	//상품 수정
+		public void modifyGoods(GoodsDTO dto) throws Exception {
+		dao.modifyGoods(dto);
 	}
 }

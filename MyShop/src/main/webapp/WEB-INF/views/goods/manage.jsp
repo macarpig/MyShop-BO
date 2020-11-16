@@ -70,6 +70,8 @@ pageEncoding="UTF-8"%>
                     <th>상품명</th>
                     <th>카테고리</th>
                     <th>금액</th>
+                    <th>수정</th>
+                    <th>삭제</th>
                   </tr>
                   </thead>
                   <tfoot>
@@ -79,6 +81,8 @@ pageEncoding="UTF-8"%>
                     <th>상품명</th>
                     <th>카테고리</th>
                     <th>금액</th>
+                    <th>수정</th>
+                    <th>삭제</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -138,12 +142,22 @@ var table =  $('#goods').DataTable({
 			{"data" : "gdsCode"},
 			{"data" : "gdsName"},
 			{"data" : "cateName"},
-			{"data" : "gdsPrice"}
+			{"data" : "gdsPrice"},
+			{
+				"data": "gdsCode",
+				"render": function(data, type, full, meta) {
+					return "<a href='modify?gdsCode="+ data +"'>수정</a>";
+				}
+			}
 		]
     });
 document.getElementById("btn_add").onclick = function(){
 	 location.href=""
 	}
+	
+$('#list tbody').on('click', 'tr', function() {
+	location.href="detail?gdsCode=" + table.row(this).data().gdsCode;
+});
 </script>
 </body>
 </html>

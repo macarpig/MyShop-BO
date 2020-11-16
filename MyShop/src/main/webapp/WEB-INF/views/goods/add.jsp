@@ -62,7 +62,7 @@ pageEncoding="UTF-8"%>
               <!-- /.card-header -->
               <div class="card-body">
               <form role="form" method="post" autocomplete="off">
-
+			
 	<div class="inputArea"> 
 	<!-- 상품 추가 main area -->
  	<label>카테고리 분류</label>

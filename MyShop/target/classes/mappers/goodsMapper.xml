@@ -9,9 +9,30 @@
 		where g.cateCode = c.cateCode
 		group by gdsCode
 	</select>
+	
+	<!-- 상품 조회 -->
+	<select id="goodsView" resultType="kr,daoko.dto.GoodsDTO">
+		select gdsCode, gdsName, cateCode, gdsPrice, gdsDesc, gdsImg, gdsThumbImg, gdsDate
+		from goods
+		where gdsCode = #{gdsCode}
+	</select>
 	<!-- 상품 등록 -->
 	<insert id="addProduct">
 		insert into goods(gdsCode, gdsName, cateCode, gdsPrice, gdsDesc, gdsImg, gdsThumbImg, gdsDate, gdsView)
 		values (#{gdsCode}, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsDesc}, #{gdsImg}, #{gdsThumbImg}, SYSDATE(), 0)
 	</insert>
+	
+	<!-- 상품 수정 -->
+	<update id="modifyGoods">
+		update goods
+		set
+			gdsName = #{gdsName},
+			cateCode = #{cateCode},
+			gdsPrice = #{gdsPrice},
+			gdsDesc = #{gdsDesc},
+			gdsImg = #{gdsImg},
+			gdsThumbImg = #{gdsThumbImg},
+			gdsDate = SYSDATE()
+		where gdsCode = #{gdsCode}
+	</update>
 </mapper>
