@@ -48,7 +48,7 @@ public class GoodsController {
 	}
 	
 	//상품 수정
-	@GetMapping("/modifywindow")
+	@GetMapping("/modify")
 		public String getGoodsModify(@RequestParam("gdsCode") String gdsCode, Model model) throws Exception {
 			logger.info("getGoodsModify()");
 
@@ -59,7 +59,7 @@ public class GoodsController {
 		}
 		
 	// 상품 수 처리
-	@PostMapping("/modifywindow")
+	@PostMapping("/modify")
 		public String postGoodsModify(GoodsDTO dto) throws Exception {
 			logger.info("postGoodsModify()");
 
