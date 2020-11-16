@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.daoko.mapper.qnaMapper">
+	<!-- Q&A 목록 -->
+	<select id="listqna" resultType="kr.daoko.dto.QnaDTO">
+		select index, userId, question, answer, date
+		from qna
+	</select>
+	
+	<!-- 특정 사용자 Q&A 목록 -->
+	<select id="listqnauser" resultType="kr.daoko.dto.QnaDTO">
+		select index, userId, question, answer, date
+		from qna
+		where userId = #{userId}
+	</select>
+</mapper>

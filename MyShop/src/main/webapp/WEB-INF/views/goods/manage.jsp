@@ -58,6 +58,7 @@ pageEncoding="UTF-8"%>
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">쇼핑몰에 등록된 상품의 정보</h3>
+                <input type="button" id="btn_add" value="상품추가">
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -140,6 +141,9 @@ var table =  $('#goods').DataTable({
 			{"data" : "gdsPrice"}
 		]
     });
+document.getElementById("btn_add").onclick = function(){
+	 location.href=""
+	}
 </script>
 </body>
 </html>
