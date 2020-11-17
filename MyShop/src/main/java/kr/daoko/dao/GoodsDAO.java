@@ -16,4 +16,7 @@ public interface GoodsDAO {
 	
 	//상품 수정
 	public void modifyGoods(GoodsDTO dto) throws Exception;
+	
+	//상품 삭제
+	public void deleteGoods(String gdsCode) throws Exception;
 }

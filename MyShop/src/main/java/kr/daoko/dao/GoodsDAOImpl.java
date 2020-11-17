@@ -40,4 +40,11 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public void modifyGoods(GoodsDTO dto) throws Exception {
 		sql.update(NAMESPACE + ".modifyGoods", dto);
 	}
+	
+	@Override
+	//상품 삭제
+	public void deleteGoods(String gdsCode) throws Exception {
+		sql.delete(NAMESPACE + ".deleteGoods", gdsCode);
+	}
+	
 }

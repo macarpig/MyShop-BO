@@ -35,4 +35,10 @@
 			gdsDate = SYSDATE()
 		where gdsCode = #{gdsCode}
 	</update>
+	
+	<!-- 상품 삭 -->
+	<delete id="deleteGoods">
+		delete from goods
+		where gdsCode = #{gdsCode}
+	</delete>
 </mapper>

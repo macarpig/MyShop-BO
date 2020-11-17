@@ -71,7 +71,6 @@ pageEncoding="UTF-8"%>
                     <th>카테고리</th>
                     <th>금액</th>
                     <th>수정</th>
-                    <th>삭제</th>
                   </tr>
                   </thead>
                   <tfoot>

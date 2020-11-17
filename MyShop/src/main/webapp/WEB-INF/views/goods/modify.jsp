@@ -56,19 +56,11 @@
 	        <div class="col-md-12">
 	          <div class="card card-primary">
 	            <div class="card-header">
-	              <h3 class="card-title">General</h3>
+	              <h3 class="card-title">상품을 수정하세요.</h3>
 	            </div>
 	            <div class="card-body">
-	              <div class="form-group">
-	                <label for="gdsCode">상품 코드</label>
-	                <input type="text" id="gdsCode" name="gdsCode" class="form-control" value="${goods.gdsCode}" readonly="readonly">
-	              </div>
-	              <div class="form-group">
-	                <label for="gdsName">상품 이름</label>
-	                <input type="text" id="gdsName" name="gdsName" class="form-control" value="${goods.gdsName}">
-	              </div>
-	              <div class="form-group">
-	                <label for="cateCode">카테고리 분류</label>
+	              <div class="inputArea">
+	              	<label for="cateCode">카테고리 분류</label>
  						<select class="category" name="cateCode" id="cateCode">
   						<option value="100" <c:if test="${goods.cateCode == '100'}">selected</c:if>>상하의</option>
 	                  	<option value="101" <c:if test="${goods.cateCode == '101'}">selected</c:if>>아우터</option>
@@ -76,22 +68,31 @@
 	                  	<option value="201" <c:if test="${goods.cateCode == '201'}">selected</c:if>>신발</option>
 	                  	<option value="202" <c:if test="${goods.cateCode == '202'}">selected</c:if>>가방</option>
  						</select>
+	                <label for="gdsCode">상품 코드</label>
+	                <input type="text" id="gdsCode" name="gdsCode" value="${goods.gdsCode}" readonly="readonly">
+	              </div>
+	              <div class="inputArea">
+	                <label for="gdsName">상품 이름</label>
+	                <input type="text" id="gdsName" name="gdsName" class="form-control" value="${goods.gdsName}">
 	              </div>
 	              <div class="form-group">
+	                
+	              </div>
+	              <div class="inputArea">
 	                <label for="gdsPrice">상품 가격</label>
-	                <input type="text" id="gdsPrice" name="gdsPrice" class="form-control" value="${goods.gdsPrice}">
+	                <input type="text" id="gdsPrice" name="gdsPrice" value="${goods.gdsPrice}">
 	              </div>
-	              <div class="form-group">
-	                <label for="gdsDesc">상품 설명</label>
-	                <input type="text" id="gdsDesc" name="gdsDesc" class="form-control" value="${goods.gdsDesc}">
-	              </div>
-	              <div class="form-group">
+	              <div class="inputArea">
 	                <label for="gdsImg">상품 이미지</label>
 	                <input type="text" id="gdsImg" name="gdsImg" class="form-control" value="${goods.gdsImg}">
 	              </div>
-	              <div class="form-group">
-	                <label for="gdsThumbImg">상품 썸네일</label>
+	              <div class="inputArea">
+	                <label for="gdsThumbImg">상품 썸네일이미지</label>
 	                <input type="text" id="gdsThumbImg" name="gdsThumbImg" class="form-control" value="${goods.gdsThumbImg}">
+	              </div>
+	              <div class="inputArea">
+	                <label for="gdsDesc">상품 설명</label>
+	                <textArea rows="5" cols="50"id="gdsDesc" name="gdsDesc" class="form-control" value="${goods.gdsDesc}"></textArea>
 	              </div>
 	            </div>
 	            <!-- /.card-body -->
@@ -144,7 +145,7 @@
 		var question = confirm("정말로 상품을 삭제하시겠습니까?");
 		
 		if(question) {
-			formObj.attr("action", "<%=request.getContextPath()%>/goods/delete");
+			formObj.attr("action", "<%=request.getContextPath()%>/goods/deletewindow");
 			formObj.submit();
 		}
 	});

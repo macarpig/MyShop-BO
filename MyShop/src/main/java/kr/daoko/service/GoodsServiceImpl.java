@@ -37,4 +37,10 @@ public class GoodsServiceImpl implements GoodsService {
 		public void modifyGoods(GoodsDTO dto) throws Exception {
 		dao.modifyGoods(dto);
 	}
+	
+	//상품 삭제
+	@Override
+	public void deleteGoods(String gdsCode) throws Exception {
+		dao.deleteGoods(gdsCode);
+	}
 }

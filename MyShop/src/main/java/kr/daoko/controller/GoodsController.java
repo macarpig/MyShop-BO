@@ -67,4 +67,14 @@ public class GoodsController {
 			
 			return "redirect:/goods/manage";
 		}
+	
+	//상품 삭제
+	@PostMapping("/deletewindow")
+		public String getDeleteGoods(@RequestParam("gdsCode") String gdsCode, Model model) throws Exception {
+			logger.info("postDeleteGoods()");
+			
+			g_service.deleteGoods(gdsCode);
+			
+			return "redirect:/goods/manage";
+	}
 }

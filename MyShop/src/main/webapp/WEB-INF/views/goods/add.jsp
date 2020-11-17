@@ -55,7 +55,7 @@ pageEncoding="UTF-8"%>
         <div class="row">
           <div class="col-12">
 
-            <div class="card">
+            <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">등록할 상품을 추가하세요</h3>
               </div>
@@ -79,33 +79,28 @@ pageEncoding="UTF-8"%>
 
 	<div class="inputArea">
  	<label for="gdsName">상품명</label>
- 	<input type="text" id="gdsName" name="gdsName" />
+ 	<input type="text" id="gdsName" name="gdsName" class="form-control"/>
 	</div>
 
 	<div class="inputArea">
  	<label for="gdsPrice">상품가격</label>
- 	<input type="text" id="gdsPrice" name="gdsPrice" />
+ 	<input type="text" id="gdsPrice" name="gdsPrice" class="form-control"/>
 	</div>
 
 	<div class="inputArea">
  	<label for="gdsImg">상품이미지</label>
- 	<input type="text" id="gdsImg" name="gdsImg" />
+ 	<input type="text" id="gdsImg" name="gdsImg" class="form-control"/>
 	</div>
 
 	<div class="inputArea">
  	<label for="gdsThumbImg">상품썸네일이미지</label>
- 	<textarea rows="5" cols="50" id="gdsThumbImg" name="gdsThumbImg"></textarea>
+ 	<input type="text" id="gdsThumbImg" name="gdsThumbImg" class="form-control"/>
 	</div>
 	
 	<div class="inputArea">
  	<label for="gdsDesc">상품설명</label>
- 	<textarea rows="5" cols="50" id="gdsDesc" name="gdsDesc"></textarea>
+ 	<textarea rows="5" cols="50" id="gdsDesc" name="gdsDesc" class="form-control"></textarea>
 	</div>
-
-	<div class="inputArea">
- 	<button type="submit" id="add_Btn" class="btn btn-primary">등록</button>
-	</div>
-
 		</form>
               </div>
               <!-- /.card-body -->
@@ -115,6 +110,11 @@ pageEncoding="UTF-8"%>
           <!-- /.col -->
         </div>
         <!-- /.row -->
+      	<div class="row">
+      		<div class="col-12">
+ 			<button type="submit" id="add_Btn" class="btn btn-primary">등록</button>
+ 			</div>
+		</div>
       </div>
       <!-- /.container-fluid -->
     </section>
