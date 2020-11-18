@@ -98,5 +98,15 @@ public class ApiController {
 		String json = gson.toJson(qna);
 		
 		return json;
+	   @RequestMapping(value = "/order/detail", produces = "application/json", method = RequestMethod.GET)
+	   public String getOrderDetail(@RequestParam String orderId) throws Exception {
+	      logger.info("from ApiController: getOderInquiry()");
+	      System.out.println(orderId);
+	      List<OrderDetailDTO> order = orderService.orderDetail(orderId);
+	      System.out.println(order.get(0).gdsName);
+	      Gson gson = new Gson();
+	      String json = gson.toJson(order);
+	      
+	      return json;
 	}
 }
