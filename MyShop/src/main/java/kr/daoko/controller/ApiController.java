@@ -55,6 +55,7 @@ public class ApiController {
 		return json;
 	}
 	
+	//주문 조회
 	@ResponseBody
 	@RequestMapping(value = "/order/inquiry", produces = "application/json", method = RequestMethod.GET)
 	public String getOrderInquiry() throws Exception {
@@ -78,37 +79,40 @@ public class ApiController {
 		return json;
 	}
 	
-	@RequestMapping(value = "/order/detail", produces = "application/json", method = RequestMethod.GET)
-	public String getOrderDetail(@RequestParam String orderId) throws Exception {
-		logger.info("from ApiController: getOderInquiry()");
-		System.out.println(orderId);
-		List<OrderDetailDTO> order = orderService.orderDetail(orderId);
-		System.out.println(order.get(0).gdsName);
-		String json = gson.toJson(order);
-      
-		return json;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/goods/manage", produces = "application/json", method = RequestMethod.GET)
-	public String getGoodsManage() throws Exception {
-		logger.info("from ApiController: getGoodsManage()");
-		
-		List<GoodsDTO> goods = goodsService.goodsManage();
-		String json = gson.toJson(goods);
-		
-		return json;
-	}
+	//orderId에 대한 orderDetail
+		@ResponseBody
+		   @RequestMapping(value = "/order/detail", produces = "application/json", method = RequestMethod.GET)
+		   public String getOrderDetail(@RequestParam String orderId) throws Exception {
+		      logger.info("from ApiController: getOderDetail()");
+		      List<OrderDetailDTO> order = orderService.orderDetail(orderId);
 
-	// 특정 사용자 Q&A 목록
-	@ResponseBody
-	@RequestMapping(value = "/qna/list", produces = "application/json", method = RequestMethod.GET)
-	public String getListQna(@RequestParam("userId") String userId) throws Exception {
-		logger.info("from ApiController: getListQna(String userId)");
+		      String json = gson.toJson(order);
+		      
+		      return json;
+		}
 		
-		List<QnaDTO> qna = qnaService.listQna(userId);
-		String json = gson.toJson(qna);
-		
-		return json;
-	}
+		//상태에 따른 주문 조회
+		@ResponseBody
+		@RequestMapping(value = "/order/process", produces = "application/json", method = RequestMethod.GET)
+		public String getOrderProcess(@RequestParam int page) throws Exception {
+			logger.info("from ApiController: getOderProcess()");
+			
+			String status = null;
+			if(page == 0)
+				status="결제완료";
+			else if(page == 1)
+				status="배송준비";
+			else if(page == 2)
+				status="교환접수";
+			else if(page == 3)
+				status="환불접수";
+			else if(page == 4)
+				status="취소접수";
+			
+			List<OrderDTO> order = orderService.orderProcess(status);
+			
+			String json = gson.toJson(order);
+			
+			return json;
+		}
 }

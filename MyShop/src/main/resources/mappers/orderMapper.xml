@@ -43,4 +43,20 @@
 		select count(case when status = '결제완료' then 1 end) as receipt, count(case when status = '배송준비' then 1 end) as processing, count(case when status = '교환접수' then 1 end) as exchange, count(case when status = '반품접수' then 1 end) as refund, count(case when status = '취소접수' then 1 end) as cancel
 		from orderProcess
 	</select>
+	
+	<!-- 상태에 따른 주문 처리 조회 -->
+	<select id="orderProcess" parameterType="String" resultType="kr.daoko.dto.OrderDTO">
+		select o.orderId, o.orderDate, o.userId, m.userRank, p.status, sum(g.gdsPrice*d.cartStock) as totalPrice
+		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
+		where o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId and p.status = #{status}
+		group by o.orderId
+		order by o.orderDate desc
+	</select>
+	
+	<!-- orderId에 따른 상태 수정 -->
+	<update id="orderProcessEdit" parameterType="HashMap">
+		update orderProcess
+		set status = #{status}
+		where orderId = #{orderId}
+	</update>
 </mapper>

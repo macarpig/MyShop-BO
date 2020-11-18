@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8");%>
+<% response.setContentType("text/html; charset=UTF-8");%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% String pageNum = request.getParameter("page"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +63,61 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                <h3 class="card-title"><% if(pageNum.equals("0")){%>주문접수<%}else if(pageNum.equals("1")){%>주문처리<%}else if(pageNum.equals("2")){%>교환접수<%}else if(pageNum.equals("3")){%>환불접수<%}else if(pageNum.equals("4")){%>취소접수<%}%></h3><br>
+                <% if(!pageNum.equals("0")){%><a href="<%=request.getContextPath()%>/order/processing?page=0"><%}%>
+                <table style="float:left;background-color:<% if(pageNum.equals("0")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
+                	<tr>
+                		<th>주문접수</th>
+                	</tr>
+                	<tr>
+                		<td>${states.receipt}</td>
+                	</tr>
+				</table>
+				<% if(!pageNum.equals("0")){%></a><%}%>
+				
+				<% if(!pageNum.equals("1")){%><a href="<%=request.getContextPath()%>/order/processing?page=1"><%}%>
+				<table style="float:left;background-color:<% if(pageNum.equals("1")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
+					<tr>
+                		<th>주문처리</th>
+                	</tr>
+                	<tr>
+                		<td>${states.processing}</td>
+                	</tr>
+				</table>
+				<% if(!pageNum.equals("1")){%></a><%}%>
+				
+				<% if(!pageNum.equals("2")){%><a href="<%=request.getContextPath()%>/order/processing?page=2"><%}%>
+				<table style="float:left;background-color:<% if(pageNum.equals("2")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
+                	<tr>
+                		<th>교환접수</th>
+                	</tr>
+                	<tr>
+                		<td>${states.exchange}</td>
+                	</tr>
+				</table>
+				<% if(!pageNum.equals("2")){%></a><%}%>
+				
+				<% if(!pageNum.equals("3")){%><a href="<%=request.getContextPath()%>/order/processing?page=3"><%}%>
+				<table style="float:left;background-color:<% if(pageNum.equals("3")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
+                	<tr>
+                		<th>환불접수</th>
+                	</tr>
+                	<tr>
+                		<td>${states.refund}</td>
+                	</tr>
+				</table>
+				<% if(!pageNum.equals("3")){%></a><%}%>
+				
+				<% if(!pageNum.equals("4")){%><a href="<%=request.getContextPath()%>/order/processing?page=4"><%}%>
+				<table style="float:left;background-color:<% if(pageNum.equals("4")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
+                	<tr>
+                		<th>취소접수</th>
+                	</tr>
+                	<tr>
+                		<td>${states.cancel}</td>
+                	</tr>
+				</table>
+				<% if(!pageNum.equals("4")){%></a><%}%>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -135,7 +192,9 @@
       "responsive": true,
   
   ajax: {
-      url: '<%=request.getContextPath()%>/api/order/inquiry',
+      url: '<%=request.getContextPath()%>/api/order/process',
+      dataType: 'json',
+      data: { page : <%=pageNum%> },
       dataSrc: ''
    },
    
@@ -156,8 +215,8 @@
            $('#order tbody').find('tr[name="'+$(this).children().eq(0).text()+'"]').empty();
            $('#order tbody').find('tr[name="'+$(this).children().eq(0).text()+'"]').remove();
         }else{
-           var htmlStr = '<tr id="goodsList" name="'+$(this).children().eq(0).text()+'"><td colspan="3"><table id="'+$(this).children().eq(0).text()+'" width="100%" style="background-color:white;margin-bottom:25px;"><thead><tr id="goodsListTitle"><th width="50%">상품코드</th><th width="30%">상품명</th><th width="20%">상품수량</th></tr></thead>'+
-            '<tbody></tbody></table></td><th align="center"><input type="button" value="주문처리" style="width:100%;height:60px;" onclick="event.cancelBubble=true;"></th></tr></tbody>';
+           var htmlStr = '<tr id="goodsList" name="'+$(this).children().eq(0).text()+'"><td colspan="3"><table id="'+$(this).children().eq(0).text()+'" width="100%" style="background-color:white;margin-bottom:30px;"><thead><tr id="goodsListTitle"><th width="50%">상품코드</th><th width="30%">상품명</th><th width="20%">상품수량</th></tr></thead>'+
+            '<tbody></tbody></table></td><th align="center"><button style="width:100%;height:100px;text-align:center;" onclick="event.cancelBubble=true;location.href=\'<%=request.getContextPath()%>/order/processEdit?page='+<%=pageNum%>+'&orderId='+$(this).children().eq(0).text()+'\'"><% if(pageNum.equals("0")){%>주문<br>처리<%}else if(pageNum.equals("1")){%>주문<br>처리<br>완료<%}else if(pageNum.equals("2")){%>교환<br>완료<%}else if(pageNum.equals("3")){%>환불<br>완료<%}else if(pageNum.equals("4")){%>취소<br>완료<%}%></button></th></tr></tbody>';
            $(this).closest('tr').after(htmlStr);
            
            $('#'+$(this).children().eq(0).text()).DataTable({

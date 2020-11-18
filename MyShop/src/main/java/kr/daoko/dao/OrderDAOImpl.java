@@ -1,5 +1,6 @@
 package kr.daoko.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -46,4 +47,13 @@ public class OrderDAOImpl implements OrderDAO {
 		return sql.selectList(NAMESPACE + ".listorderuser", userId);
 	}
 	
+	@Override
+	public List<OrderDTO> orderProcess(String status) throws Exception {
+		return sql.selectList(NAMESPACE + ".orderProcess", status);
+	}
+
+	@Override
+	public void orderProcessEdit(HashMap<String, String> orderInfo) throws Exception {
+		sql.update(NAMESPACE+".orderProcessEdit", orderInfo);
+	}
 }

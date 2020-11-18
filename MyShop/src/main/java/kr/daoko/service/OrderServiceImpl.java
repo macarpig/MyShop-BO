@@ -1,5 +1,6 @@
 package kr.daoko.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -43,4 +44,13 @@ public class OrderServiceImpl implements OrderService {
 		return dao.listOrderUser(userId);
 	}
 	
+	@Override
+	public List<OrderDTO> orderProcess(String status) throws Exception {
+		return dao.orderProcess(status);
+	}
+
+	@Override
+	public void orderProcessEdit(HashMap<String, String> orderInfo) throws Exception {
+		dao.orderProcessEdit(orderInfo);
+	}
 }

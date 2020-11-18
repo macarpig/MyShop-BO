@@ -58,6 +58,7 @@ pageEncoding="UTF-8"%>
 
             <div class="card">
               <div class="card-header">
+              <a href="<%=request.getContextPath()%>/order/processing?page=0">
                 <table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
                 	<tr>
                 		<th>주문접수</th>
@@ -66,7 +67,9 @@ pageEncoding="UTF-8"%>
                 		<td>${states.receipt}</td>
                 	</tr>
 				</table>
-					
+				</a>
+				
+				<a href="<%=request.getContextPath()%>/order/processing?page=1">	
 				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
 					<tr>
                 		<th>주문처리</th>
@@ -75,7 +78,9 @@ pageEncoding="UTF-8"%>
                 		<td>${states.processing}</td>
                 	</tr>
 				</table>
+				</a>
 				
+				<a href="<%=request.getContextPath()%>/order/processing?page=2">
 				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
                 	<tr>
                 		<th>교환접수</th>
@@ -84,16 +89,20 @@ pageEncoding="UTF-8"%>
                 		<td>${states.exchange}</td>
                 	</tr>
 				</table>
+				</a>
 				
+				<a href="<%=request.getContextPath()%>/order/processing?page=3">
 				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
                 	<tr>
-                		<th>반품접수</th>
+                		<th>환불접수</th>
                 	</tr>
                 	<tr>
                 		<td>${states.refund}</td>
                 	</tr>
 				</table>
+				</a>
 				
+				<a href="<%=request.getContextPath()%>/order/processing?page=4">
 				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
                 	<tr>
                 		<th>취소접수</th>
@@ -102,6 +111,7 @@ pageEncoding="UTF-8"%>
                 		<td>${states.cancel}</td>
                 	</tr>
 				</table>
+				</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

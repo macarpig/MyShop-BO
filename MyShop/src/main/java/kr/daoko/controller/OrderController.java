@@ -1,5 +1,6 @@
 package kr.daoko.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -61,10 +62,34 @@ public class OrderController {
 	}
 	
 	@GetMapping("/processing")
-	public String getProcessing() {
+	public String getProcessing(Model model, @RequestParam int page) throws Exception {
 		logger.info("from OrderController: getProcessing()");
+		
+		OrderStatusDTO states = orderService.orderStates();
+		model.addAttribute("states", states);
 		
 		return "order/processing";
 	}
 	
+	@GetMapping("/processEdit")
+	public String getProcessEdit(@RequestParam int page, @RequestParam String orderId) throws Exception{
+		logger.info("from OrderController: getProcessEdit()");
+		
+		HashMap<String, String> orderInfo = new HashMap<String, String>();
+		orderInfo.put("orderId", orderId);
+		if(page == 0)
+			orderInfo.put("status", "배송준비");
+		else if(page == 1)
+			orderInfo.put("status", "배송완료");
+		else if(page == 2)
+			orderInfo.put("status", "교환완료");
+		else if(page == 3)
+			orderInfo.put("status", "환불완료");
+		else if(page == 4)
+			orderInfo.put("status", "취소완료");
+		
+		orderService.orderProcessEdit(orderInfo);
+		
+		return "redirect:/order/processing?page="+page;
+	}
 }
