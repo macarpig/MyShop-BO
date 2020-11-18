@@ -118,7 +118,7 @@
 											<textarea rows="5" cols="50" id="gdsDesc" name="gdsDesc"
 												class="form-control"></textarea>
 										</div>
-									</form>
+									
 								</div>
 								<!-- /.card-body -->
 							</div>
@@ -132,6 +132,7 @@
 							<button type="submit" id="add_Btn" class="btn btn-primary">등록</button>
 						</div>
 					</div>
+				</form>
 				</div>
 				<!-- /.container-fluid -->
 			</section>

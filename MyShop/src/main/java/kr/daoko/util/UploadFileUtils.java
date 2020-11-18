@@ -17,7 +17,7 @@ public class UploadFileUtils {
 	public static String fileUpload(String uploadPath,
 			String fileName,
 			byte[] fileData, String ymdPath) throws Exception {
-		
+		System.out.print("uploadutil()");
 		//같은 파일명이라도 랜덤id를 부여해 다른 이름으로 
 		UUID uid = UUID.randomUUID();
 		
