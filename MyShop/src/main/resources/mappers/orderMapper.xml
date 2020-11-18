@@ -10,6 +10,19 @@
 		order by o.orderDate desc
 	</select>
 	
+	<!-- 특정 사용자 주문 조회 -->
+	<select id="listorderuser" resultType="kr.daoko.dto.OrderDTO">
+		select o.orderId, o.orderDate, sum(g.gdsPrice*d.cartStock) as totalPrice, p.status
+		from ordertbl o
+		inner join orderDetail d on o.orderId = d.orderId
+		inner join member m on o.userId = m.userId
+		inner join goods g on d.gdsCode = g.gdsCode
+		inner join orderProcess p on o.orderId = p.orderId
+		where o.userId = #{userId}
+		group by o.orderId
+		order by o.orderDate desc
+	</select>
+	
 	<!-- 주문 번호에 의한 주문 정보 -->
 	<select id="orderInfo" parameterType="String" resultType="kr.daoko.dto.OrderDTO">
 		select o.orderId, o.userId, o.orderRecvr, o.orderZipCode, o.orderAddr1, o.orderAddr2, o.orderTel, o.orderDate, p.status, m.userRank, sum(g.gdsPrice*d.cartStock) as totalPrice

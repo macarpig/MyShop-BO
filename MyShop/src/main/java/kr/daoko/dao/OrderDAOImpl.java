@@ -39,5 +39,11 @@ public class OrderDAOImpl implements OrderDAO {
 	public OrderStatusDTO orderStates() throws Exception {
 		return sql.selectOne(NAMESPACE + ".orderStates");
 	}
+
+	// 특정 사용자 주문 조회
+	@Override
+	public List<OrderDTO> listOrderUser(String userId) throws Exception {
+		return sql.selectList(NAMESPACE + ".listorderuser", userId);
+	}
 	
 }

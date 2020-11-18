@@ -3,13 +3,13 @@
 <mapper namespace="kr.daoko.mapper.qnaMapper">
 	<!-- Q&A 목록 -->
 	<select id="listqna" resultType="kr.daoko.dto.QnaDTO">
-		select index, userId, question, answer, date
+		select idx, userId, question, answer, date
 		from qna
 	</select>
 	
 	<!-- 특정 사용자 Q&A 목록 -->
 	<select id="listqnauser" resultType="kr.daoko.dto.QnaDTO">
-		select index, userId, question, answer, date
+		select idx, userId, question, answer, date
 		from qna
 		where userId = #{userId}
 	</select>

@@ -54,35 +54,31 @@ pageEncoding="UTF-8"%>
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="card">
+            <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                <h3 class="card-title">클릭 시 회원정보 수정 페이지로 이동합니다.</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="list" class="table table-bordered table-hover">
+                <table id="member" class="table table-bordered table-hover">
                   <thead>
-                  <tr>
-                    <th>아이디</th>
-                    <th>이름</th>
-                    <th>연락처</th>
-                    <th>주소</th>
-                    <th>등급</th>
-                    <th>권한</th>
-                    <th>수정</th>
-                  </tr>
-                  </thead>
-                  <tfoot>
 	                  <tr>
 	                    <th>아이디</th>
 	                    <th>이름</th>
 	                    <th>연락처</th>
 	                    <th>주소</th>
 	                    <th>등급</th>
-	                    <th>권한</th>
-	                    <th>수정</th>
 	                  </tr>
-                  </tfoot>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>${member.userId}</td>
+                          <td>${member.userName}</td>
+                          <td>${member.userTel}</td>
+                          <td>${member.userAddr1}</td>
+                          <td>${member.userRank}</td>
+                      </tr>
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -92,6 +88,53 @@ pageEncoding="UTF-8"%>
           <!-- /.col -->
         </div>
         <!-- /.row -->
+        <div class="row">
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">클릭 시 해당 주문 상세 페이지로 이동합니다.</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="order" class="table table-bordered table-hover">
+                  <thead>
+	                  <tr>
+	                    <th>주문번호</th>
+	                    <th>주문일자</th>
+	                    <th>주문금액</th>
+	                    <th>주문상태</th>
+	                  </tr>
+                  </thead>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">클릭 시 해당 Q&A 페이지로 이동합니다.</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="qna" class="table table-bordered table-hover">
+                  <thead>
+	                  <tr>
+	                    <th>문의번호</th>
+	                    <th>문의사항</th>
+	                    <th>문의일자</th>
+	                    <th>문의상태</th>
+	                  </tr>
+                  </thead>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
       </div>
       <!-- /.container-fluid -->
     </section>
@@ -124,42 +167,68 @@ pageEncoding="UTF-8"%>
 <script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
-var table = $('#list').DataTable({
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var userId = getParameterByName("userId");
+console.log(userId);
+
+$('#member tbody').on('click', 'tr', function() {
+	location.href="modify?userId=" + userId;
+});
+
+var order = $('#order').DataTable({
 	ajax: {
-		url: '<%=request.getContextPath()%>/api/member/list',
+		url: '<%=request.getContextPath()%>/api/order/list?userId=' + userId,
 		dataSrc: ''
 	},
 	
 	columns: [
-		{"data" : "userId"},
-		{"data" : "userName"},
-		{"data" : "userTel"},
-		{"data" : "userAddr1"},
-		{"data" : "userRank"},
+		{"data" : "orderId"},
+		{"data" : "orderDate"},
+		{"data" : "totalPrice"},
+		{"data" : "status"}
+	]
+});
+
+$('#order tbody').on('click', 'tr', function() {
+	location.href="<%=request.getContextPath()%>/order/detail?orderId=" + order.row(this).data().orderId;
+});
+
+var qna = $('#qna').DataTable({
+	ajax: {
+		url: '<%=request.getContextPath()%>/api/qna/list?userId=' + userId,
+		dataSrc: ''
+	},
+	
+	columns: [
+		{"data" : "idx"},
+		{"data" : "question"},
+		{"data" : "date"},
 		{
-			"data" : "userAuth",
+			"data" : "answer",
 			"render" : function(data, type, row) {
-				if(data === true) {
-					return '<input type="checkbox" class="editor-active" onclick="return false;" checked>';
+				
+				console.log(data);
+				
+				if(data === undefined) {
+					return '대기';
 				}
 				
 				else {
-					return '<input type="checkbox" class="editor-active" onclick="return false;">';
+					return '완료';
 				}
-				return data;
-			}
-		},
-		{
-			"data": "userId",
-			"render": function(data, type, full, meta) {
-				return "<a href='modify?userId="+ data +"'>수정</a>";
 			}
 		}
 	]
 });
 
-$('#list tbody').on('click', 'tr', function() {
-	location.href="detail?userId=" + table.row(this).data().userId;
+$('#qna tbody').on('click', 'tr', function() {
+	location.href="<%=request.getContextPath()%>/qna/detail?idx=" + qna.row(this).data().idx;
 });
 </script>
 </body>

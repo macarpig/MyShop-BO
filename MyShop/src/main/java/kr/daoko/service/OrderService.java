@@ -10,6 +10,9 @@ public interface OrderService {
 	// 二쇰Ц 議고쉶
 	public List<OrderDTO> orderInquiry() throws Exception;
 	
+	// 특정 사용자 주문 조회
+	public List<OrderDTO> listOrderUser(String userId) throws Exception;
+	
 	// 二쇰Ц 踰덊샇�뿉 �쓽�븳 �긽�꽭 紐⑸줉
 	public List<OrderDetailDTO> orderDetail(String orderId) throws Exception;
 	

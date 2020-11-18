@@ -59,4 +59,15 @@ public class MemberController {
 		
 		return "redirect:/member/list";
 	}
+	
+	// 회원 상세정보 출력
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String getMemberDetail(@RequestParam("userId") String userId, Model model) throws Exception {
+		logger.info("from MemberController: postMemberDetail()");
+
+		MemberDTO member = service.viewMember(userId);
+		model.addAttribute("member", member);
+		
+		return "member/detail";
+	}
 }

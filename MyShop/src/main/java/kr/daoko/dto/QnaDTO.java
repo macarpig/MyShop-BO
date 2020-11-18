@@ -1,19 +1,19 @@
 package kr.daoko.dto;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class QnaDTO {
-	private int index;
+	private int idx;
 	private String userId;
 	private String question;
 	private String answer;
-	private LocalDateTime date;
+	private Date date;
 	
-	public int getIndex() {
-		return index;
+	public int getIdx() {
+		return idx;
 	}
-	public void setIndex(int index) {
-		this.index = index;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	public String getUserId() {
 		return userId;
@@ -33,10 +33,10 @@ public class QnaDTO {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public LocalDateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(LocalDateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 }
