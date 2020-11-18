@@ -15,6 +15,7 @@ public class OrderDTO {
 	private String status;
 	private String userRank;
 	private int totalPrice;
+	private String reason;
 	public String getOrderId() {
 		return orderId;
 	}
@@ -87,5 +88,11 @@ public class OrderDTO {
 	}
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 }

@@ -25,7 +25,7 @@
 	
 	<!-- 주문 번호에 의한 주문 정보 -->
 	<select id="orderInfo" parameterType="String" resultType="kr.daoko.dto.OrderDTO">
-		select o.orderId, o.userId, o.orderRecvr, o.orderZipCode, o.orderAddr1, o.orderAddr2, o.orderTel, o.orderDate, p.status, m.userRank, sum(g.gdsPrice*d.cartStock) as totalPrice
+		select o.orderId, o.userId, o.orderRecvr, o.orderZipCode, o.orderAddr1, o.orderAddr2, o.orderTel, o.orderDate, p.status, m.userRank, p.reason, sum(g.gdsPrice*d.cartStock) as totalPrice
 		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
 		where o.orderId = #{orderId} and o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId
 		group by o.orderId
@@ -46,7 +46,7 @@
 	
 	<!-- 상태에 따른 주문 처리 조회 -->
 	<select id="orderProcess" parameterType="String" resultType="kr.daoko.dto.OrderDTO">
-		select o.orderId, o.orderDate, o.userId, m.userRank, p.status, sum(g.gdsPrice*d.cartStock) as totalPrice
+		select o.orderId, o.orderDate, o.userId, m.userRank, p.status, p.reason, sum(g.gdsPrice*d.cartStock) as totalPrice
 		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
 		where o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId and p.status = #{status}
 		group by o.orderId
