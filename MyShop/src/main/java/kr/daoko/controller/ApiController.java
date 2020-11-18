@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import kr.daoko.dto.GoodsDTO;
 import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
+import kr.daoko.dto.OrderDetailDTO;
 import kr.daoko.dto.QnaDTO;
 import kr.daoko.service.GoodsService;
 import kr.daoko.service.MemberService;
@@ -77,6 +78,17 @@ public class ApiController {
 		return json;
 	}
 	
+	@RequestMapping(value = "/order/detail", produces = "application/json", method = RequestMethod.GET)
+	public String getOrderDetail(@RequestParam String orderId) throws Exception {
+		logger.info("from ApiController: getOderInquiry()");
+		System.out.println(orderId);
+		List<OrderDetailDTO> order = orderService.orderDetail(orderId);
+		System.out.println(order.get(0).gdsName);
+		String json = gson.toJson(order);
+      
+		return json;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/goods/manage", produces = "application/json", method = RequestMethod.GET)
 	public String getGoodsManage() throws Exception {
@@ -98,15 +110,5 @@ public class ApiController {
 		String json = gson.toJson(qna);
 		
 		return json;
-	   @RequestMapping(value = "/order/detail", produces = "application/json", method = RequestMethod.GET)
-	   public String getOrderDetail(@RequestParam String orderId) throws Exception {
-	      logger.info("from ApiController: getOderInquiry()");
-	      System.out.println(orderId);
-	      List<OrderDetailDTO> order = orderService.orderDetail(orderId);
-	      System.out.println(order.get(0).gdsName);
-	      Gson gson = new Gson();
-	      String json = gson.toJson(order);
-	      
-	      return json;
 	}
 }
