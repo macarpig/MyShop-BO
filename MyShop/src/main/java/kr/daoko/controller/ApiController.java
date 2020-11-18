@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -16,6 +17,7 @@ import com.google.gson.Gson;
 import kr.daoko.dto.GoodsDTO;
 import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
+import kr.daoko.dto.OrderDetailDTO;
 import kr.daoko.service.GoodsService;
 import kr.daoko.service.MemberService;
 import kr.daoko.service.OrderService;
@@ -62,16 +64,16 @@ public class ApiController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/goods/manage", produces = "application/json", method = RequestMethod.GET)
-	public String getGoodsManage() throws Exception {
-		logger.info("from ApiController: getGoodsManage()");
-		
-		List<GoodsDTO> goods = goodsService.goodsManage();
-		
-		Gson gson = new Gson();
-		String json = gson.toJson(goods);
-		
-		return json;
+	   @RequestMapping(value = "/order/detail", produces = "application/json", method = RequestMethod.GET)
+	   public String getOrderDetail(@RequestParam String orderId) throws Exception {
+	      logger.info("from ApiController: getOderInquiry()");
+	      System.out.println(orderId);
+	      List<OrderDetailDTO> order = orderService.orderDetail(orderId);
+	      System.out.println(order.get(0).gdsName);
+	      Gson gson = new Gson();
+	      String json = gson.toJson(order);
+	      
+	      return json;
 	}
 	
 }
