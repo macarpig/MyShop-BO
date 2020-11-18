@@ -40,7 +40,7 @@
 	
 	<!-- 주문접수, 주문처리, 교환접수, 반품접수, 취소접수 -->
 	<select id="orderStates" resultType="kr.daoko.dto.OrderStatusDTO">
-		select count(case when status = '결제완료' then 1 end) as receipt, count(case when status = '배송준비' then 1 end) as processing, count(case when status = '교환접수' then 1 end) as exchange, count(case when status = '반품접수' then 1 end) as refund, count(case when status = '취소접수' then 1 end) as cancel
+		select count(case when status = '결제완료' then 1 end) as receipt, count(case when status = '배송준비' then 1 end) as processing, count(case when status = '교환접수' then 1 end) as exchange, count(case when status = '환불접수' then 1 end) as refund, count(case when status = '취소접수' then 1 end) as cancel
 		from orderProcess
 	</select>
 	
