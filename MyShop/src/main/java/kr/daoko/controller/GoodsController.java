@@ -1,6 +1,7 @@
 package kr.daoko.controller;
 
 import java.io.File;
+import javax.annotation.Resource;
 
 import javax.inject.Inject;
 
@@ -28,8 +29,9 @@ public class GoodsController {
 
 	@Inject
 	GoodsService g_service;
+	
 	// 상품 업로드 패스
-	//@Resource(name="uploadPath")
+	@Resource(name="uploadPath")
 	private String uploadPath;
 
 	// 모든 상품 조회
