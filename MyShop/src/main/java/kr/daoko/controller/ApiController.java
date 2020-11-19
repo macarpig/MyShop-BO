@@ -139,4 +139,16 @@ public class ApiController {
 			
 			return json;
 		}
+		
+		//직권 처리를 위한 주문 조회
+		@ResponseBody
+		@RequestMapping(value = "/order/manage", produces = "application/json", method = RequestMethod.GET)
+		public String getOrderManage() throws Exception {
+			logger.info("from ApiController: getOderManage()");
+			
+			List<OrderDTO> order = orderService.orderManage();
+			String json = gson.toJson(order);
+			
+			return json;
+		}
 }

@@ -31,4 +31,7 @@ public interface OrderDAO {
 	
 	//orderId에 대한 처리
 	public void orderProcessEdit(HashMap<String, String> orderInfo) throws Exception;
+	
+	//주문 직권 처리 관리를 위한 조회
+	public List<OrderDTO> orderManage() throws Exception;
 }

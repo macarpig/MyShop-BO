@@ -59,4 +59,9 @@ public class OrderServiceImpl implements OrderService {
 	public void orderProcessEdit(HashMap<String, String> orderInfo) throws Exception {
 		dao.orderProcessEdit(orderInfo);
 	}
+
+	@Override
+	public List<OrderDTO> orderManage() throws Exception {
+		return dao.orderManage();
+	}
 }

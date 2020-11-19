@@ -182,6 +182,14 @@ pageEncoding="UTF-8"%>
                 </table>
               </div>
               <!-- /.card-body -->
+              <div class="card-header">
+                <h3 class="card-title">사유</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <textarea rows="10" cols="70" autofocus="autofocus" spellcheck="true"></textarea>
+              </div>
+              <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>

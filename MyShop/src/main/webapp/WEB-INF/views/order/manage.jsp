@@ -132,7 +132,7 @@ pageEncoding="UTF-8"%>
 <script>
 var table =  $('#order').DataTable({
       ajax: {
-			url: '<%=request.getContextPath()%>/api/order/inquiry',
+			url: '<%=request.getContextPath()%>/api/order/manage',
 			dataSrc: ''
 		},
 		

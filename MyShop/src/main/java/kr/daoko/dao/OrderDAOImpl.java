@@ -62,4 +62,9 @@ public class OrderDAOImpl implements OrderDAO {
 	public void orderProcessEdit(HashMap<String, String> orderInfo) throws Exception {
 		sql.update(NAMESPACE+".orderProcessEdit", orderInfo);
 	}
+
+	@Override
+	public List<OrderDTO> orderManage() throws Exception {
+		return sql.selectList(NAMESPACE + ".orderManage");
+	}
 }
