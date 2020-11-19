@@ -55,6 +55,18 @@ public class ApiController {
 		return json;
 	}
 	
+	//상품 목록 조회
+	@ResponseBody
+	@RequestMapping(value = "goods/manage", produces = "application/json", method = RequestMethod.GET)
+	public String getGoodsList() throws Exception {
+		logger.info("from ApiController: getMemberList()");
+		
+		List<GoodsDTO> list = goodsService.goodsManage();
+		String json = gson.toJson(list);
+		
+		return json;
+	}
+	
 	//주문 조회
 	@ResponseBody
 	@RequestMapping(value = "/order/inquiry", produces = "application/json", method = RequestMethod.GET)
