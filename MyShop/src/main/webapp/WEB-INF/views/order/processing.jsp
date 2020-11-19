@@ -63,7 +63,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><% if(pageNum.equals("0")){%>주문접수<%}else if(pageNum.equals("1")){%>주문처리<%}else if(pageNum.equals("2")){%>교환접수<%}else if(pageNum.equals("3")){%>환불접수<%}else if(pageNum.equals("4")){%>취소접수<%}%></h3><br>
+                <h3 class="card-title"><% if(pageNum.equals("0")){%>주문접수<%}else if(pageNum.equals("1")){%>주문처리<%}else if(pageNum.equals("2")){%>교환접수<%}else if(pageNum.equals("3")){%>반품접수<%}else if(pageNum.equals("4")){%>취소접수<%}%></h3><br>
                 <% if(!pageNum.equals("0")){%><a href="<%=request.getContextPath()%>/order/processing?page=0"><%}%>
                 <table style="float:left;background-color:<% if(pageNum.equals("0")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
                 	<tr>
@@ -100,7 +100,7 @@
 				<% if(!pageNum.equals("3")){%><a href="<%=request.getContextPath()%>/order/processing?page=3"><%}%>
 				<table style="float:left;background-color:<% if(pageNum.equals("3")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
                 	<tr>
-                		<th>환불접수</th>
+                		<th>반품접수</th>
                 	</tr>
                 	<tr>
                 		<td>${states.refund}</td>
@@ -205,7 +205,15 @@
       {"data" : "orderDate"},
       {"data" : "userId"},
       {"data" : "userRank"}
-      <% if(!pageNum.equals("0")&&!pageNum.equals("1")){%>,{"data" : "reason"}<%}%>
+      <% if(!pageNum.equals("0")&&!pageNum.equals("1")){%>,{"data" : "reason",
+    	  "render": function(data, type, full, meta) {
+			if(data === undefined){
+				return "";
+			}else{
+				return data;
+			}
+		}
+      }<%}%>
    ]
 
    });
@@ -219,7 +227,7 @@
            $('#order tbody').find('tr[name="'+$(this).children().eq(0).text()+'"]').remove();
         }else{
            var htmlStr = '<tr id="goodsList" name="'+$(this).children().eq(0).text()+'"><td <% if(pageNum.equals("0")||pageNum.equals("1")){%>colspan="3"<%}else{%>colspan="4"<%}%>><table id="'+$(this).children().eq(0).text()+'" width="100%" style="background-color:white;margin-bottom:30px;"><thead><tr id="goodsListTitle"><th width="50%">상품코드</th><th width="30%">상품명</th><th width="20%">상품수량</th></tr></thead>'+
-            '<tbody></tbody></table></td><th align="center"><button style="width:100%;height:100px;text-align:center;" onclick="event.cancelBubble=true;location.href=\'<%=request.getContextPath()%>/order/processEdit?page='+<%=pageNum%>+'&orderId='+$(this).children().eq(0).text()+'\'"><% if(pageNum.equals("0")){%>주문<br>처리<%}else if(pageNum.equals("1")){%>주문<br>처리<br>완료<%}else if(pageNum.equals("2")){%>교환<br>완료<%}else if(pageNum.equals("3")){%>환불<br>완료<%}else if(pageNum.equals("4")){%>취소<br>완료<%}%></button></th></tr></tbody>';
+            '<tbody></tbody></table></td><th align="center"><button class=<% if(pageNum.equals("0")||pageNum.equals("1")){%>"btn btn-success"<%}else{%>"btn btn-warning"<%}%> style="width:100%;height:100px;text-align:center;" onclick="event.cancelBubble=true;location.href=\'<%=request.getContextPath()%>/order/processEdit?page='+<%=pageNum%>+'&orderId='+$(this).children().eq(0).text()+'\'"><% if(pageNum.equals("0")){%>주문<br>처리<%}else if(pageNum.equals("1")){%>주문<br>처리<br>완료<%}else if(pageNum.equals("2")){%>교환<br>완료<%}else if(pageNum.equals("3")){%>반품<br>완료<%}else if(pageNum.equals("4")){%>취소<br>완료<%}%></button></th></tr></tbody>';
            $(this).closest('tr').after(htmlStr);
            
            $('#'+$(this).children().eq(0).text()).DataTable({

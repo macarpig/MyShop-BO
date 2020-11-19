@@ -154,7 +154,7 @@ var table =  $('#order').DataTable({
 			{"data" : "status"},
 			{"data" : "orderId",
 				"render":function(data, type, full, meta) {
-					return "<input type=\"button\" value=\"취소처리\" onclick=\"location.href='ExOfficioProcess?orderId='"+data+"'&d=0\"><input type=\"button\" value=\"반품처리\" onclick=\"location.href='ExOfficioProcess?orderId='"+data+"'&d=1\"><input type=\"button\" value=\"교환처리\" onclick=\"location.href='ExOfficioProcess?orderId='"+data+"'&d=2\">";
+					return '<button onclick="location.href=\'ExOfficio?orderId='+data+'&d=0\'">취소처리</button><button onclick="location.href=\'ExOfficioProcess?orderId='+data+'&d=1\'">반품처리</button><button onclick="location.href=\'ExOfficioProcess?orderId='+data+'&d=2\'">교환처리</button>';
 				}
 			}
 		]

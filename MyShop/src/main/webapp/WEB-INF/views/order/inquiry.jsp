@@ -94,7 +94,7 @@ pageEncoding="UTF-8"%>
 				<a href="<%=request.getContextPath()%>/order/processing?page=3">
 				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
                 	<tr>
-                		<th>환불접수</th>
+                		<th>반품접수</th>
                 	</tr>
                 	<tr>
                 		<td>${states.refund}</td>

@@ -84,12 +84,27 @@ public class OrderController {
 		else if(page == 2)
 			orderInfo.put("status", "교환완료");
 		else if(page == 3)
-			orderInfo.put("status", "환불완료");
+			orderInfo.put("status", "반품완료");
 		else if(page == 4)
 			orderInfo.put("status", "취소완료");
 		
 		orderService.orderProcessEdit(orderInfo);
 		
 		return "redirect:/order/processing?page="+page;
+	}
+	
+	@GetMapping("/ExOfficio")
+	public String getExOfficio(@RequestParam String orderId, @RequestParam int d, Model model) throws Exception{
+		logger.info("from OrderController: getExOfficio()");
+		
+		OrderDTO order = orderService.orderInfo(orderId);
+		List<OrderDetailDTO> detail = orderService.orderDetail(orderId);
+		MemberDTO member = memberService.viewMember(order.getUserId());
+		
+		model.addAttribute("order", order);
+		model.addAttribute("detail", detail);
+		model.addAttribute("member", member);
+		
+		return "order/ExOfficio";
 	}
 }

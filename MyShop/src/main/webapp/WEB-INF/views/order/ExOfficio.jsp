@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8");%>
+<% response.setContentType("text/html; charset=UTF-8");%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% String d = request.getParameter("d"); %>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Macarpig | 주문 상세 페이지</title>
+  <title>Macarpig | <% if(d.equals("0")){%>직권 취소<%}else if(d.equals("1")){%>직권 반품<%}else if(d.equals("2")){%>직권 교환<%}%></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -34,12 +37,12 @@ pageEncoding="UTF-8"%>
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>주문 상세 페이지</h1>
+            <h1><% if(d.equals("0")){%>취소처리<%}else if(d.equals("1")){%>반품처리<%}else if(d.equals("2")){%>교환처리<%}%></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">주문 상세 페이지</li>
+              <li class="breadcrumb-item active"><% if(d.equals("0")){%>취소처리<%}else if(d.equals("1")){%>반품처리<%}else if(d.equals("2")){%>교환처리<%}%></li>
             </ol>
           </div>
         </div>
@@ -53,7 +56,7 @@ pageEncoding="UTF-8"%>
           <div class="col-md-6">
             <div class="card">
               <div class="card-body p-0">
-                <table class="table table-striped" style="width:100%;">
+                <table class="table table-striped">
                   <tbody>
                     <tr>
                       <th>주문 번호</th>
@@ -87,7 +90,6 @@ pageEncoding="UTF-8"%>
                       <th>썸네일</th>
                       <th>상품명</th>
                       <th>수량</th>
-                      <th>요청사항</th>
                       <th>판매가</th>
                       <th>총 구매금액</th>
                       <th>상품상태</th>
@@ -100,7 +102,6 @@ pageEncoding="UTF-8"%>
                       <td><c:out value="${detail}" /></td>
                       <td><c:out value="${detail.gdsName}" /></td>
                       <td><c:out value="${detail.cartStock}" /></td>
-                      <td><c:out value="${detail.orderRequest}" /></td>
                       <td><c:out value="${detail.gdsPrice}" /></td>
                       <td><c:out value="${detail.gdsPrice}" /></td>
                       <td>${order.status}</td>

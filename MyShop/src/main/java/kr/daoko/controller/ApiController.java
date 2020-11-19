@@ -129,7 +129,7 @@ public class ApiController {
 			else if(page == 2)
 				status="교환접수";
 			else if(page == 3)
-				status="환불접수";
+				status="반품접수";
 			else if(page == 4)
 				status="취소접수";
 			
