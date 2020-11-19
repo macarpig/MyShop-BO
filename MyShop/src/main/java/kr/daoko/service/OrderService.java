@@ -23,6 +23,9 @@ public interface OrderService {
 	// 주문접수, 주문처리, 교환접수, 반품접수, 취소접수
 	public OrderStatusDTO orderStates() throws Exception;
 	
+	// 특정 사용자에 대한 주문접수, 주문처리, 교환접수, 반품접수, 취소접수
+	public OrderStatusDTO orderStates(String userId) throws Exception;
+	
 	//상태에 따른 주문 처리 조회
 	public List<OrderDTO> orderProcess(String status) throws Exception;
 		

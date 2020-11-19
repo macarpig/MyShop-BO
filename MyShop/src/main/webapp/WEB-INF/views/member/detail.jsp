@@ -96,6 +96,60 @@ pageEncoding="UTF-8"%>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+              	<a href="<%=request.getContextPath()%>/order/processing?page=0">
+                <table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
+                	<tr>
+                		<th>주문접수</th>
+                	</tr>
+                	<tr>
+                		<td>${status.receipt}</td>
+                	</tr>
+				</table>
+				</a>
+				
+				<a href="<%=request.getContextPath()%>/order/processing?page=1">	
+				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
+					<tr>
+                		<th>주문처리</th>
+                	</tr>
+                	<tr>
+                		<td>${status.processing}</td>
+                	</tr>
+				</table>
+				</a>
+				
+				<a href="<%=request.getContextPath()%>/order/processing?page=2">
+				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
+                	<tr>
+                		<th>교환접수</th>
+                	</tr>
+                	<tr>
+                		<td>${status.exchange}</td>
+                	</tr>
+				</table>
+				</a>
+				
+				<a href="<%=request.getContextPath()%>/order/processing?page=3">
+				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
+                	<tr>
+                		<th>반품접수</th>
+                	</tr>
+                	<tr>
+                		<td>${status.refund}</td>
+                	</tr>
+				</table>
+				</a>
+				
+				<a href="<%=request.getContextPath()%>/order/processing?page=4">
+				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
+                	<tr>
+                		<th>취소접수</th>
+                	</tr>
+                	<tr>
+                		<td>${status.cancel}</td>
+                	</tr>
+				</table>
+				</a>
                 <table id="order" class="table table-bordered table-hover">
                   <thead>
 	                  <tr>
@@ -175,11 +229,19 @@ function getParameterByName(name) {
 }
 
 var userId = getParameterByName("userId");
-console.log(userId);
+var userRank = "${member.userRank}";
 
 $('#member tbody').on('click', 'tr', function() {
 	location.href="modify?userId=" + userId;
 });
+
+if(userRank === 'VIP') {
+	$("#member tr:odd").css("background-color", "#00FF00");
+}
+
+else if(userRank === '우수회원') {
+	$("#member tr:odd").css("background-color", "#FF00FF");
+}
 
 var order = $('#order').DataTable({
 	ajax: {
@@ -212,8 +274,6 @@ var qna = $('#qna').DataTable({
 		{
 			"data" : "answer",
 			"render" : function(data, type, row) {
-				
-				console.log(data);
 				
 				if(data === undefined) {
 					return '대기';

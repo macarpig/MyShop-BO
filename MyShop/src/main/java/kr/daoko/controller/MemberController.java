@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.daoko.dto.MemberDTO;
+import kr.daoko.dto.OrderStatusDTO;
 import kr.daoko.service.MemberService;
+import kr.daoko.service.OrderService;
 
 @Controller
 @RequestMapping("/member/*")
@@ -19,7 +21,10 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Inject
-	private MemberService service;
+	private MemberService memberService;
+	
+	@Inject
+	private OrderService orderService;
 	
 	// 회원관리 페이지 출력
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -34,7 +39,7 @@ public class MemberController {
 	public String getMemberModify(@RequestParam("userId") String userId, Model model) throws Exception {
 		logger.info("from MemberController: getMemberModify()");
 
-		MemberDTO member = service.viewMember(userId);
+		MemberDTO member = memberService.viewMember(userId);
 		model.addAttribute("member", member);
 		
 		return "member/modify";
@@ -45,7 +50,7 @@ public class MemberController {
 	public String postMemberModify(MemberDTO dto) throws Exception {
 		logger.info("from MemberController: postMemberModify()");
 
-		service.modifyMember(dto);
+		memberService.modifyMember(dto);
 		
 		return "redirect:/member/list";
 	}
@@ -55,7 +60,7 @@ public class MemberController {
 	public String postMemberDelete(@RequestParam("userId") String userId) throws Exception {
 		logger.info("from MemberController: postMemberDelete()");
 
-		service.deleteMember(userId);
+		memberService.deleteMember(userId);
 		
 		return "redirect:/member/list";
 	}
@@ -65,8 +70,17 @@ public class MemberController {
 	public String getMemberDetail(@RequestParam("userId") String userId, Model model) throws Exception {
 		logger.info("from MemberController: postMemberDetail()");
 
-		MemberDTO member = service.viewMember(userId);
+		MemberDTO member = memberService.viewMember(userId);
+		OrderStatusDTO status = orderService.orderStates(userId);
+		
+		logger.info("주문접수: " + status.getReceipt());
+		logger.info("주문처리: " + status.getProcessing());
+		logger.info("교환접수: " + status.getExchange());
+		logger.info("반품접수: " + status.getRefund());
+		logger.info("취소접수: " + status.getCancel());
+		
 		model.addAttribute("member", member);
+		model.addAttribute("status", status);
 		
 		return "member/detail";
 	}
