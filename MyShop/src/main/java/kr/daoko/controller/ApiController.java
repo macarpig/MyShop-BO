@@ -67,6 +67,18 @@ public class ApiController {
 		return json;
 	}
 	
+	// 특정 사용자 Q&A 목록
+	@ResponseBody
+	@RequestMapping(value = "/qna/list", produces = "application/json", method = RequestMethod.GET)
+	public String getListQna(@RequestParam("userId") String userId) throws Exception {
+		logger.info("from ApiController: getListQna(String userId)");
+
+		List<QnaDTO> qna = qnaService.listQna(userId);
+		String json = gson.toJson(qna);
+
+		return json;
+	}
+		
 	//주문 조회
 	@ResponseBody
 	@RequestMapping(value = "/order/inquiry", produces = "application/json", method = RequestMethod.GET)
