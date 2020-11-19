@@ -37,6 +37,12 @@ public class OrderServiceImpl implements OrderService {
 	public OrderStatusDTO orderStates() throws Exception {
 		return dao.orderStates();
 	}
+	
+	// 특정 사용자에 대한 주문접수, 주문처리, 교환접수, 반품접수, 취소접수
+	@Override
+	public OrderStatusDTO orderStates(String userId) throws Exception {
+		return dao.orderStates(userId);
+	}
 
 	// 특정 사용자 주문 조회
 	@Override
