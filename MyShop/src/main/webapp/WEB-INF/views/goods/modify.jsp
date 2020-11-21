@@ -51,7 +51,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <form role="form" method="post">
+      <form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
       	<div class="row">
 	        <div class="col-md-12">
 	          <div class="card card-primary">
@@ -84,12 +84,27 @@
 	              </div>
 	              <div class="inputArea">
 	                <label for="gdsImg">상품 이미지</label>
-	                <input type="text" id="gdsImg" name="gdsImg" class="form-control" value="${goods.gdsImg}">
-	              </div>
-	              <div class="inputArea">
-	                <label for="gdsThumbImg">상품 썸네일이미지</label>
-	                <input type="text" id="gdsThumbImg" name="gdsThumbImg" class="form-control" value="${goods.gdsThumbImg}">
-	              </div>
+	                <input type="file" id="gdsImg" name="file"/>
+	                <div class="select_img">
+	                	<img src="${goods.gdsImg}"/>
+	                	<input type="hidden" name="gdsImg" value="${goods.gdsImg}"/>
+	                	<input type="hidden" name="gdsThumbImg" value="${goods.gdsThumbImg}"/>
+	                </div>
+	                
+	                <script>
+	                	$("#gdsImg").change(function() {
+	                		if(this.files && this.files[0]) {
+	                			var reader = new FileReader;
+	                			reader.onload = function(data) {
+	                				$(".select_img img").attr("src", data.target.result).width(500);
+	                			}
+	                			reader.readAsDataURL(this.files[0]);
+	                		}
+	                	});
+	                </script>
+	                <%=request.getRealPath("/") %>
+	              </div> 
+	              
 	              <div class="inputArea">
 	                <label for="gdsDesc">상품 설명</label>
 	                <textArea rows="5" cols="50"id="gdsDesc" name="gdsDesc" class="form-control" value="${goods.gdsDesc}"></textArea>

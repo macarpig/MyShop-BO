@@ -4,11 +4,13 @@ import java.io.File;
 import javax.annotation.Resource;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -84,9 +86,25 @@ public class GoodsController {
 
 	// 상품 수 처리
 	@PostMapping("/modify")
-	public String postGoodsModify(GoodsDTO dto) throws Exception {
+	public String postGoodsModify(GoodsDTO dto, MultipartFile file, HttpServletRequest req) throws Exception {
 		logger.info("postGoodsModify()");
-
+		//새로운 파일이 등록되었는지 확인 
+		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+			new File(uploadPath + req.getParameter("gdsImg")).delete();
+			new File(uploadPath + req.getParameter("gdsThumbImg")).delete();
+			
+			//새로 첨부한 파일 등록
+			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+			
+			dto.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+			dto.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		
+		} else { //새로운 파일 등록되지 않으면 기존 이미지 그대
+			dto.setGdsImg(req.getParameter("gdsImg"));
+			dto.setGdsThumbImg(req.getParameter("gdsThumbImg"));
+		}
 		g_service.modifyGoods(dto);
 
 		return "redirect:/goods/manage";
