@@ -1,17 +1,25 @@
 package kr.daoko.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.daoko.dto.GoodsDTO;
+import kr.daoko.dto.GoodsMemberDTO;
 import kr.daoko.dto.MemberDTO;
+import kr.daoko.dto.OrderDTO;
+import kr.daoko.dto.OrderDetailDTO;
 import kr.daoko.dto.OrderStatusDTO;
+import kr.daoko.service.GoodsService;
 import kr.daoko.service.MemberService;
 import kr.daoko.service.OrderService;
 
@@ -25,6 +33,9 @@ public class MemberController {
 	
 	@Inject
 	private OrderService orderService;
+	
+	@Inject
+	private GoodsService goodsService;
 	
 	// 회원관리 페이지 출력
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -84,4 +95,20 @@ public class MemberController {
 		
 		return "member/detail";
 	}
+	/*
+	//특정 상품구매 회원 출력 
+	@GetMapping("/detail")
+	public String getDetail(@RequestParam String gdsCode, Model model) throws Exception{
+		logger.info("getDetail()");
+		GoodsMemberDTO member1 = 
+		List<GoodsMemberDTO> member = memberService.goodsMember(gdsCode);
+		GoodsDTO goods = goodsService.goodsView(member.getUserId());
+		
+		model.addAttribute("member", member);
+		model.addAttribute("detail", detail);
+		model.addAttribute("goods", goods);
+		return "member/detail";
+	}*/
+	
+	
 }

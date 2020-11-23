@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.daoko.dao.MemberDAO;
+import kr.daoko.dto.GoodsMemberDTO;
 import kr.daoko.dto.MemberDTO;
 
 @Service
@@ -36,5 +37,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void deleteMember(String userId) throws Exception {
 		dao.deleteMember(userId);
+	}
+	
+	// 특정 상품을 구매한 회원 조회
+	@Override
+	public List<GoodsMemberDTO> goodsMember(String gdsCode) throws Exception {
+		return dao.goodsMember(gdsCode);
 	}
 }

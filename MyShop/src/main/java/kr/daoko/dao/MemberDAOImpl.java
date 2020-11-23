@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.daoko.dto.GoodsMemberDTO;
 import kr.daoko.dto.MemberDTO;
 
 @Repository
@@ -39,5 +40,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void deleteMember(String userId) throws Exception {
 		sql.delete(NAMESPACE + ".deletemember", userId);
+	}
+	
+	//특정 상품을 구매한 회원 조회
+	@Override
+	public List<GoodsMemberDTO> goodsMember(String gdsCode) throws Exception {
+		return sql.selectList(NAMESPACE + ".goodsmember", gdsCode);
 	}
 }

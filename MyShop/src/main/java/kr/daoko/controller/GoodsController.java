@@ -1,6 +1,8 @@
 package kr.daoko.controller;
 
 import java.io.File;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import javax.inject.Inject;
@@ -20,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.daoko.dto.GoodsDTO;
+import kr.daoko.dto.GoodsMemberDTO;
 import kr.daoko.dto.MemberDTO;
+import kr.daoko.dto.OrderStatusDTO;
 import kr.daoko.service.GoodsService;
+import kr.daoko.service.MemberService;
 import kr.daoko.util.UploadFileUtils;
 
 @Controller
@@ -31,6 +36,7 @@ public class GoodsController {
 
 	@Inject
 	GoodsService g_service;
+	MemberService m_service;
 	
 	// 상품 업로드 패스
 	@Resource(name="uploadPath")
@@ -119,5 +125,17 @@ public class GoodsController {
 
 		return "redirect:/goods/manage";
 	}
+	
+	// 상품 상세정보 출력
+		@RequestMapping(value = "/detail", method = RequestMethod.GET)
+		public String getGoodsDetail(@RequestParam("gdsCode") String gdsCode, Model model) throws Exception {
+			logger.info("getGoodsDetail()");
+
+			GoodsDTO goods = g_service.goodsView(gdsCode);
+			
+			model.addAttribute("member", goods);
+			
+			return "goods/detail";
+		}
 
 }

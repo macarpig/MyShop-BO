@@ -86,7 +86,7 @@
 	                <label for="gdsImg">상품 이미지</label>
 	                <input type="file" id="gdsImg" name="file"/>
 	                <div class="select_img">
-	                	<img src="${goods.gdsImg}"/>
+	                	<img src="${goods.gdsImg}" class="oriImg"/>
 	                	<input type="hidden" name="gdsImg" value="${goods.gdsImg}"/>
 	                	<input type="hidden" name="gdsThumbImg" value="${goods.gdsThumbImg}"/>
 	                </div>
@@ -165,5 +165,9 @@
 		}
 	});
 </script>
+<style>
+.orgImg{width:500px; height:auto;}
+
+</style>
 </body>
 </html>

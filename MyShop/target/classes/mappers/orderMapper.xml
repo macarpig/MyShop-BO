@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.daoko.mapper.orderMapper">
+	<!-- 주문 조회 -->
+	<select id="orderInquiry" resultType="kr.daoko.dto.OrderDTO">
+		select o.orderId, o.orderDate, o.userId, m.userRank, p.status, sum(g.gdsPrice*d.cartStock) as totalPrice
+		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
+		where o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId
+		group by o.orderId
+		order by o.orderDate desc
+	</select>
+	
+	<!-- 특정 사용자 주문 조회 -->
+	<select id="listorderuser" resultType="kr.daoko.dto.OrderDTO">
+		select o.orderId, o.orderDate, sum(g.gdsPrice*d.cartStock) as totalPrice, p.status
+		from ordertbl o
+		inner join orderDetail d on o.orderId = d.orderId
+		inner join member m on o.userId = m.userId
+		inner join goods g on d.gdsCode = g.gdsCode
+		inner join orderProcess p on o.orderId = p.orderId
+		where o.userId = #{userId}
+		group by o.orderId
+		order by o.orderDate desc
+	</select>
+	
+	<!-- 주문 번호에 의한 주문 정보 -->
+	<select id="orderInfo" parameterType="String" resultType="kr.daoko.dto.OrderDTO">
+		select o.orderId, o.userId, o.orderRecvr, o.orderZipCode, o.orderAddr1, o.orderAddr2, o.orderTel, o.orderDate, p.status, m.userRank, p.reason, sum(g.gdsPrice*d.cartStock) as totalPrice
+		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
+		where o.orderId = #{orderId} and o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId
+		group by o.orderId
+	</select>
+	
+	<!-- 주문 번호에 의한 주문 상세 정보 -->
+	<select id="orderDetail" parameterType="String" resultType="kr.daoko.dto.OrderDetailDTO">
+		select d.orderDetailId, d.orderId, d.gdsCode, g.gdsName, g.gdsPrice, d.cartStock, d.orderRequest
+		from orderDetail d, goods g
+		where d.orderId = #{orderId} and d.gdsCode = g.gdsCode
+	</select>
+	
+	<!-- 주문접수, 주문처리, 교환접수, 반품접수, 취소접수 -->
+	<select id="orderStates" resultType="kr.daoko.dto.OrderStatusDTO">
+		select count(case when status = '결제완료' then 1 end) as receipt, count(case when status = '배송준비' then 1 end) as processing, count(case when status = '교환접수' then 1 end) as exchange, count(case when status = '반품접수' then 1 end) as refund, count(case when status = '취소접수' then 1 end) as cancel
+		from orderProcess
+	</select>
+	
+	<!-- 특정 사용자의 주문접수, 주문처리, 교환접수, 반품접수, 취소접수 -->
+	<select id="userorderstatus" resultType="kr.daoko.dto.OrderStatusDTO">
+		select count(case when p.status = '결제완료' then 1 end) as receipt, count(case when p.status = '배송준비' then 1 end) as processing, count(case when p.status = '교환접수' then 1 end) as exchange, count(case when p.status = '반품접수' then 1 end) as refund, count(case when p.status = '취소접수' then 1 end) as cancel
+		from orderProcess p
+		inner join ordertbl o on p.orderId = o.orderId
+		where o.userId = #{userId}
+	</select>
+	
+	<!-- 상태에 따른 주문 처리 조회 -->
+	<select id="orderProcess" parameterType="String" resultType="kr.daoko.dto.OrderDTO">
+		select o.orderId, o.orderDate, o.userId, m.userRank, p.status, p.reason, sum(g.gdsPrice*d.cartStock) as totalPrice
+		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
+		where o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId and p.status = #{status}
+		group by o.orderId
+		order by o.orderDate desc
+	</select>
+	
+	<!-- orderId에 따른 상태 수정 -->
+	<update id="orderProcessEdit" parameterType="HashMap">
+		update orderProcess
+		set status = #{status}
+		where orderId = #{orderId}
+	</update>
+	
+	<!-- 직권 관리 조회 -->
+	<select id="orderManage" resultType="kr.daoko.dto.OrderDTO">
+		select o.orderId, o.orderDate, o.userId, m.userRank, p.status, sum(g.gdsPrice*d.cartStock) as totalPrice
+		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
+		where o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId and p.status not like '%접수'
+		group by o.orderId
+		order by o.orderDate desc
+	</select>
+</mapper>

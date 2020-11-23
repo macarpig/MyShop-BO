@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kr.daoko.dto.GoodsDTO;
+import kr.daoko.dto.GoodsMemberDTO;
 import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
 import kr.daoko.dto.OrderDetailDTO;
@@ -102,6 +103,18 @@ public class ApiController {
 		
 		return json;
 	}
+	
+	// 특정 상품주문 회원
+		@ResponseBody
+		@RequestMapping(value = "/member/goods", produces = "application/json", method = RequestMethod.GET)
+		public String getMemberGoods(@RequestParam("userId") String userId) throws Exception {
+			logger.info("gdtMemberGoods(String gdsCode)");
+			
+			List<GoodsMemberDTO> goods = memberService.goodsMember(userId);
+			String json = gson.toJson(goods);
+			
+			return json;
+		}
 	
 	//orderId에 대한 orderDetail
 		@ResponseBody

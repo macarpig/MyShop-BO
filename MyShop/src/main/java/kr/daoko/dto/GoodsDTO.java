@@ -3,7 +3,7 @@ package kr.daoko.dto;
 import java.util.Date;
 
 public class GoodsDTO {
-	private int gdsCode;
+	private String gdsCode;
 	private String gdsName;
 	private String cateName;
 	private int gdsPrice;
@@ -16,13 +16,13 @@ public class GoodsDTO {
 	/**
 	 * @return the gdsCode
 	 */
-	public int getGdsCode() {
+	public String getGdsCode() {
 		return gdsCode;
 	}
 	/**
 	 * @param gdsCode the gdsCode to set
 	 */
-	public void setGdsCode(int gdsCode) {
+	public void setGdsCode(String gdsCode) {
 		this.gdsCode = gdsCode;
 	}
 	/**

@@ -153,7 +153,7 @@ document.getElementById("btn_add").onclick = function(){
 	 location.href=""
 	}
 	
-$('#list tbody').on('click', 'tr', function() {
+$('#goods tbody').on('click', 'tr', function() {
 	location.href="detail?gdsCode=" + table.row(this).data().gdsCode;
 });
 </script>

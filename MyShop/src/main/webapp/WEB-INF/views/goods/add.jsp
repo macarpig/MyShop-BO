@@ -179,5 +179,8 @@
 	<!-- page script -->
 	<script>
 </script>
+<style> 
+.select_img img { margin:20px 0;}
+</style>
 </body>
 </html>
