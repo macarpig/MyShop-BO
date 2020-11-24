@@ -130,6 +130,7 @@ pageEncoding="UTF-8"%>
 <script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
+var status = null;
 var table =  $('#order').DataTable({
       ajax: {
 			url: '<%=request.getContextPath()%>/api/order/manage',
@@ -151,10 +152,19 @@ var table =  $('#order').DataTable({
 				}},
 			{"data" : "userRank"},
 			{"data" : "totalPrice"},
-			{"data" : "status"},
+			{"data" : "status",
+				"render": function(data, type, full, meta) {
+					status = data;
+					return data;
+				}},
 			{"data" : "orderId",
 				"render":function(data, type, full, meta) {
-					return '<button onclick="location.href=\'ExOfficio?orderId='+data+'&d=0\'">취소처리</button><button onclick="location.href=\'ExOfficioProcess?orderId='+data+'&d=1\'">반품처리</button><button onclick="location.href=\'ExOfficioProcess?orderId='+data+'&d=2\'">교환처리</button>';
+					if(status == "배송완료"){
+						return '<button onclick="location.href=\'ExOfficio?orderId='+data+'&d=1\'">반품처리</button><button onclick="location.href=\'ExOfficio?orderId='+data+'&d=2\'">교환처리</button>';
+					}else{
+						return '<button onclick="location.href=\'ExOfficio?orderId='+data+'&d=0\'">취소처리</button>';
+					}
+					return '<button onclick="location.href=\'ExOfficio?orderId='+data+'&d=0\'">취소처리</button><button onclick="location.href=\'ExOfficio?orderId='+data+'&d=1\'">반품처리</button><button onclick="location.href=\'ExOfficio?orderId='+data+'&d=2\'">교환처리</button>';
 				}
 			}
 		]

@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -106,5 +108,27 @@ public class OrderController {
 		model.addAttribute("member", member);
 		
 		return "order/ExOfficio";
+	}
+	
+	@PostMapping("/ExOfficio")
+	public String postExOfficio(HttpServletRequest request) throws Exception{
+		logger.info("from OrderController: postExOfficio()");
+		String txtReason = request.getParameter("txtReason");
+		String orderId = request.getParameter("orderId");
+		String d = request.getParameter("d");
+		if(d.equals("0")) {
+			d = "취소완료";
+		}else if(d.equals("1")) {
+			d = "반품완료";
+		}else if(d.equals("2")) {
+			d = "교환완료";
+		}
+		HashMap<String, String> ExOfficio = new HashMap<String, String>();
+		ExOfficio.put("reason", txtReason);
+		ExOfficio.put("orderId", orderId);
+		ExOfficio.put("status", d);
+		orderService.orderExOfficio(ExOfficio);
+		
+		return "redirect:/order/manage";
 	}
 }

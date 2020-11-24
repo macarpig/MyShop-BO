@@ -76,4 +76,11 @@
 		group by o.orderId
 		order by o.orderDate desc
 	</select>
+	
+	<!-- 직권 관리 후의 수정 -->
+	<update id="orderExOfficio" parameterType="HashMap">
+		update orderProcess
+		set status = #{status} and reason = #{reason}
+		where orderId = #{orderId}
+	</update>
 </mapper>

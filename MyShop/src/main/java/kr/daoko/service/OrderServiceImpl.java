@@ -64,4 +64,9 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderDTO> orderManage() throws Exception {
 		return dao.orderManage();
 	}
+
+	@Override
+	public void orderExOfficio(HashMap<String, String> ExOfficio) throws Exception {
+		dao.orderExOfficio(ExOfficio);
+	}
 }

@@ -3,7 +3,8 @@ pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8");%>
 <% response.setContentType("text/html; charset=UTF-8");%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% String d = request.getParameter("d"); %>
+<% String orderId = request.getParameter("orderId");
+String d = request.getParameter("d"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -187,7 +188,12 @@ pageEncoding="UTF-8"%>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <textarea rows="10" cols="70" autofocus="autofocus" spellcheck="true"></textarea>
+              	<form method="post" action="ExOfficio">
+                <textarea rows="10" cols="70" autofocus="autofocus" spellcheck="true" name="txtReason"></textarea>
+                <input type="hidden" name="orderId" value="<%=orderId%>">
+                <input type="hidden" name="d" value="<%=d%>">
+                <button type="submit"><% if(d.equals("0")){%>직권 취소<%}else if(d.equals("1")){%>직권 반품<%}else if(d.equals("2")){%>직권 교환<%}%></button>
+                </form>
               </div>
               <!-- /.card-body -->
             </div>

@@ -34,4 +34,7 @@ public interface OrderDAO {
 	
 	//주문 직권 처리 관리를 위한 조회
 	public List<OrderDTO> orderManage() throws Exception;
+	
+	//사유 수정과 직권 처리 후
+	public void orderExOfficio(HashMap<String, String> ExOfficio) throws Exception;
 }

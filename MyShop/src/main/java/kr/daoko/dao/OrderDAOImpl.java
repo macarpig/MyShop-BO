@@ -67,4 +67,9 @@ public class OrderDAOImpl implements OrderDAO {
 	public List<OrderDTO> orderManage() throws Exception {
 		return sql.selectList(NAMESPACE + ".orderManage");
 	}
+
+	@Override
+	public void orderExOfficio(HashMap<String, String> ExOfficio) throws Exception {
+		sql.update(NAMESPACE + ".orderExOfficio", ExOfficio);
+	}
 }
