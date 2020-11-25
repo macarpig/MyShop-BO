@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kr.daoko.dto.GoodsDTO;
-import kr.daoko.dto.GoodsMemberDTO;
 import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
 import kr.daoko.dto.OrderDetailDTO;
@@ -68,9 +67,21 @@ public class ApiController {
 		return json;
 	}
 	
-	// 특정 사용자 Q&A 목록
+	// Q&A 목록
 	@ResponseBody
 	@RequestMapping(value = "/qna/list", produces = "application/json", method = RequestMethod.GET)
+	public String getQnaList() throws Exception {
+		logger.info("from ApiController: getQnaList()");
+
+		List<QnaDTO> qna = qnaService.listQna();
+		String json = gson.toJson(qna);
+		
+		return json;
+	}
+	
+	// 특정 사용자 Q&A 목록
+	@ResponseBody
+	@RequestMapping(value = "/qna/listuser", produces = "application/json", method = RequestMethod.GET)
 	public String getListQna(@RequestParam("userId") String userId) throws Exception {
 		logger.info("from ApiController: getListQna(String userId)");
 
@@ -104,64 +115,27 @@ public class ApiController {
 		return json;
 	}
 	
-	// 특정 상품주문 회원
-		@ResponseBody
-		@RequestMapping(value = "/member/goods", produces = "application/json", method = RequestMethod.GET)
-		public String getMemberGoods(@RequestParam("userId") String userId) throws Exception {
-			logger.info("gdtMemberGoods(String gdsCode)");
-			
-			List<GoodsMemberDTO> goods = memberService.goodsMember(userId);
-			String json = gson.toJson(goods);
-			
-			return json;
-		}
-	
 	//orderId에 대한 orderDetail
-		@ResponseBody
-		   @RequestMapping(value = "/order/detail", produces = "application/json", method = RequestMethod.GET)
-		   public String getOrderDetail(@RequestParam String orderId) throws Exception {
-		      logger.info("from ApiController: getOderDetail()");
-		      List<OrderDetailDTO> order = orderService.orderDetail(orderId);
+	@ResponseBody
+	   @RequestMapping(value = "/order/detail", produces = "application/json", method = RequestMethod.GET)
+	   public String getOrderDetail(@RequestParam String orderId) throws Exception {
+	      logger.info("from ApiController: getOderDetail()");
+	      List<OrderDetailDTO> order = orderService.orderDetail(orderId);
 
-		      String json = gson.toJson(order);
-		      
-		      return json;
-		}
+	      String json = gson.toJson(order);
+	      
+	      return json;
+	}
 		
-		//상태에 따른 주문 조회
-		@ResponseBody
-		@RequestMapping(value = "/order/process", produces = "application/json", method = RequestMethod.GET)
-		public String getOrderProcess(@RequestParam int page) throws Exception {
-			logger.info("from ApiController: getOderProcess()");
-			
-			String status = null;
-			if(page == 0)
-				status="결제완료";
-			else if(page == 1)
-				status="배송준비";
-			else if(page == 2)
-				status="교환접수";
-			else if(page == 3)
-				status="반품접수";
-			else if(page == 4)
-				status="취소접수";
-			
-			List<OrderDTO> order = orderService.orderProcess(status);
-			
-			String json = gson.toJson(order);
-			
-			return json;
-		}
+	//직권 처리를 위한 주문 조회
+	@ResponseBody
+	@RequestMapping(value = "/order/manage", produces = "application/json", method = RequestMethod.GET)
+	public String getOrderManage() throws Exception {
+		logger.info("from ApiController: getOderManage()");
 		
-		//직권 처리를 위한 주문 조회
-		@ResponseBody
-		@RequestMapping(value = "/order/manage", produces = "application/json", method = RequestMethod.GET)
-		public String getOrderManage() throws Exception {
-			logger.info("from ApiController: getOderManage()");
-			
-			List<OrderDTO> order = orderService.orderManage();
-			String json = gson.toJson(order);
-			
-			return json;
-		}
+		List<OrderDTO> order = orderService.orderManage();
+		String json = gson.toJson(order);
+		
+		return json;
+	}
 }
