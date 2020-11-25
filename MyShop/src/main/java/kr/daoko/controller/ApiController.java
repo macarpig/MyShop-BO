@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kr.daoko.dto.GoodsDTO;
+import kr.daoko.dto.GoodsMemberDTO;
 import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
 import kr.daoko.dto.OrderDetailDTO;
@@ -52,6 +53,18 @@ public class ApiController {
 		List<MemberDTO> list = memberService.listMember();
 		String json = gson.toJson(list);
 		
+		return json;
+	}
+	
+	// 특정 상품주문 회원
+	@ResponseBody
+	@RequestMapping(value = "/member/goods", produces = "application/json", method = RequestMethod.GET)
+	public String getMemberGoods(@RequestParam("userId") String userId) throws Exception {
+		logger.info("gdtMemberGoods(String gdsCode)");
+
+		List<GoodsMemberDTO> goods = memberService.goodsMember(userId);
+		String json = gson.toJson(goods);
+
 		return json;
 	}
 	
@@ -125,6 +138,31 @@ public class ApiController {
 	      String json = gson.toJson(order);
 	      
 	      return json;
+	}
+	
+	//상태에 따른 주문 조회
+	@ResponseBody
+	@RequestMapping(value = "/order/process", produces = "application/json", method = RequestMethod.GET)
+	public String getOrderProcess(@RequestParam int page) throws Exception {
+		logger.info("from ApiController: getOderProcess()");
+
+		String status = null;
+		if(page == 0)
+			status="결제완료";
+		else if(page == 1)
+			status="배송준비";
+		else if(page == 2)
+			status="교환접수";
+		else if(page == 3)
+			status="반품접수";
+		else if(page == 4)
+			status="취소접수";
+
+		List<OrderDTO> order = orderService.orderProcess(status);
+
+		String json = gson.toJson(order);
+
+		return json;
 	}
 		
 	//직권 처리를 위한 주문 조회
