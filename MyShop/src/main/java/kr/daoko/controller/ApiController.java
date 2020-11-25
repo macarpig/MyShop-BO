@@ -173,7 +173,19 @@ public class ApiController {
 		
 		List<OrderDTO> order = orderService.orderManage();
 		String json = gson.toJson(order);
-		
 		return json;
 	}
+	
+	// 회원 목록
+    @ResponseBody
+    @RequestMapping(value = "/member/purchaser", produces = "application/json", method = RequestMethod.GET)
+    public String getMemberPurchaser(@RequestParam String gdsCode) throws Exception {
+       logger.info("from ApiController: getMemberPurchaser()");
+       
+       List<GoodsMemberDTO> list = memberService.goodsMember(gdsCode);
+       String json = gson.toJson(list);
+       
+       return json;
+    }
+
 }

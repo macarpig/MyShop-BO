@@ -127,15 +127,15 @@ public class GoodsController {
 	}
 	
 	// 상품 상세정보 출력
-		@RequestMapping(value = "/detail", method = RequestMethod.GET)
-		public String getGoodsDetail(@RequestParam("gdsCode") String gdsCode, Model model) throws Exception {
-			logger.info("getGoodsDetail()");
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    public String getGoodsDetail(@RequestParam("gdsCode") String gdsCode, Model model) throws Exception {
+       logger.info("getGoodsDetail()");
 
-			GoodsDTO goods = g_service.goodsView(gdsCode);
-			
-			model.addAttribute("member", goods);
-			
-			return "goods/detail";
-		}
+       GoodsDTO goods = g_service.goodsView(gdsCode);
+       
+       model.addAttribute("goods", goods);
+       
+       return "goods/detail";
+    }
 
 }

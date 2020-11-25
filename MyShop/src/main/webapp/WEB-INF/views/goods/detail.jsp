@@ -56,24 +56,24 @@ pageEncoding="UTF-8"%>
           <div class="col-12">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">클릭 시 상품 수정 페이지로 이</h3>
+                <h3 class="card-title">클릭 시 상품 수정 페이지로 이동</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="goods" class="table table-bordered table-hover">
                   <thead>
-	                  <tr>
-	                    <th>썸네일 이미지 </th>
-	                    <th>상품코드 </th>
-	                    <th>상품명 </th>
-	                    <th>금액 </th>
-	                    <th>등록날짜</th>
-	                    <th>조회수</th>
-	                  </tr>
+                     <tr>
+                       <th>썸네일 이미지 </th>
+                       <th>상품코드 </th>
+                       <th>상품명 </th>
+                       <th>금액 </th>
+                       <th>등록날짜</th>
+                       <th>조회수</th>
+                     </tr>
                   </thead>
                   <tbody>
                       <tr>
-                          <td>${goods.ThumbImg}</td>
+                          <td>${goods.gdsThumbImg}</td>
                           <td>${goods.gdsCode}</td>
                           <td>${goods.gdsName}</td>
                           <td>${goods.gdsPrice}</td>
@@ -97,17 +97,19 @@ pageEncoding="UTF-8"%>
                 <h3 class="card-title">클릭 시 해당 멤버를 조회합니다.</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">				
+              <div class="card-body">            
                 <table id="member" class="table table-bordered table-hover">
                   <thead>
-	                  <tr>
-	                    <th>아이디 </th>
-	                    <th>이름 </th>
-	                    <th>전화번호 </th>
-	                    <th>이메일 </th>
-	                    <th>등급 </th>
-	                  </tr>
+                     <tr>
+                       <th>주문번호 </th>
+                       <th>주문일 </th>
+                       <th>회원ID </th>
+                       <th>등급</th>
+                       <th>상품상태 </th>
+                     </tr>
                   </thead>
+                  <tbody>
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -124,12 +126,12 @@ pageEncoding="UTF-8"%>
               <div class="card-body">
                 <table id="answer" class="table table-bordered table-hover">
                   <thead>
-	                  <tr>
-	                    <th>댓글번호 </th>
-	                    <th>아이디 </th>
-	                    <th>댓글내용 </th>
-	                    <th>날짜 </th>
-	                  </tr>
+                     <tr>
+                       <th>댓글번호 </th>
+                       <th>아이디 </th>
+                       <th>댓글내용 </th>
+                       <th>날짜 </th>
+                     </tr>
                   </thead>
                 </table>
               </div>
@@ -180,55 +182,62 @@ function getParameterByName(name) {
 var gdsCode = getParameterByName("gdsCode");
 
 $('#goods tbody').on('click', 'tr', function() {
-	location.href="modify?gdsCode=" + gdsCode;
+   location.href="modify?gdsCode=" + gdsCode;
 });
 
 var member = $('#member').DataTable({
-	ajax: {
-		url: '<%=request.getContextPath()%>/api/member/list?gdsCode=' + gdsCode,
-		dataSrc: ''
-	},
-	
-	columns: [
-		{"data" : "orderId"},
-		{"data" : "orderDate"},
-		{"data" : "totalPrice"},
-		{"data" : "status"}
-	]
+   ajax: {
+      url: '<%=request.getContextPath()%>/api/member/purchaser?gdsCode=' + gdsCode,
+      dataSrc: ''
+   },
+   
+   columns: [
+      {"data" : "orderId",
+         "render": function(data, type, full, meta) {
+            return "<a href='../order/detail?orderId="+ data +"'>"+data+"</a>";
+         }},
+      {"data" : "orderDate"},
+      {"data" : "userId",
+         "render": function(data, type, full, meta) {
+            return "<a href='../member/detail?userId="+ data +"'>"+data+"</a>";
+         }},
+      {"data" : "userRank"},
+      {"data" : "status"}
+   ]
 });
 
-$('#member tbody').on('click', 'tr', function() {
-	location.href="<%=request.getContextPath()%>api/goods/manage/detail?orderId=" + order.row(this).data().orderId;
-});
+<%-- $('#member tbody').on('click', 'tr', function() {
+   location.href="<%=request.getContextPath()%>goods/manage/detail?orderId=" + order.row(this).data().orderId;
+}); --%>
 
 var qna = $('#qna').DataTable({
-	ajax: {
-		url: '<%=request.getContextPath()%>/api/qna/list?userId=' + userId,
-		dataSrc: ''
-	},
-	
-	columns: [
-		{"data" : "idx"},
-		{"data" : "question"},
-		{"data" : "date"},
-		{
-			"data" : "answer",
-			"render" : function(data, type, row) {
-				
-				if(data === undefined) {
-					return '대기';
-				}
-				
-				else {
-					return '완료';
-				}
-			}
-		}
-	]
+   ajax: {
+      url: '<%=request.getContextPath()%>/api/qna/list?userId=' + userId,
+      dataSrc: ''
+   },
+   
+   columns: [
+      {"data" : "idx"},
+      {"data" : "question"},
+      {"data" : "date"},
+      {
+         "data" : "answer",
+         "render" : function(data, type, row) {
+            
+            if(data === undefined) {
+               return '대기';
+            }
+            
+            else {
+               return '완료';
+            }
+         }
+      }
+   ]
 });
 
 $('#qna tbody').on('click', 'tr', function() {
-	location.href="<%=request.getContextPath()%>/qna/detail?idx=" + qna.row(this).data().idx;
+   location.href="<%=request.getContextPath()%>/qna/detail?idx=" + qna.row(this).data().idx;
 });
 </script>
 </body>
