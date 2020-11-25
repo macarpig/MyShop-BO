@@ -136,7 +136,12 @@ var table =  $('#goods').DataTable({
 		},
 		
 		columns: [
-			{"data" : "gdsThumbImg"},
+			{"data" : "gdsThumbImg" , "name" : "gdsThumbImg",
+				"render" : function(data, type, row, meta) {
+					var imgsrc = 'data:image/png:base64,' + data;
+					return '<img class="img-responsive" src="' + imgsrc +'" alt="gdsThumbImg" height="100px" width="100px"/>';
+				}
+			},
 			{"data" : "gdsCode"},
 			{"data" : "gdsName"},
 			{"data" : "cateName"},
