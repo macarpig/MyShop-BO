@@ -38,6 +38,7 @@ pageEncoding="UTF-8"%>
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>상품</h1>
+         
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -135,11 +136,10 @@ var table =  $('#goods').DataTable({
 			dataSrc: ''
 		},
 		
-		columns: [
-			{"data" : "gdsThumbImg" , "name" : "gdsThumbImg",
-				"render" : function(data, type, row, meta) {
-					var imgsrc = 'data:image/png:base64,' + data;
-					return '<img class="img-responsive" src="' + imgsrc +'" alt="gdsThumbImg" height="100px" width="100px"/>';
+		columns: [	
+			{"data" : "gdsThumbImg",
+				"render": function(data, type, row) {
+					return '<img src="/controller/resources'+ data +'" style="height:50px;width:50px;"/>';
 				}
 			},
 			{"data" : "gdsCode"},
