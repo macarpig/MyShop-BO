@@ -58,82 +58,29 @@ pageEncoding="UTF-8"%>
 
             <div class="card">
               <div class="card-header">
-              <a href="<%=request.getContextPath()%>/order/processing?page=0">
-                <table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
-                	<tr>
-                		<th>주문접수</th>
-                	</tr>
-                	<tr>
-                		<td>${states.receipt}</td>
-                	</tr>
-				</table>
-				</a>
-				
-				<a href="<%=request.getContextPath()%>/order/processing?page=1">	
-				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
-					<tr>
-                		<th>주문처리</th>
-                	</tr>
-                	<tr>
-                		<td>${states.processing}</td>
-                	</tr>
-				</table>
-				</a>
-				
-				<a href="<%=request.getContextPath()%>/order/processing?page=2">
-				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
-                	<tr>
-                		<th>교환접수</th>
-                	</tr>
-                	<tr>
-                		<td>${states.exchange}</td>
-                	</tr>
-				</table>
-				</a>
-				
-				<a href="<%=request.getContextPath()%>/order/processing?page=3">
-				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
-                	<tr>
-                		<th>반품접수</th>
-                	</tr>
-                	<tr>
-                		<td>${states.refund}</td>
-                	</tr>
-				</table>
-				</a>
-				
-				<a href="<%=request.getContextPath()%>/order/processing?page=4">
-				<table style="float:left;width:18%;margin:1%;text-align:center;" border="1">
-                	<tr>
-                		<th>취소접수</th>
-                	</tr>
-                	<tr>
-                		<td>${states.cancel}</td>
-                	</tr>
-				</table>
-				</a>
+              	<h3 class="card-title">you can enter search criteria here to manage your sales</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="order" class="table table-bordered table-striped">
+                <table id="manage" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>주문번호</th>
+                    <th>상품명</th>
+                    <th>상품코드</th>
+                    <th>카테고리</th>
+                    <th>주문자</th>
                     <th>주문일</th>
-                    <th>회원ID</th>
-                    <th>등급</th>
-                    <th>총 구매금액</th>
-                    <th>상태</th>
                   </tr>
                   </thead>
                   <tfoot>
                   <tr>
                     <th>주문번호</th>
+                    <th>상품명</th>
+                    <th>상품코드</th>
+                    <th>카테고리</th>
+                    <th>주문자</th>
                     <th>주문일</th>
-                    <th>회원ID</th>
-                    <th>등급</th>
-                    <th>총 구매금액</th>
-                    <th>상태</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -182,9 +129,9 @@ pageEncoding="UTF-8"%>
 <script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
-var table =  $('#order').DataTable({
+var table =  $('#manage').DataTable({
       ajax: {
-			url: '<%=request.getContextPath()%>/api/order/inquiry',
+			url: '<%=request.getContextPath()%>/api/stat/manage',
 			dataSrc: ''
 		},
 		
@@ -193,17 +140,14 @@ var table =  $('#order').DataTable({
 				"render": function(data, type, full, meta) {
 					return "<a href='detail?orderId="+ data +"'>"+data+"</a>";
 				}},
-			{"data" : "orderDate",
-					"render": function(data, type, full, meta) {
-						return data;
-					}},
-			{"data" : "userId",
+			{"data" : "gdsName"},
+			{"data" : "gdsCode",
 				"render": function(data, type, full, meta) {
-					return "<a href='../member/detail?userId="+ data +"'>"+data+"</a>";
+					return "<a href='../goods/detail?gdsCode="+ data +"'>"+data+"</a>";
 				}},
-			{"data" : "userRank"},
-			{"data" : "totalPrice"},
-			{"data" : "status"}
+			{"data" : "cateName"},
+			{"data" : "userId"},
+			{"data" : "orderDate"}
 		]
     });
 </script>
