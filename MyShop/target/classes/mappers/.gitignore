@@ -1,2 +1,5 @@
 /orderMapper.xml
 /qnaMapper.xml
+/goodsMapper.xml
+/memberMapper.xml
+/statMapper.xml
