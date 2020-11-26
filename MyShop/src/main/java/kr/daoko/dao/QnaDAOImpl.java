@@ -28,6 +28,11 @@ public class QnaDAOImpl implements QnaDAO {
 	public List<QnaDTO> listQna(String userId) throws Exception {
 		return sql.selectList(NAMESPACE + ".listqnauser", userId);
 	}
-	
+
+	// Q&A 답변 조회
+	@Override
+	public QnaDTO viewQna(int idx) throws Exception {
+		return sql.selectOne(NAMESPACE + ".viewqna", idx);
+	}
 	
 }

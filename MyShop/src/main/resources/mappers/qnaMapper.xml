@@ -13,4 +13,11 @@
 		from qna
 		where userId = #{userId}
 	</select>
+	
+	<!-- Q&A 답변 조회 -->
+	<select id="viewqna" resultType="kr.daoko.dto.QnaDTO">
+		select idx, userId, question, answer, date
+		from qna
+		where idx = #{idx}
+	</select>
 </mapper>

@@ -148,7 +148,7 @@ var table = $('#list').DataTable({
 });
 
 $('#list tbody').on('click', 'tr', function() {
-	location.href="answer?idx=" + table.row(this).data().idx;
+	location.href="view?idx=" + table.row(this).data().idx;
 });
 </script>
 </body>
