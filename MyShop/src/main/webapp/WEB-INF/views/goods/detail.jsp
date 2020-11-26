@@ -73,7 +73,7 @@ pageEncoding="UTF-8"%>
                   </thead>
                   <tbody>
                       <tr>
-                          <td>${goods.gdsThumbImg}</td>
+                          <td><img src="/controller/resources${goods.gdsThumbImg}" /></td>
                           <td>${goods.gdsCode}</td>
                           <td>${goods.gdsName}</td>
                           <td>${goods.gdsPrice}</td>
@@ -206,39 +206,6 @@ var member = $('#member').DataTable({
    ]
 });
 
-<%-- $('#member tbody').on('click', 'tr', function() {
-   location.href="<%=request.getContextPath()%>goods/manage/detail?orderId=" + order.row(this).data().orderId;
-}); --%>
-
-var qna = $('#qna').DataTable({
-   ajax: {
-      url: '<%=request.getContextPath()%>/api/qna/list?userId=' + userId,
-      dataSrc: ''
-   },
-   
-   columns: [
-      {"data" : "idx"},
-      {"data" : "question"},
-      {"data" : "date"},
-      {
-         "data" : "answer",
-         "render" : function(data, type, row) {
-            
-            if(data === undefined) {
-               return '대기';
-            }
-            
-            else {
-               return '완료';
-            }
-         }
-      }
-   ]
-});
-
-$('#qna tbody').on('click', 'tr', function() {
-   location.href="<%=request.getContextPath()%>/qna/detail?idx=" + qna.row(this).data().idx;
-});
 </script>
 </body>
 </html>
