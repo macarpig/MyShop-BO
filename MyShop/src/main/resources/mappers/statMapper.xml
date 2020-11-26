@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.daoko.mapper.statMapper">
+	<!-- Q&A 목록 -->
+	<select id="statList" resultType="kr.daoko.dto.StatDTO">
+		select o.orderId, g.gdsName, g.gdsCode, c.cateName, o.userId, o.orderDate
+		from ordertbl o, orderDetail d, goods g, category c
+		where o.orderId = d.orderId and g.gdsCode = d.gdsCode and g.cateCode = c.cateCode
+	</select>
+	
+</mapper>

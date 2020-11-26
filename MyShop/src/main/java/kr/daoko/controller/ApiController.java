@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.web.server.header.StaticServerHttpHeadersWriter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,10 +21,12 @@ import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
 import kr.daoko.dto.OrderDetailDTO;
 import kr.daoko.dto.QnaDTO;
+import kr.daoko.dto.StatDTO;
 import kr.daoko.service.GoodsService;
 import kr.daoko.service.MemberService;
 import kr.daoko.service.OrderService;
 import kr.daoko.service.QnaService;
+import kr.daoko.service.StatService;
 
 @Controller
 @RequestMapping("/api/*")
@@ -41,6 +44,9 @@ public class ApiController {
 	
 	@Inject
 	private QnaService qnaService;
+	
+	@Inject
+	private StatService statService;
 	
 	Gson gson = new Gson();
 	
@@ -173,7 +179,30 @@ public class ApiController {
 		
 		List<OrderDTO> order = orderService.orderManage();
 		String json = gson.toJson(order);
-		
 		return json;
 	}
+	
+	// 회원 목록
+    @ResponseBody
+    @RequestMapping(value = "/member/purchaser", produces = "application/json", method = RequestMethod.GET)
+    public String getMemberPurchaser(@RequestParam String gdsCode) throws Exception {
+       logger.info("from ApiController: getMemberPurchaser()");
+       
+       List<GoodsMemberDTO> list = memberService.goodsMember(gdsCode);
+       String json = gson.toJson(list);
+       
+       return json;
+    }
+
+    // 회원 목록
+    @ResponseBody
+    @RequestMapping(value = "/stat/manage", produces = "application/json", method = RequestMethod.GET)
+    public String geStatManage() throws Exception {
+       logger.info("from ApiController: getMemberPurchaser()");
+       
+       List<StatDTO> list = statService.listStat();
+       String json = gson.toJson(list);
+       
+       return json;
+    }
 }

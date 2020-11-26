@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>MyShop ::: 상품 관리</title>
+  <title>MyShop ::: 회원 관리</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -37,7 +38,7 @@ pageEncoding="UTF-8"%>
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>상품</h1>
+            <h1>DataTables</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -57,30 +58,29 @@ pageEncoding="UTF-8"%>
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">쇼핑몰에 등록된 상품의 정보</h3>
-                <input type="button" id="btn_add" value="상품추가">
+              	<h3 class="card-title">you can enter search criteria here to manage your sales</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="goods" class="table table-bordered table-striped">
+                <table id="manage" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>썸네일 이미지</th>
-                    <th>상품코드</th>
+                    <th>주문번호</th>
                     <th>상품명</th>
+                    <th>상품코드</th>
                     <th>카테고리</th>
-                    <th>금액</th>
-                    <th>수정</th>
+                    <th>주문자</th>
+                    <th>주문일</th>
                   </tr>
                   </thead>
                   <tfoot>
                   <tr>
-                    <th>썸네일 이미지</th>
-                    <th>상품코드</th>
+                    <th>주문번호</th>
                     <th>상품명</th>
+                    <th>상품코드</th>
                     <th>카테고리</th>
-                    <th>금액</th>
-                    <th>수정</th>
+                    <th>주문자</th>
+                    <th>주문일</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -129,38 +129,27 @@ pageEncoding="UTF-8"%>
 <script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
-var table =  $('#goods').DataTable({
+var table =  $('#manage').DataTable({
       ajax: {
-			url: '<%=request.getContextPath()%>/api/goods/manage',
+			url: '<%=request.getContextPath()%>/api/stat/manage',
 			dataSrc: ''
 		},
 		
 		columns: [
-			{"data" : "gdsThumbImg" , "name" : "gdsThumbImg",
-				"render" : function(data, type, row, meta) {
-					var imgsrc = 'data:image/png:base64,' + data;
-					return '<img class="img-responsive" src="' + imgsrc +'" alt="gdsThumbImg" height="100px" width="100px"/>';
-				}
-			},
-			{"data" : "gdsCode"},
-			{"data" : "gdsName"},
-			{"data" : "cateName"},
-			{"data" : "gdsPrice"},
-			{
-				"data": "gdsCode",
+			{"data" : "orderId",
 				"render": function(data, type, full, meta) {
-					return "<a href='modify?gdsCode="+ data +"'>수정</a>";
-				}
-			}
+					return "<a href='detail?orderId="+ data +"'>"+data+"</a>";
+				}},
+			{"data" : "gdsName"},
+			{"data" : "gdsCode",
+				"render": function(data, type, full, meta) {
+					return "<a href='../goods/detail?gdsCode="+ data +"'>"+data+"</a>";
+				}},
+			{"data" : "cateName"},
+			{"data" : "userId"},
+			{"data" : "orderDate"}
 		]
     });
-document.getElementById("btn_add").onclick = function(){
-	 location.href=""
-	}
-	
-$('#goods tbody').on('click', 'tr', function() {
-	location.href="detail?gdsCode=" + table.row(this).data().gdsCode;
-});
 </script>
 </body>
 </html>

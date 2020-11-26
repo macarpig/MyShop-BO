@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.daoko.mapper.memberMapper">
-	<!-- 사용자 목록 -->
-	<select id="listmember" resultType="kr.daoko.dto.MemberDTO">
-		select userId, userName, userTel, userAddr1, userRank, userAuth
-		from member
-	</select>
-	
-	<!-- 회원 정보 조회 -->
-	<select id="viewmember" resultType="kr.daoko.dto.MemberDTO">
-		select userId, userName, userEmail, userTel, userZipcode, userAddr1, userAddr2, userRank, userAuth
-		from member
-		where userId = #{userId}
-	</select>
-	
-	<!-- 회원 정보 수정 -->
-	<update id="modifymember">
-		update member
-		set
-			userName = #{userName},
-			userEmail = #{userEmail},
-			userTel = #{userTel},
-			userZipcode = #{userZipcode},
-			userAddr1 = #{userAddr1},
-			userAddr2 = #{userAddr2},
-			userRank = #{userRank},
-			userAuth = #{userAuth}
-		where userId = #{userId}
-	</update>
+   <!-- 사용자 목록 -->
+   <select id="listmember" resultType="kr.daoko.dto.MemberDTO">
+      select userId, userName, userTel, userAddr1, userRank, userAuth
+      from member
+   </select>
+   
+   <!-- 회원 정보 조회 -->
+   <select id="viewmember" resultType="kr.daoko.dto.MemberDTO">
+      select userId, userName, userEmail, userTel, userZipcode, userAddr1, userAddr2, userRank, userAuth
+      from member
+      where userId = #{userId}
+   </select>
+   
+   <!-- 회원 정보 수정 -->
+   <update id="modifymember">
+      update member
+      set
+         userName = #{userName},
+         userEmail = #{userEmail},
+         userTel = #{userTel},
+         userZipcode = #{userZipcode},
+         userAddr1 = #{userAddr1},
+         userAddr2 = #{userAddr2},
+         userRank = #{userRank},
+         userAuth = #{userAuth}
+      where userId = #{userId}
+   </update>
 
-	<!-- 회원 정보 삭제 -->
-	<delete id="deletemember">
-		delete member
-		where userId = #{userId}
-	</delete>
-	
-	<!-- 특정 상품을 구매한 회원 조 회 -->
-	<select id="goodsmember" resultType="kr.daoko.dto.GoodsMemberDTO">
-		select m.userId, m.userName, m.userTel, m.userEmail, m.userRank, g.gdsCode, p.status
-		from member m
-		inner join ordertbl o on m.userId = o.userId
-		inner join orderProcess p on o.orederId = p.orderId
-		inner join orderDetail d on p.orderId = d.orderId
-		inner join goods g on d.gdsCode = g.gdsCode
-		where g.gdsCode = #{gdsCode}
-		 
-	</select>
+   <!-- 회원 정보 삭제 -->
+   <delete id="deletemember">
+      delete member
+      where userId = #{userId}
+   </delete>
+   
+   <!-- 특정 상품을 구매한 회원 조 회 -->
+   <select id="goodsmember" resultType="kr.daoko.dto.GoodsMemberDTO">
+      select m.userId, m.userName, m.userTel, m.userEmail, m.userRank, g.gdsCode, p.status, o.orderDate, o.orderId
+      from member m
+      inner join ordertbl o on m.userId = o.userId
+      inner join orderProcess p on o.orderId = p.orderId
+      inner join orderDetail d on p.orderId = d.orderId
+      inner join goods g on d.gdsCode = g.gdsCode
+      where g.gdsCode = #{gdsCode}
+       
+   </select>
 </mapper>
