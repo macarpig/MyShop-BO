@@ -27,6 +27,8 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
+
+
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper">
@@ -115,8 +117,17 @@
 										</div>
 										<div class="inputArea">
 											<label for="gdsDesc">상품설명</label>
-											<textarea rows="5" cols="50" id="gdsDesc" name="gdsDesc"
-												class="form-control"></textarea>
+											<textarea rows="5" cols="50" id="gdsDesc" name="gdsDesc" class="form-control"></textarea>
+											<script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js">
+											
+											 var ckeditor_config = {
+													   resize_enaleb : false,
+													   enterMode : CKEDITOR.ENTER_BR,
+													   shiftEnterMode : CKEDITOR.ENTER_P,
+													   filebrowserUploadUrl : "/goods/ckUpload"
+													 };
+											CKEDITOR.replace("gdsDesc", ckeditor_config);
+											</script>
 										</div>
 									
 								</div>
@@ -155,13 +166,14 @@
 		<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
-
 	<!-- jQuery -->
 	<script
 		src="<%=request.getContextPath()%>/resources/plugins/jquery/jquery.min.js"></script>
 	<!-- Bootstrap 4 -->
 	<script
 		src="<%=request.getContextPath()%>/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- ckeditor -->
+	<script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js" ></script>
 	<!-- DataTables -->
 	<script
 		src="<%=request.getContextPath()%>/resources/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -176,6 +188,7 @@
 		src="<%=request.getContextPath()%>/resources/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
+	
 	<!-- page script -->
 	<script>
 </script>

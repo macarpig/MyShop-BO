@@ -1,12 +1,18 @@
 package kr.daoko.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,8 +71,8 @@ public class GoodsController {
 		//날짜 계산 
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
-		
-		if(file != null) {
+		//첨부된 파일의 이름이 없거나 공백이라면 
+		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 		} else {
 			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
@@ -78,6 +84,58 @@ public class GoodsController {
 		g_service.addProduct(dto);
 		return "redirect:/goods/manage";
 	}
+	
+	
+	//ckeditor 에서 파일 업로드
+	@PostMapping("/ckUpload")
+	public void postCKEditorImgUpload(HttpServletRequest req, 
+			HttpServletResponse res,
+			@RequestParam MultipartFile upload) throws Exception {
+		logger.info("post ckeditor img upload");
+		
+		//랜덤 문자 생성
+		UUID uid = UUID.randomUUID();
+		
+		OutputStream out = null;
+		PrintWriter printWriter = null;
+		//인코딩 
+		res.setCharacterEncoding("utf-8");
+		res.setContentType("text/html;charset=utf-8");
+		
+		try {
+			String fileName = upload.getOriginalFilename(); //파일 이름 가져오기
+			byte[] bytes = upload.getBytes();
+			
+			//업로드 경로
+			String ckUploadPath = uploadPath + File.separator + "ckUpload" + File.separator + uid + "_" + fileName;
+			
+			out = new FileOutputStream(new File(ckUploadPath));
+			out.write(bytes);
+			out.flush();
+			
+			String callback = req.getParameter("CKEditorFuncNum");
+			printWriter = res.getWriter();
+			String fileUrl = "/ckUpload/" + uid + "_" + fileName;
+			
+			//업로드 시 메시지 출력
+			printWriter.println("<script type='text/javascript'>"
+					+ "window.parent.CKEDITOR.tools.callFunction("
+					+ callback + "," + fileUrl + "','이미지를 업로드했습니다.')"
+					+ "</script>");
+			
+			printWriter.flush();
+			
+			} catch (IOException e) {e.printStackTrace();
+		} finally {
+			try {
+				if(out != null) {out.close();}
+				if(printWriter != null) {printWriter.close(); }
+				
+			} catch (IOException e) {e.printStackTrace(); }
+		}
+		return;
+	}
+	
 
 	// 상품 수정
 	@GetMapping("/modify")

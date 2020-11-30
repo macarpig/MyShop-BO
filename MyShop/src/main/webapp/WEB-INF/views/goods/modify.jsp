@@ -102,13 +102,24 @@
 	                		}
 	                	});
 	                </script>
-	                <%=request.getRealPath("/") %>
+	         
 	              </div> 
 	              
 	              <div class="inputArea">
 	                <label for="gdsDesc">상품 설명</label>
 	                <textArea rows="5" cols="50"id="gdsDesc" name="gdsDesc" class="form-control" value="${goods.gdsDesc}"></textArea>
-	              </div>
+										<script
+											src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js">
+											var ckeditor_config = {
+												resize_enaleb : false,
+												enterMode : CKEDITOR.ENTER_BR,
+												shiftEnterMode : CKEDITOR.ENTER_P,
+												filebrowserUploadUrl : "/goods/ckUpload"
+											};
+											CKEDITOR.replace("gdsDesc",
+													ckeditor_config);
+										</script>
+									</div>
 	            </div>
 	            <!-- /.card-body -->
 	          </div>

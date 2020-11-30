@@ -27,7 +27,8 @@
 	</beans:bean>
 	<!-- 일반 파일 업로드 경로  -->
 	<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
-	
+	<!--ck에디터 업로드 경로  -->
+	<resources mapping="/ckUpload/**" location="/resources/ckUpload/" />
 	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
 	</beans:bean>
 	
