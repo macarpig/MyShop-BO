@@ -27,7 +27,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
-<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 
 
 </head>
@@ -124,7 +124,7 @@
 													   resize_enaleb : false,
 													   enterMode : CKEDITOR.ENTER_BR,
 													   shiftEnterMode : CKEDITOR.ENTER_P,
-													   filebrowserUploadUrl : "./goods/ckUpload"
+													   filebrowserUploadUrl : "/controller/goods/ckUpload"
 													 };
 											CKEDITOR.replace('gdsDesc', ckeditor_config);
 											</script>

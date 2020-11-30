@@ -116,13 +116,10 @@ public class GoodsController {
 	  
 	  String callback = req.getParameter("CKEditorFuncNum");
 	  printWriter = res.getWriter();
-	  String fileUrl = "/ckUpload/" + uid + "_" + fileName; // 작성화면
+	  String fileUrl = "/controller/ckUpload/" + uid + "_" + fileName; // 작성화면
 	  
 	  // 업로드시 메시지 출력
-	  printWriter.println("<script type='text/javascript'>"
-			     + "window.parent.CKEDITOR.tools.callFunction("
-			     + callback+",'"+ fileUrl+"','이미지를 업로드하였습니다.')"
-			     +"</script>");
+	  printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
 	  
 	  printWriter.flush();
 	  
