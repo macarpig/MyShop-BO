@@ -27,6 +27,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
+<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 
 
 </head>
@@ -117,16 +118,15 @@
 										</div>
 										<div class="inputArea">
 											<label for="gdsDesc">상품설명</label>
-											<textarea rows="5" cols="50" id="gdsDesc" name="gdsDesc" class="form-control"></textarea>
-											<script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js">
-											
+											<textarea rows="5" cols="50" id="gdsDesc" name="gdsDesc"></textarea>
+											<script>	
 											 var ckeditor_config = {
 													   resize_enaleb : false,
 													   enterMode : CKEDITOR.ENTER_BR,
 													   shiftEnterMode : CKEDITOR.ENTER_P,
-													   filebrowserUploadUrl : "/goods/ckUpload"
+													   filebrowserUploadUrl : "./goods/ckUpload"
 													 };
-											CKEDITOR.replace("gdsDesc", ckeditor_config);
+											CKEDITOR.replace('gdsDesc', ckeditor_config);
 											</script>
 										</div>
 									

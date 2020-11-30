@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script src="//cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -108,8 +109,7 @@
 	              <div class="inputArea">
 	                <label for="gdsDesc">상품 설명</label>
 	                <textArea rows="5" cols="50"id="gdsDesc" name="gdsDesc" class="form-control" value="${goods.gdsDesc}"></textArea>
-										<script
-											src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js">
+										<script>
 											var ckeditor_config = {
 												resize_enaleb : false,
 												enterMode : CKEDITOR.ENTER_BR,
