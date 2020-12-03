@@ -69,10 +69,19 @@
 	</update>
 	
 	<!-- 직권 관리 조회 -->
-	<select id="orderManage" resultType="kr.daoko.dto.OrderDTO">
+	<select id="orderManage0" resultType="kr.daoko.dto.OrderDTO">
 		select o.orderId, o.orderDate, o.userId, m.userRank, p.status, sum(g.gdsPrice*d.cartStock) as totalPrice
 		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
-		where o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId and p.status not like '%접수'
+		where o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId and p.status in ('결제완료', '배송준비', '배송완료')
+		group by o.orderId
+		order by o.orderDate desc
+	</select>
+	
+	<!-- 직권 관리 조회 -->
+	<select id="orderManage1" resultType="kr.daoko.dto.OrderDTO">
+		select o.orderId, o.orderDate, o.userId, m.userRank, p.status, sum(g.gdsPrice*d.cartStock) as totalPrice
+		from ordertbl o, orderDetail d, member m, goods g, orderProcess p
+		where o.orderId = d.orderId and o.userId = m.userId and d.gdsCode = g.gdsCode and o.orderId = p.orderId and p.status not like '%접수' and p.status not in ('결제완료', '배송준비', '배송완료')
 		group by o.orderId
 		order by o.orderDate desc
 	</select>

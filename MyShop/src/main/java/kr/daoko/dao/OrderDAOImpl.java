@@ -64,8 +64,13 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public List<OrderDTO> orderManage() throws Exception {
-		return sql.selectList(NAMESPACE + ".orderManage");
+	public List<OrderDTO> orderManage0() throws Exception {
+		return sql.selectList(NAMESPACE + ".orderManage0");
+	}
+	
+	@Override
+	public List<OrderDTO> orderManage1() throws Exception {
+		return sql.selectList(NAMESPACE + ".orderManage1");
 	}
 
 	@Override

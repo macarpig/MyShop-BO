@@ -61,8 +61,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderDTO> orderManage() throws Exception {
-		return dao.orderManage();
+	public List<OrderDTO> orderManage0() throws Exception {
+		return dao.orderManage0();
+	}
+	
+	@Override
+	public List<OrderDTO> orderManage1() throws Exception {
+		return dao.orderManage1();
 	}
 
 	@Override
