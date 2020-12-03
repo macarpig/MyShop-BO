@@ -34,5 +34,10 @@ public class QnaDAOImpl implements QnaDAO {
 	public QnaDTO viewQna(int idx) throws Exception {
 		return sql.selectOne(NAMESPACE + ".viewqna", idx);
 	}
-	
+
+	// Q&A 답변 처리
+	@Override
+	public void modifyQna(QnaDTO dto) throws Exception {
+		sql.update(NAMESPACE + ".modifyqna", dto);
+	}
 }

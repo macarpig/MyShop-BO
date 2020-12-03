@@ -29,7 +29,7 @@ public class QnaController {
 		return "qna/list";
 	}
 	
-	// Q&A 조회
+	// Q&A 답변 페이지
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String getQnaView(@RequestParam("idx") int idx, Model model) throws Exception {
 		logger.info("from QnaController: getQnaView()");
@@ -38,5 +38,15 @@ public class QnaController {
 		model.addAttribute("qna", qna);
 		
 		return "qna/view";
+	}
+	
+	// Q&A 답변 처리
+	@RequestMapping(value = "/view", method = RequestMethod.POST)
+	public String postQnaView(QnaDTO dto) throws Exception {
+		logger.info("from QnaController: getQnaView()");
+
+		service.modifyQna(dto);
+		
+		return "redirect:/qna/list";
 	}
 }

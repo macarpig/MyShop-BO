@@ -31,6 +31,10 @@ public class QnaServiceImpl implements QnaService {
 	public QnaDTO viewQna(int idx) throws Exception {
 		return dao.viewQna(idx);
 	}
-	
-	
+
+	// Q&A 답변 처리
+	@Override
+	public void modifyQna(QnaDTO dto) throws Exception {
+		dao.modifyQna(dto);
+	}
 }

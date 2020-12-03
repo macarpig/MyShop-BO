@@ -13,4 +13,7 @@ public interface QnaDAO {
 	
 	// Q&A 조회
 	public QnaDTO viewQna(int idx) throws Exception;
+	
+	// Q&A 답변 처리
+	public void modifyQna(QnaDTO dto) throws Exception;
 }

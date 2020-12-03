@@ -20,4 +20,12 @@
 		from qna
 		where idx = #{idx}
 	</select>
+	
+	<!-- Q&A 답변 처리 -->
+	<update id="modifyqna">
+		update qna
+		set
+	   		answer = #{answer}
+		where idx = #{idx}
+	</update>
 </mapper>
