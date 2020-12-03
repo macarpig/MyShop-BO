@@ -116,7 +116,9 @@
 													   shiftEnterMode : CKEDITOR.ENTER_P,
 													   filebrowserUploadUrl : "/controller/goods/ckUpload"
 													 };
+											CKEDITOR.config.allowContent = true;
 											CKEDITOR.replace('gdsDesc', ckeditor_config);
+											
 											</script>
 									</div>
 	            </div>
