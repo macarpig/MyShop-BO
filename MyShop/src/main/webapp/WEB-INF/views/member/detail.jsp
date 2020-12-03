@@ -288,7 +288,7 @@ var qna = $('#qna').DataTable({
 });
 
 $('#qna tbody').on('click', 'tr', function() {
-	location.href="<%=request.getContextPath()%>/qna/detail?idx=" + qna.row(this).data().idx;
+	location.href="<%=request.getContextPath()%>/qna/view?idx=" + qna.row(this).data().idx;
 });
 </script>
 </body>

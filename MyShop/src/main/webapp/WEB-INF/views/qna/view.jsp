@@ -61,7 +61,7 @@
 					<div class="col-md-12">
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">회원 정보</h3>
+								<h3 class="card-title">클릭 시 회원 상세정보로 이동합니다.</h3>
 							</div>
 							<div class="card-body">
 								<table id="list"
@@ -75,9 +75,9 @@
 									</thead>
 									<tbody>
 										<tr>
-											<th>${qna.idx}</th>
-											<th>${qna.userId}</th>
-											<th>${qna.date}</th>
+											<td>${qna.idx}</td>
+											<td>${qna.userId}</td>
+											<td>${qna.date}</td>
 										</tr>
 									</tbody>
 								</table>
@@ -92,7 +92,7 @@
 						<div class="col-md-12">
 							<div class="card card-success">
 								<div class="card-header">
-									<h3 class="card-title"></h3>
+									<h3 class="card-title">Q&A 영역</h3>
 								</div>
 								<div class="card-body">
 									<div class="form-group">
@@ -113,9 +113,10 @@
 					</div>
 					<div class="row">
 						<div class="col-12">
-							<button type="reset" class="btn btn-secondary">초기화</button>
-							<button id="modify_Btn" type="submit"
-								class="btn btn-primary float-right ml-1">저장</button>
+							<button id="list_Btn" type="button" class="btn btn-secondary">목록</button>
+							<input type="submit"
+								class="btn btn-primary float-right ml-1" value="저장">
+							<button type="reset" class="btn btn-secondary float-right">초기화</button>
 						</div>
 					</div>
 				</form>
@@ -147,12 +148,13 @@
 	<script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
 
 	<script>
-	var formObj = $("form[role='form']");
-	
-	$("#modify_Btn").click(function(){
-		formObj.attr("action", "<%=request.getContextPath()%>/qna/modify");
-		formObj.attr("method", "post")
-		formObj.submit();
+	$('#list tbody').on('click', 'tr', function() {
+		location.href="<%=request.getContextPath()%>/member/detail?userId=${qna.userId}";
 	});
+	
+	$("#list_Btn").click(function(){
+		location.href="list";
+	});
+	</script>
 </body>
 </html>
