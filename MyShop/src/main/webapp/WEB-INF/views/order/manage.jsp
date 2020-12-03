@@ -67,7 +67,7 @@ pageEncoding="UTF-8"%>
                     <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="<% if(pageNum.equals("0")){%>true<%}else{%>false<%}%>" onclick="location.href='<%=request.getContextPath()%>/order/manage?page=0'">관리할 목록</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="<% if(pageNum.equals("1")){%>true<%}else{%>false<%}%" onclick="location.href='<%=request.getContextPath()%>/order/manage?page=1'">처리한 목록</a>
+                    <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="<% if(pageNum.equals("1")){%>true<%}else{%>false<%}%>" onclick="location.href='<%=request.getContextPath()%>/order/manage?page=1'">처리한 목록</a>
                   </li>
                 </ul>
               </div>
