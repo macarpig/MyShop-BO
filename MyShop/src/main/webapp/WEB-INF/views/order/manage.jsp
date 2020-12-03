@@ -58,28 +58,19 @@ pageEncoding="UTF-8"%>
 
             <div class="card">
               <div class="card-header">
-                <% if(!pageNum.equals("0")){%><a href="<%=request.getContextPath()%>/order/manage?page=0"><%}%>
-                <table style="float:left;background-color:<% if(pageNum.equals("0")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
-                	<tr>
-                		<th>관리할 목록</th>
-                	</tr>
-                	<tr>
-                		<td>${states.receipt}</td>
-                	</tr>
-				</table>
-				<% if(!pageNum.equals("0")){%></a><%}%>
 				
-				<% if(!pageNum.equals("1")){%><a href="<%=request.getContextPath()%>/order/manage?page=1"><%}%>
-				<table style="float:left;background-color:<% if(pageNum.equals("1")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
-					<tr>
-                		<th>처리한 목록</th>
-                	</tr>
-                	<tr>
-                		<td>${states.processing}</td>
-                	</tr>
-				</table>
-				<% if(!pageNum.equals("1")){%></a><%}%>
-				
+              </div>
+              <div class="card card-primary card-tabs">
+              <div class="card-header p-0 pt-1">
+                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="<% if(pageNum.equals("0")){%>true<%}else{%>false<%}%>" onclick="location.href='<%=request.getContextPath()%>/order/manage?page=0'">관리할 목록</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="<% if(pageNum.equals("1")){%>true<%}else{%>false<%}%" onclick="location.href='<%=request.getContextPath()%>/order/manage?page=1'">처리한 목록</a>
+                  </li>
+                </ul>
+              </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -92,7 +83,7 @@ pageEncoding="UTF-8"%>
                     <th>등급</th>
                     <th>총 구매금액</th>
                     <th>상태</th>
-                    <th></th>
+                    <% if(!pageNum.equals("1")){%><th></th><%}%>
                   </tr>
                   </thead>
                   <tfoot>
@@ -103,7 +94,7 @@ pageEncoding="UTF-8"%>
                     <th>등급</th>
                     <th>총 구매금액</th>
                     <th>상태</th>
-                    <th></th>
+                    <% if(!pageNum.equals("1")){%><th></th><%}%>
                   </tr>
                   </tfoot>
                 </table>
@@ -156,7 +147,9 @@ var status = null;
 var table =  $('#order').DataTable({
       ajax: {
 			url: '<%=request.getContextPath()%>/api/order/manage',
-			dataSrc: ''
+			dataType: 'json',
+            data: { page : <%=pageNum%> },
+            dataSrc: ''
 		},
 		
 		columns: [
@@ -178,8 +171,9 @@ var table =  $('#order').DataTable({
 				"render": function(data, type, full, meta) {
 					status = data;
 					return data;
-				}},
-			{"data" : "orderId",
+				}}
+			<% if(!pageNum.equals("1")){%>
+			,{"data" : "orderId",
 				"render":function(data, type, full, meta) {
 					if(status == "배송완료"){
 						return '<button onclick="location.href=\'ExOfficio?orderId='+data+'&d=1\'">반품처리</button><button onclick="location.href=\'ExOfficio?orderId='+data+'&d=2\'">교환처리</button>';
@@ -188,7 +182,7 @@ var table =  $('#order').DataTable({
 					}
 					return '<button onclick="location.href=\'ExOfficio?orderId='+data+'&d=0\'">취소처리</button><button onclick="location.href=\'ExOfficio?orderId='+data+'&d=1\'">반품처리</button><button onclick="location.href=\'ExOfficio?orderId='+data+'&d=2\'">교환처리</button>';
 				}
-			}
+			}<%}%>
 		]
     });
 </script>
