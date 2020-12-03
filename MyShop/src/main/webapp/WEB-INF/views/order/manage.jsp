@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<% String pageNum = request.getParameter("page"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +58,28 @@ pageEncoding="UTF-8"%>
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <% if(!pageNum.equals("0")){%><a href="<%=request.getContextPath()%>/order/manage?page=0"><%}%>
+                <table style="float:left;background-color:<% if(pageNum.equals("0")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
+                	<tr>
+                		<th>관리할 목록</th>
+                	</tr>
+                	<tr>
+                		<td>${states.receipt}</td>
+                	</tr>
+				</table>
+				<% if(!pageNum.equals("0")){%></a><%}%>
+				
+				<% if(!pageNum.equals("1")){%><a href="<%=request.getContextPath()%>/order/manage?page=1"><%}%>
+				<table style="float:left;background-color:<% if(pageNum.equals("1")){%>black;color:white;font-weight:bold<%}else{%>13%<%}%>;width:18%;margin:1%;text-align:center;" border="1">
+					<tr>
+                		<th>처리한 목록</th>
+                	</tr>
+                	<tr>
+                		<td>${states.processing}</td>
+                	</tr>
+				</table>
+				<% if(!pageNum.equals("1")){%></a><%}%>
+				
               </div>
               <!-- /.card-header -->
               <div class="card-body">

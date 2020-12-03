@@ -117,11 +117,11 @@ public class OrderController {
 		String orderId = request.getParameter("orderId");
 		String d = request.getParameter("d");
 		if(d.equals("0")) {
-			d = "취소완료";
+			d = "취소접수";
 		}else if(d.equals("1")) {
-			d = "반품완료";
+			d = "반품접수";
 		}else if(d.equals("2")) {
-			d = "교환완료";
+			d = "교환접수";
 		}
 		HashMap<String, String> ExOfficio = new HashMap<String, String>();
 		ExOfficio.put("reason", txtReason);

@@ -17,6 +17,8 @@ pageEncoding="UTF-8"%>
   <!-- DataTables -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/plugins/daterangepicker/daterangepicker.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
@@ -57,6 +59,26 @@ pageEncoding="UTF-8"%>
           <div class="col-12">
 
             <div class="card">
+              <div class="card-header">
+              	<!-- Date range -->
+                <div class="form-group">
+                  <label>Date range:</label>
+
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control float-right" id="reservation">
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+              </div>
+              <div class="card-header">
+              	<h3 class="card-title">you can enter search criteria here to manage your sales</h3>
+              </div>
               <div class="card-header">
               	<h3 class="card-title">you can enter search criteria here to manage your sales</h3>
               </div>
@@ -127,9 +149,12 @@ pageEncoding="UTF-8"%>
 <script src="<%=request.getContextPath()%>/resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
+<!-- date-range-picker -->
+<script src="<%=request.getContextPath()%>/resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- page script -->
 <script>
-var table =  $('#manage').DataTable({
+$(function () {
+	var table =  $('#manage').DataTable({
       ajax: {
 			url: '<%=request.getContextPath()%>/api/stat/manage',
 			dataSrc: ''
@@ -150,6 +175,10 @@ var table =  $('#manage').DataTable({
 			{"data" : "orderDate"}
 		]
     });
+    
+	//Date range picker
+    $('#reservation').daterangepicker();
+});'
 </script>
 </body>
 </html>
