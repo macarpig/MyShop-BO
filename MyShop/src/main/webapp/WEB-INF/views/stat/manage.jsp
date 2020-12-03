@@ -149,6 +149,9 @@ pageEncoding="UTF-8"%>
 <script src="<%=request.getContextPath()%>/resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
+<!-- InputMask -->
+<script src="<%=request.getContextPath()%>/resources/plugins/moment/moment.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 <!-- date-range-picker -->
 <script src="<%=request.getContextPath()%>/resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- page script -->
