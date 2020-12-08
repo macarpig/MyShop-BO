@@ -83,17 +83,17 @@
 	                <label for="gdsPrice">상품 가격</label>
 	                <input type="text" id="gdsPrice" name="gdsPrice" value="${goods.gdsPrice}">
 	              </div>
+	              
 	              <div class="inputArea">
 	                <label for="gdsImg">상품 이미지</label>
-	                <input type="file" id="gdsImg" name="file"/>
+	                <input type="file" id="gdsImg" name="file" onchange="setThumbnail(this);"/>
 	                <div class="select_img">
-	                	<img src="${goods.gdsImg}" class="oriImg"/>
+					<img id="select_img" src="/controller${goods.gdsImg }" alt="이미지미리보기" class="select_img"/>
 	                	<input type="hidden" name="gdsImg" value="${goods.gdsImg}"/>
 	                	<input type="hidden" name="gdsThumbImg" value="${goods.gdsThumbImg}"/>
 	                </div>
-	                
 	                <script>
-	                	$("#gdsImg").change(function() {
+	                	/*$("#gdsImg").change(function() {
 	                		if(this.files && this.files[0]) {
 	                			var reader = new FileReader;
 	                			reader.onload = function(data) {
@@ -101,23 +101,32 @@
 	                			}
 	                			reader.readAsDataURL(this.files[0]);
 	                		}
-	                	});
+	                	});*/
+	                	function setThumbnail(input) {
+							  if(input.files && input.files[0]) {
+		                		var reader = new FileReader();
+		                		
+		                		reader.onload = function(e) {
+		                			$('#select_img').attr('src', e.target.result);
+		                		}
+		                		reader.readAsDataURL(input.files[0]);
+							  }
+		                	}
 	                </script>
 	         
 	              </div> 
 	              
 	              <div class="inputArea">
-	                <label for="gdsDesc">상품 설명</label>
-	                <textArea rows="5" cols="50"id="gdsDesc" name="gdsDesc" class="form-control" value="${goods.gdsDesc}"></textArea>
-										<script>	
+	                <label for="gdsDesc">상품 설명</label> 
+	                <textArea rows="5" cols="50" id="gdsDesc" name="gdsDesc">${goods.gdsDesc}</textArea>	              
+										  <script>	
 											 var ckeditor_config = {
 													   resize_enaleb : false,
 													   enterMode : CKEDITOR.ENTER_BR,
 													   shiftEnterMode : CKEDITOR.ENTER_P,
 													   filebrowserUploadUrl : "/controller/goods/ckUpload"
 													 };
-											CKEDITOR.config.allowContent = true;
-											CKEDITOR.replace('gdsDesc', ckeditor_config);
+											CKEDITOR.replace("gdsDesc", ckeditor_config);
 											
 											</script>
 									</div>
@@ -178,7 +187,7 @@
 	});
 </script>
 <style>
-.orgImg{width:500px; height:auto;}
+.select_img img {width:100px; height:100; margin:20px;}
 
 </style>
 </body>

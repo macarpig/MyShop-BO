@@ -97,24 +97,33 @@
 										</div>
 
 										<div class="inputArea">
-											<label for="gdsImg">상품이미지</label> <input type="file"
-												id="gdsImg" name="file" />
+											<label for="gdsImg">상품이미지</label> 
+											<input type="file" id="gdsImg" name="file" onchange="setThumbnail(this);"/>
 											<div class="select_img">
-												<img src="" />
+											<img id="select_img" src="#" alt="이미지미리보기" class="select_img"/>
 											</div>
-											<script>
-												$("#gdsImg").change(function() {
-																	if (this.files&& this.files[0]) {
-																		var reader = new FileReader;
-																		reader.onload = function(data) {
-																			$(".select_img img").attr("src",data.target.result).width(500);
-																		}
-																		reader.readAsDataURL(this.files[0]);
-																	}
-																});
+											<script type="text/javascript">
+											/*$("#gdsImg").change(function(){
+												   if(this.files && this.files[0]) {
+												    var reader = new FileReader;
+												    reader.onload = function(data) {
+												     $(".select_img img").attr("src", data.target.result).width(500);        
+												    }
+												    reader.readAsDataURL(this.files[0]);
+												   }
+												  });*/
+												  function setThumbnail(input) {
+													  if(input.files && input.files[0]) {
+								                		var reader = new FileReader();
+								                		
+								                		reader.onload = function(e) {
+								                			$('#select_img').attr('src', e.target.result);
+								                		}
+								                		reader.readAsDataURL(input.files[0]);
+													  }
+								                	}
 											</script>
 
-											<%=request.getRealPath("/") %>
 										</div>
 										<div class="inputArea">
 											<label for="gdsDesc">상품설명</label>
@@ -172,8 +181,6 @@
 	<!-- Bootstrap 4 -->
 	<script
 		src="<%=request.getContextPath()%>/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- ckeditor -->
-	<script src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js" ></script>
 	<!-- DataTables -->
 	<script
 		src="<%=request.getContextPath()%>/resources/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -193,7 +200,7 @@
 	<script>
 </script>
 <style> 
-.select_img img { margin:20px 0;}
+.select_img img {width:100px; height:100; margin:20px;}
 </style>
 </body>
 </html>
