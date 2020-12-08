@@ -11,6 +11,9 @@ public interface QnaService {
 	// 특정 사용자 Q&A 목록 조회
 	public List<QnaDTO> listQna(String userId) throws Exception;
 	
-	// Q&A 답변 조호
+	// Q&A 답변 조회
 	public QnaDTO viewQna(int idx) throws Exception;
+	
+	// Q&A 답변 처리
+	public void modifyQna(QnaDTO dto) throws Exception;
 }

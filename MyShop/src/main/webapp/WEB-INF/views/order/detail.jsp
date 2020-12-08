@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -139,6 +140,25 @@ pageEncoding="UTF-8"%>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+            <c:if test="${fn:contains(order.status, '반품') || fn:contains(order.status, '취소') ||fn:contains(order.status, '교환')}">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">${order.status} 사유</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table table-striped" style="width:100%">
+                  <tbody>
+                    <tr>
+                      <td>${order.reason}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            </c:if>
           </div>
           <!-- /.col -->
         </div>

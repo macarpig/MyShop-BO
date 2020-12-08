@@ -35,7 +35,7 @@
       where userId = #{userId}
    </delete>
    
-   <!-- 특정 상품을 구매한 회원 조 회 -->
+   <!-- 특정 상품을 구매한 회원 조회 -->
    <select id="goodsmember" resultType="kr.daoko.dto.GoodsMemberDTO">
       select m.userId, m.userName, m.userTel, m.userEmail, m.userRank, g.gdsCode, p.status, o.orderDate, o.orderId
       from member m
@@ -44,6 +44,5 @@
       inner join orderDetail d on p.orderId = d.orderId
       inner join goods g on d.gdsCode = g.gdsCode
       where g.gdsCode = #{gdsCode}
-       
    </select>
 </mapper>

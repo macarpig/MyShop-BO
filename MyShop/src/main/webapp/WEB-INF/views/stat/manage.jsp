@@ -57,30 +57,57 @@ pageEncoding="UTF-8"%>
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-
             <div class="card">
-              <div class="card-header">
+              <div class="card-body">
               	<!-- Date range -->
+                  <div class="row">
+                   <div class="col-sm-6">
+                	<div class="form-group"><label>상품코드</label>
+                  	<input type="text" class="form-control" id="gdsCode">
+                   </div></div>
+                   <div class="col-sm-6">
+                	<div class="form-group"><label>카테고리</label>
+                  	<select class="form-control" id="cateCode">
+                  	<option></option>
+                  	<option value="100">상하의</option>
+	                <option value="101">아우터</option>
+	                <option value="200">악세서리</option>
+	                <option value="201">신발</option>
+	                <option value="202">가방</option>
+                  	</select>
+                  </div></div>
+                  </div>
+                  <div class="row">
+                   <div class="col-sm-6">
+                	<div class="form-group"><label>상품명</label>
+                  	<input type="text" class="form-control" id="gdsName">
+                   </div></div>
+                   <div class="col-sm-6">
+                	<div class="form-group"><label>고객 ID</label>
+                  	<input type="text" class="form-control" id="userId">
+                  </div></div>
+                  </div>
                 <div class="form-group">
-                  <label>Date range:</label>
-
+                 <div class="input-group">
+                  <label>기간 : </label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="far fa-calendar-alt"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control float-right" id="reservation">
+                    <input type="text" class="form-control float-right" id="reservation" id="daterange">
                   </div>
-                  <!-- /.input group -->
-                </div>
-                <!-- /.form group -->
+                  </div></div></div>
+              <div class="card-footer">
+                <button class="btn btn-info" style="width:30%;" onclick="submit()">조회</button>
+                <button type="reset" class="btn btn-default float-right" style="width:30%;">초기화</button><br>
               </div>
               <div class="card-header">
-              	<h3 class="card-title">you can enter search criteria here to manage your sales</h3>
+              	<h3 class="card-title">차트영역</h3>
               </div>
               <div class="card-header">
-              	<h3 class="card-title">you can enter search criteria here to manage your sales</h3>
+              	<h3 class="card-title">차트영역</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -149,39 +176,87 @@ pageEncoding="UTF-8"%>
 <script src="<%=request.getContextPath()%>/resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
-<!-- InputMask -->
-<script src="<%=request.getContextPath()%>/resources/plugins/moment/moment.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 <!-- date-range-picker -->
-<script src="<%=request.getContextPath()%>/resources/plugins/daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <!-- page script -->
 <script>
 $(function () {
-	var table =  $('#manage').DataTable({
-      ajax: {
-			url: '<%=request.getContextPath()%>/api/stat/manage',
-			dataSrc: ''
-		},
-		
-		columns: [
-			{"data" : "orderId",
-				"render": function(data, type, full, meta) {
-					return "<a href='detail?orderId="+ data +"'>"+data+"</a>";
-				}},
-			{"data" : "gdsName"},
-			{"data" : "gdsCode",
-				"render": function(data, type, full, meta) {
-					return "<a href='../goods/detail?gdsCode="+ data +"'>"+data+"</a>";
-				}},
-			{"data" : "cateName"},
-			{"data" : "userId"},
-			{"data" : "orderDate"}
-		]
-    });
-    
+	$('#manage').DataTable({
+	      ajax: {
+				url: '<%=request.getContextPath()%>/api/stat/manage',
+				dataType: 'json',
+	            dataSrc: ''
+			},
+			
+			columns: [
+				{"data" : "orderId",
+					"render": function(data, type, full, meta) {
+						return "<a href='../order/detail?orderId="+ data +"'>"+data+"</a>";
+					}},
+				{"data" : "gdsName"},
+				{"data" : "gdsCode",
+					"render": function(data, type, full, meta) {
+						return "<a href='../goods/detail?gdsCode="+ data +"'>"+data+"</a>";
+					}},
+				{"data" : "cateName"},
+				{"data" : "userId",
+					"render": function(data, type, full, meta) {
+						return "<a href='../member/detail?userId="+ data +"'>"+data+"</a>";
+					}},
+				{"data" : "orderDate"}
+			]
+	    });
+
 	//Date range picker
-    $('#reservation').daterangepicker();
-});'
+    $('#reservation').daterangepicker({
+    	locale: {
+    		format: 'YYYY-MM-DD',
+    		applyLabel: 'Apply',
+    		cancelLabel: 'Cancel'
+    	},
+    	showDropdowns: true,
+    	minYear: 2000,
+    	maxYear: parseInt(moment().format('YYYY'), 10),
+    	opens: 'left',
+    });
+    $('#reservation').setDate(null);
+    
+});
+
+//조회 버튼 클릭
+function submit() {
+	alert('submit');
+	$('#manage').DataTable().clear().draw();
+	$('#manage').DataTable({
+	      ajax: {
+				url: '<%=request.getContextPath()%>/api/stat/manage',
+				dataType: 'json',
+				data: {
+					gdsCode: $('#gdsCode').val(), cateCode: $('#cateCode').val(), gdsName: $('#gdsName').val(), userId: $('#userId').val()
+				},
+	            dataSrc: ''
+			},
+			
+			columns: [
+				{"data" : "orderId",
+					"render": function(data, type, full, meta) {
+						return "<a href='../order/detail?orderId="+ data +"'>"+data+"</a>";
+					}},
+				{"data" : "gdsName"},
+				{"data" : "gdsCode",
+					"render": function(data, type, full, meta) {
+						return "<a href='../goods/detail?gdsCode="+ data +"'>"+data+"</a>";
+					}},
+				{"data" : "cateName"},
+				{"data" : "userId",
+					"render": function(data, type, full, meta) {
+						return "<a href='../member/detail?userId="+ data +"'>"+data+"</a>";
+					}},
+				{"data" : "orderDate"}
+			]
+	    });
+}
 </script>
 </body>
 </html>
