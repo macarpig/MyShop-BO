@@ -230,30 +230,6 @@ var chartLabels = [];
 var chartData1=[], chartData2=[], chartData3=[];
 var txtTitle = '전체 매출 차트';
 
-var chartData = {
-		labels: chartLabels,
-		datasets: [{
-			type: 'line',
-			label: '총 주문금액(단위:10만원)',
-			borderColor: '#FF5E00',
-			borderWidth: 2,
-			fill: false,
-			data: chartData1
-		}, {
-			type: 'bar',
-			label: '주문 수',
-			backgroundColor: '#1DDB16',
-			data: chartData2,
-			borderColor: 'white',
-			borderWidth: 2
-		}, {
-			type: 'bar',
-			label: '취소/교환/반품 수',
-			backgroundColor: '#FF00DD',
-			data: chartData3
-		}]
-
-	};
 	window.onload = function() {
 		$.getJSON("<%=request.getContextPath()%>/api/stat/manageChart",
 				function(data) {
@@ -270,6 +246,30 @@ var chartData = {
 	function createChart() {
 		window.myMixedChart = null;
 		var ctx = document.getElementById('chart').getContext('2d');
+		var chartData = {
+				labels: chartLabels,
+				datasets: [{
+					type: 'line',
+					label: '총 주문금액(단위:10만원)',
+					borderColor: '#FF5E00',
+					borderWidth: 2,
+					fill: false,
+					data: chartData1
+				}, {
+					type: 'bar',
+					label: '주문 수',
+					backgroundColor: '#1DDB16',
+					data: chartData2,
+					borderColor: 'white',
+					borderWidth: 2
+				}, {
+					type: 'bar',
+					label: '취소/교환/반품 수',
+					backgroundColor: '#FF00DD',
+					data: chartData3
+				}]
+
+			};
 		window.myMixedChart = new Chart(ctx, {
 			type: 'bar',
 			data: chartData,
@@ -309,7 +309,6 @@ function inquiry() {
 	     chartData1.push(obj.totalPrice);
 	     chartData2.push(obj.orderCnt);
 	     chartData3.push(obj.cancleCnt);
-	     alert(obj.period);
 	  });
 	  createChart();
 	});

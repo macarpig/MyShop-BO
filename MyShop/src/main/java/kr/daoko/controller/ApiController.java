@@ -226,7 +226,6 @@ public class ApiController {
     @RequestMapping(value = "/stat/manageChart", produces = "application/json", method = RequestMethod.GET)
     public String getStatManageChart(@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) throws Exception {
     	logger.info("from ApiController: getStatManageChart()");
-    	System.out.println(startDate + " - " + endDate);
     	
     	StatDTO stat = new StatDTO();
         stat.setStartDate(startDate);
@@ -234,7 +233,6 @@ public class ApiController {
         
         List<StatChartDTO> list = statService.statChart(stat);
     	String json = gson.toJson(list);
-        
         return json;
     }
 }
