@@ -2,6 +2,7 @@ package kr.daoko.dto;
 
 public class MemberDTO {
 	private String userId;
+	private String userPw;
 	private String userName;
 	private String userEmail;
 	private String userTel;
@@ -16,6 +17,12 @@ public class MemberDTO {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getUserPw() {
+		return userPw;
+	}
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
 	}
 	public String getUserName() {
 		return userName;

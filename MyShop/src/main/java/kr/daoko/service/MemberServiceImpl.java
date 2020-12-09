@@ -3,6 +3,7 @@ package kr.daoko.service;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -45,9 +46,21 @@ public class MemberServiceImpl implements MemberService {
 		return dao.goodsMember(gdsCode);
 	}
 	
-	//회원 총 수
+	// 회원 총 수
 	@Override
 	public int memberCount() throws Exception {
 		return dao.memberCount();
+	}
+
+	// 로그인 처리
+	@Override
+	public MemberDTO login(MemberDTO dto) throws Exception {
+		return dao.login(dto);
+	}
+
+	// 로그아웃 처리
+	@Override
+	public void logout(HttpSession session) throws Exception {
+		session.invalidate();
 	}
 }

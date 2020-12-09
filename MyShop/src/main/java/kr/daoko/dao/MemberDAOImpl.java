@@ -52,4 +52,10 @@ public class MemberDAOImpl implements MemberDAO {
 	public int memberCount() throws Exception {
 		return sql.selectOne(NAMESPACE + ".memberCount");
 	}
+
+	// 로그인 처리
+	@Override
+	public MemberDTO login(MemberDTO dto) throws Exception {
+		return sql.selectOne(NAMESPACE + ".login", dto);
+	}
 }

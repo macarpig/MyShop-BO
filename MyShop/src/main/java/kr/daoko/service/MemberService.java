@@ -2,6 +2,8 @@ package kr.daoko.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import kr.daoko.dto.GoodsMemberDTO;
 import kr.daoko.dto.MemberDTO;
 
@@ -22,4 +24,10 @@ public interface MemberService {
 	public List<GoodsMemberDTO> goodsMember(String gdsCode) throws Exception;
 	
 	public int memberCount() throws Exception;
+	
+	// 로그인 처리
+	public MemberDTO login(MemberDTO dto) throws Exception;
+	
+	// 로그아웃 처리
+	public void logout(HttpSession session) throws Exception;
 }

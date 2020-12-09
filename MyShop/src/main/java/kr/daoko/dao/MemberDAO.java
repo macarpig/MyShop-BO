@@ -18,8 +18,11 @@ public interface MemberDAO {
 	// 회원 정보 삭제
 	public void deleteMember(String userId) throws Exception;
 	
-	//특정 상품을 구매한 회원 조회
+	// 특정 상품을 구매한 회원 조회
 	public List<GoodsMemberDTO> goodsMember(String gdsCode) throws Exception;
 	
 	public int memberCount() throws Exception;
+	
+	// 로그인 처리
+	public MemberDTO login(MemberDTO dto) throws Exception;
 }

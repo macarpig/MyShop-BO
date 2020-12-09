@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@ pageEncoding="UTF-8"%>
 
       <form method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="아이디">
+          <input type="text" id="userId" name="userId" class="form-control" placeholder="아이디">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -40,7 +41,7 @@ pageEncoding="UTF-8"%>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="비밀번호">
+          <input type="password" id="userPw" name="userPw" class="form-control" placeholder="비밀번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -48,17 +49,14 @@ pageEncoding="UTF-8"%>
           </div>
         </div>
         <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
           <!-- /.col -->
-          <div class="col-4">
+          <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">로그인</button>
+            <c:if test="${msg == false}">
+            	<div class="alert alert-danger mt-4" role="alert">
+					ID 혹은 PW를 확인해주세요.
+				</div>
+            </c:if>
           </div>
           <!-- /.col -->
         </div>
