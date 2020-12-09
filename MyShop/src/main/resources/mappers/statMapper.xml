@@ -7,16 +7,19 @@
 		from ordertbl o, orderDetail d, goods g, category c
 		where o.orderId = d.orderId and g.gdsCode = d.gdsCode and g.cateCode = c.cateCode
 		<if test="gdsCode != null and gdsCode != '' ">
-			and g.gdsCode = #{gdsCode}
+			and g.gdsCode like concat('%', #{gdsCode}, '%')
 		</if>
 		<if test="cateName != null and cateName != '' ">
-			and c.cateName = #{cateName}
+			and c.cateName like concat('%', #{cateName}, '%')
 		</if>
 		<if test="gdsName != null and gdsName != '' ">
-			and g.gdsName = #{gdsName}
+			and g.gdsName like concat('%', #{gdsName}, '%')
 		</if>
 		<if test="userId != null and userId != '' ">
-			and o.userId = #{userId}
+			and o.userId like concat('%', #{userId}, '%')
+		</if>
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != '' ">
+			and date_format(orderDate, '%Y-%m-%d') &gt;= #{startDate} and date_format(orderDate, '%Y-%m-%d') &lt;= #{endDate}
 		</if>
 	</select>
 	

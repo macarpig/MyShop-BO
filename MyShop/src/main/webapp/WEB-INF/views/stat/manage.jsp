@@ -96,15 +96,16 @@ pageEncoding="UTF-8"%>
                         <i class="far fa-calendar-alt"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control float-right" id="reservation" id="daterange">
+                    <input type="text" class="form-control float-right" id="reservation">
                   </div>
                   </div></div></div>
               <div class="card-footer">
                 <input type="button" class="btn btn-info" style="width:30%;" onclick="inquiry();" value="조회">
                 <button type="reset" class="btn btn-default float-right" style="width:30%;">초기화</button><br>
               </div></form>
+              <!-- 차트 영역 -->
               <div class="card-header">
-              	<h3 class="card-title">차트영역</h3>
+              	<canvas id="chart"></canvas>
               </div>
               <div class="card-header">
               	<h3 class="card-title">차트영역</h3>
@@ -172,6 +173,8 @@ pageEncoding="UTF-8"%>
 <script src="<%=request.getContextPath()%>/resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- ChartJS -->
+<script src="<%=request.getContextPath()%>/resources/plugins/chart.js/Chart.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath()%>/resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -223,38 +226,82 @@ $(function () {
     
 });
 
+var chartData = {
+		labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+		datasets: [{
+			type: 'line',
+			label: 'Dataset 1',
+			borderColor: '#FF5E00',
+			borderWidth: 2,
+			fill: false,
+			data: [
+				10,
+				11,
+				4,
+				4,
+				8,
+				10,
+				16
+			]
+		}, {
+			type: 'bar',
+			label: 'Dataset 2',
+			backgroundColor: '#1DDB16',
+			data: [
+				13,
+				50,
+				10,
+				34,
+				12,
+				31,
+				5
+			],
+			borderColor: 'white',
+			borderWidth: 2
+		}, {
+			type: 'bar',
+			label: 'Dataset 3',
+			backgroundColor: '#FF00DD',
+			data: [
+				1,
+				21,
+				2,
+				3,
+				1,
+				1,
+				0
+			]
+		}]
+
+	};
+	window.onload = function() {
+		var ctx = document.getElementById('chart').getContext('2d');
+		window.myMixedChart = new Chart(ctx, {
+			type: 'bar',
+			data: chartData,
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Chart.js Combo Bar Line Chart'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: true
+				}
+			}
+		});
+	};
+
 //조회 버튼 클릭
 function inquiry() {
-	alert('submit');
-	$('#manage').DataTable().clear().draw();
-	$('#manage').DataTable({
-	      ajax: {
-				url: '<%=request.getContextPath()%>/api/stat/manage',
-				dataType: 'json',
-				data: {
-					gdsCode: $('#gdsCode').val(), cateName: $('#cateName').val(), gdsName: $('#gdsName').val(), userId: $('#userId').val()
-				},
-	            dataSrc: ''
-			},
-			
-			columns: [
-				{"data" : "orderId",
-					"render": function(data, type, full, meta) {
-						return "<a href='../order/detail?orderId="+ data +"'>"+data+"</a>";
-					}},
-				{"data" : "gdsName"},
-				{"data" : "gdsCode",
-					"render": function(data, type, full, meta) {
-						return "<a href='../goods/detail?gdsCode="+ data +"'>"+data+"</a>";
-					}},
-				{"data" : "cateName"},
-				{"data" : "userId",
-					"render": function(data, type, full, meta) {
-						return "<a href='../member/detail?userId="+ data +"'>"+data+"</a>";
-					}},
-				{"data" : "orderDate"}
-			]
-	    });
+	var strRsv = $('#reservation').val().split(' - ');
+	$('#manage').DataTable().clear();
+	$('#manage').DataTable().ajax.url("${pageContext.request.contextPath}/api/stat/manage?gdsCode="+$('#gdsCode').val()+"&cateName="+encodeURIComponent($('#cateName').val())+"&gdsName="+$('#gdsName').val()+"&userId="+$('#userId').val()+"&startDate="+strRsv[0]+"&endDate="+strRsv[1]).load();
+	alert($('#gdsCode').val());
+	alert($('#cateName').val());
+	alert(strRsv[0]);
+	alert(strRsv[1]);
 }
 </script>
 </body>

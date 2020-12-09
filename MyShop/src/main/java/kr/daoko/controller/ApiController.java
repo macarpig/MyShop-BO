@@ -204,16 +204,16 @@ public class ApiController {
     // 회원 목록
     @ResponseBody
     @RequestMapping(value = "/stat/manage", produces = "application/json", method = RequestMethod.GET)
-    public String geStatManage(@RequestParam(required = false) String gdsCode, @RequestParam(required = false) String cateName, @RequestParam(required = false) String gdsName, @RequestParam(required = false) String userId) throws Exception {
+    public String geStatManage(@RequestParam(required = false) String gdsCode, @RequestParam(required = false) String cateName, @RequestParam(required = false) String gdsName, @RequestParam(required = false) String userId, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) throws Exception {
        logger.info("from ApiController: getMemberPurchaser()");
-       System.out.println(gdsCode + " " + cateName + " " + gdsName + " " + userId);
        
        StatDTO stat = new StatDTO();
        stat.setGdsCode(gdsCode);
        stat.setCateName(cateName);
        stat.setGdsName(gdsName);
        stat.setUserId(userId);
-       
+       stat.setStartDate(startDate);
+       stat.setEndDate(endDate);
 
        List<StatDTO> list = statService.listStat(stat);
        String json = gson.toJson(list);
