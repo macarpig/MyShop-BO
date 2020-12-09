@@ -85,7 +85,6 @@ pageEncoding="UTF-8"%>
                   <thead>
                     <tr>
                       <th>주문상세번호</th>
-                      <th>썸네일</th>
                       <th>상품명</th>
                       <th>수량</th>
                       <th>요청사항</th>
@@ -98,7 +97,6 @@ pageEncoding="UTF-8"%>
                   <c:forEach var="detail" items="${detail}">
                   	<tr>
                       <td><c:out value="${detail.orderDetailId}" /></td>
-                      <td><c:out value="${detail}" /></td>
                       <td><c:out value="${detail.gdsName}" /></td>
                       <td><c:out value="${detail.cartStock}" /></td>
                       <td><c:out value="${detail.orderRequest}" /></td>
