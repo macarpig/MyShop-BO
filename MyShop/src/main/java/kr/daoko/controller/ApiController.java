@@ -22,6 +22,7 @@ import kr.daoko.dto.MemberDTO;
 import kr.daoko.dto.OrderDTO;
 import kr.daoko.dto.OrderDetailDTO;
 import kr.daoko.dto.QnaDTO;
+import kr.daoko.dto.StatChartDTO;
 import kr.daoko.dto.StatDTO;
 import kr.daoko.service.GoodsService;
 import kr.daoko.service.MemberService;
@@ -204,8 +205,8 @@ public class ApiController {
     // 회원 목록
     @ResponseBody
     @RequestMapping(value = "/stat/manage", produces = "application/json", method = RequestMethod.GET)
-    public String geStatManage(@RequestParam(required = false) String gdsCode, @RequestParam(required = false) String cateName, @RequestParam(required = false) String gdsName, @RequestParam(required = false) String userId, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) throws Exception {
-       logger.info("from ApiController: getMemberPurchaser()");
+    public String getStatManage(@RequestParam(required = false) String gdsCode, @RequestParam(required = false) String cateName, @RequestParam(required = false) String gdsName, @RequestParam(required = false) String userId, @RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) throws Exception {
+       logger.info("from ApiController: getStatManage()");
        
        StatDTO stat = new StatDTO();
        stat.setGdsCode(gdsCode);
@@ -219,5 +220,21 @@ public class ApiController {
        String json = gson.toJson(list);
        
        return json;
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/stat/manageChart", produces = "application/json", method = RequestMethod.GET)
+    public String getStatManageChart(@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate) throws Exception {
+    	logger.info("from ApiController: getStatManageChart()");
+    	System.out.println(startDate + " - " + endDate);
+    	
+    	StatDTO stat = new StatDTO();
+        stat.setStartDate(startDate);
+        stat.setEndDate(endDate);
+        
+        List<StatChartDTO> list = statService.statChart(stat);
+    	String json = gson.toJson(list);
+        
+        return json;
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.daoko.mapper.statMapper">
-	<!-- Q&A 목록 -->
+	<!-- 매출 조회 -->
 	<select id="statList" resultType="kr.daoko.dto.StatDTO">
 		select o.orderId, g.gdsName, g.gdsCode, c.cateName, o.userId, o.orderDate
 		from ordertbl o, orderDetail d, goods g, category c
@@ -23,4 +23,14 @@
 		</if>
 	</select>
 	
+	<!-- 매출 차트 조회 -->
+	<select id="statChart" resultType="kr.daoko.dto.StatChartDTO">
+		select date_format(o.orderDate, '%Y-%m-%d') as period, sum(g.gdsPrice*d.cartStock)*0.00001 as totalPrice, count(o.orderId) as orderCnt, count(case when p.status like '취소%' or p.status like '반품%' or p.status like '교환%' then 1 end) as cancleCnt
+		from ordertbl o, orderDetail d, goods g, orderProcess p
+		where o.orderId = d.orderId and g.gdsCode = d.gdsCode and o.orderId = p.orderId
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != '' ">
+			and date_format(o.orderDate, '%Y-%m-%d') &gt;= #{startDate} and date_format(orderDate, '%Y-%m-%d') &lt;= #{endDate}
+		</if>
+		group by date_format(orderDate, '%Y-%m-%d')
+	</select>
 </mapper>

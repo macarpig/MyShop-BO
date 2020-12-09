@@ -226,55 +226,49 @@ $(function () {
     
 });
 
+var chartLabels = [];
+var chartData1=[], chartData2=[], chartData3=[];
+var txtTitle = '전체 매출 차트';
+
 var chartData = {
-		labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+		labels: chartLabels,
 		datasets: [{
 			type: 'line',
-			label: 'Dataset 1',
+			label: '총 주문금액(단위:10만원)',
 			borderColor: '#FF5E00',
 			borderWidth: 2,
 			fill: false,
-			data: [
-				10,
-				11,
-				4,
-				4,
-				8,
-				10,
-				16
-			]
+			data: chartData1
 		}, {
 			type: 'bar',
-			label: 'Dataset 2',
+			label: '주문 수',
 			backgroundColor: '#1DDB16',
-			data: [
-				13,
-				50,
-				10,
-				34,
-				12,
-				31,
-				5
-			],
+			data: chartData2,
 			borderColor: 'white',
 			borderWidth: 2
 		}, {
 			type: 'bar',
-			label: 'Dataset 3',
+			label: '취소/교환/반품 수',
 			backgroundColor: '#FF00DD',
-			data: [
-				1,
-				21,
-				2,
-				3,
-				1,
-				1,
-				0
-			]
+			data: chartData3
 		}]
 
 	};
 	window.onload = function() {
+		$.getJSON("<%=request.getContextPath()%>/api/stat/manageChart",
+				function(data) {
+		  $.each(data, function(idx, obj) {
+			 chartLabels.push(obj.period);
+		     chartData1.push(obj.totalPrice);
+		     chartData2.push(obj.orderCnt);
+		     chartData3.push(obj.cancleCnt);
+		  });
+		  createChart();
+		});
+	};
+	
+	function createChart() {
+		window.myMixedChart = null;
 		var ctx = document.getElementById('chart').getContext('2d');
 		window.myMixedChart = new Chart(ctx, {
 			type: 'bar',
@@ -283,7 +277,7 @@ var chartData = {
 				responsive: true,
 				title: {
 					display: true,
-					text: 'Chart.js Combo Bar Line Chart'
+					text: txtTitle
 				},
 				tooltips: {
 					mode: 'index',
@@ -291,17 +285,34 @@ var chartData = {
 				}
 			}
 		});
-	};
+	}
 
 //조회 버튼 클릭
 function inquiry() {
 	var strRsv = $('#reservation').val().split(' - ');
 	$('#manage').DataTable().clear();
 	$('#manage').DataTable().ajax.url("${pageContext.request.contextPath}/api/stat/manage?gdsCode="+$('#gdsCode').val()+"&cateName="+encodeURIComponent($('#cateName').val())+"&gdsName="+$('#gdsName').val()+"&userId="+$('#userId').val()+"&startDate="+strRsv[0]+"&endDate="+strRsv[1]).load();
-	alert($('#gdsCode').val());
-	alert($('#cateName').val());
-	alert(strRsv[0]);
-	alert(strRsv[1]);
+	chartLabels = [];
+	chartData1 = [];
+	chartData2 = [];
+	chartData3 = [];
+	if(strRsv.length > 1){
+		txtTitle = strRsv[0] + ' - ' + strRsv[1] + '의 매출 차트';
+	}else{
+		txtTitle = '전체 매출 차트';
+	}
+	$.getJSON("<%=request.getContextPath()%>/api/stat/manageChart",
+    		{startDate:strRsv[0], endDate:strRsv[1]},
+			function(data) {
+	  $.each(data, function(idx, obj) {
+		 chartLabels.push(obj.period);
+	     chartData1.push(obj.totalPrice);
+	     chartData2.push(obj.orderCnt);
+	     chartData3.push(obj.cancleCnt);
+	     alert(obj.period);
+	  });
+	  createChart();
+	});
 }
 </script>
 </body>
