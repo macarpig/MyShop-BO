@@ -25,7 +25,7 @@ public class QnaDAOImpl implements QnaDAO {
 
 	// 특정 사용자 Q&A 목록 조회
 	@Override
-	public List<QnaDTO> listQna(String userId) throws Exception {
+	public List<QnaDTO> listQnaUser(String userId) throws Exception {
 		return sql.selectList(NAMESPACE + ".listqnauser", userId);
 	}
 

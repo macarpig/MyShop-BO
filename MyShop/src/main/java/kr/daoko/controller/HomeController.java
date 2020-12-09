@@ -54,13 +54,7 @@ public class HomeController {
 		
 		boolean pwMatch = pwEncoder.matches(dto.getUserPw(), login.getUserPw());
 		
-		if(login == null) {
-			 rttr.addFlashAttribute("msg", false);
-			 
-			 return "redirect:/";
-		}
-		
-		else if(login != null && pwMatch) {
+		if(login != null && pwMatch) {
 			session.setAttribute("member", login);
 		}
 		

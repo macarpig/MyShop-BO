@@ -22,8 +22,8 @@ public class QnaServiceImpl implements QnaService {
 
 	// 특정 사용자 Q&A 목록 조회
 	@Override
-	public List<QnaDTO> listQna(String userId) throws Exception {
-		return dao.listQna(userId);
+	public List<QnaDTO> listQnaUser(String userId) throws Exception {
+		return dao.listQnaUser(userId);
 	}
 
 	// Q&A 답변 조회

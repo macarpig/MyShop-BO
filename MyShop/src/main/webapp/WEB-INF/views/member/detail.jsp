@@ -263,7 +263,7 @@ $('#order tbody').on('click', 'tr', function() {
 
 var qna = $('#qna').DataTable({
 	ajax: {
-		url: '<%=request.getContextPath()%>/api/qna/list?userId=' + userId,
+		url: '<%=request.getContextPath()%>/api/qna/listuser?userId=' + userId,
 		dataSrc: ''
 	},
 	

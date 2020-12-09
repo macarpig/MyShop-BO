@@ -105,7 +105,7 @@ public class ApiController {
 	public String getListQna(@RequestParam("userId") String userId) throws Exception {
 		logger.info("from ApiController: getListQna(String userId)");
 
-		List<QnaDTO> qna = qnaService.listQna(userId);
+		List<QnaDTO> qna = qnaService.listQnaUser(userId);
 		String json = gson.toJson(qna);
 
 		return json;

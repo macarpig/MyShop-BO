@@ -9,7 +9,7 @@ public interface QnaDAO {
 	public List<QnaDTO> listQna() throws Exception;
 	
 	// 특정 사용자 Q&A 목록 조회
-	public List<QnaDTO> listQna(String userId) throws Exception;
+	public List<QnaDTO> listQnaUser(String userId) throws Exception;
 	
 	// Q&A 조회
 	public QnaDTO viewQna(int idx) throws Exception;
