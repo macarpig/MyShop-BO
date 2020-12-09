@@ -57,7 +57,7 @@ pageEncoding="UTF-8"%>
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="card">
+            <div class="card"><form>
               <div class="card-body">
               	<!-- Date range -->
                   <div class="row">
@@ -67,13 +67,13 @@ pageEncoding="UTF-8"%>
                    </div></div>
                    <div class="col-sm-6">
                 	<div class="form-group"><label>카테고리</label>
-                  	<select class="form-control" id="cateCode">
+                  	<select class="form-control" id="cateName">
                   	<option></option>
-                  	<option value="100">상하의</option>
-	                <option value="101">아우터</option>
-	                <option value="200">악세서리</option>
-	                <option value="201">신발</option>
-	                <option value="202">가방</option>
+                  	<option value="상하의">상하의</option>
+	                <option value="아우터">아우터</option>
+	                <option value="악세서리">악세서리</option>
+	                <option value="신발">신발</option>
+	                <option value="가방">가방</option>
                   	</select>
                   </div></div>
                   </div>
@@ -100,9 +100,9 @@ pageEncoding="UTF-8"%>
                   </div>
                   </div></div></div>
               <div class="card-footer">
-                <button class="btn btn-info" style="width:30%;" onclick="submit()">조회</button>
+                <input type="button" class="btn btn-info" style="width:30%;" onclick="inquiry();" value="조회">
                 <button type="reset" class="btn btn-default float-right" style="width:30%;">초기화</button><br>
-              </div>
+              </div></form>
               <div class="card-header">
               	<h3 class="card-title">차트영역</h3>
               </div>
@@ -220,12 +220,11 @@ $(function () {
     	maxYear: parseInt(moment().format('YYYY'), 10),
     	opens: 'left',
     });
-    $('#reservation').setDate(null);
     
 });
 
 //조회 버튼 클릭
-function submit() {
+function inquiry() {
 	alert('submit');
 	$('#manage').DataTable().clear().draw();
 	$('#manage').DataTable({
@@ -233,7 +232,7 @@ function submit() {
 				url: '<%=request.getContextPath()%>/api/stat/manage',
 				dataType: 'json',
 				data: {
-					gdsCode: $('#gdsCode').val(), cateCode: $('#cateCode').val(), gdsName: $('#gdsName').val(), userId: $('#userId').val()
+					gdsCode: $('#gdsCode').val(), cateName: $('#cateName').val(), gdsName: $('#gdsName').val(), userId: $('#userId').val()
 				},
 	            dataSrc: ''
 			},

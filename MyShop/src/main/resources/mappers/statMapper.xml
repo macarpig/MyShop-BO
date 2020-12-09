@@ -6,6 +6,18 @@
 		select o.orderId, g.gdsName, g.gdsCode, c.cateName, o.userId, o.orderDate
 		from ordertbl o, orderDetail d, goods g, category c
 		where o.orderId = d.orderId and g.gdsCode = d.gdsCode and g.cateCode = c.cateCode
+		<if test="gdsCode != null and gdsCode != '' ">
+			and g.gdsCode = #{gdsCode}
+		</if>
+		<if test="cateName != null and cateName != '' ">
+			and c.cateName = #{cateName}
+		</if>
+		<if test="gdsName != null and gdsName != '' ">
+			and g.gdsName = #{gdsName}
+		</if>
+		<if test="userId != null and userId != '' ">
+			and o.userId = #{userId}
+		</if>
 	</select>
 	
 </mapper>

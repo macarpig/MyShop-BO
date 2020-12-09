@@ -16,8 +16,8 @@ public class StatServiceImpl implements StatService {
 	private StatDAO dao;
 
 	@Override
-	public List<StatDTO> listStat() throws Exception {
-		return dao.listStat();
+	public List<StatDTO> listStat(StatDTO stat) throws Exception {
+		return dao.listStat(stat);
 	}
 
 }

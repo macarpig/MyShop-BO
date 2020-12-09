@@ -7,5 +7,5 @@ import kr.daoko.dto.StatDTO;
 
 public interface StatService {
 	// 매출 목록 조회
-	public List<StatDTO> listStat() throws Exception;
+	public List<StatDTO> listStat(StatDTO stat) throws Exception;
 }

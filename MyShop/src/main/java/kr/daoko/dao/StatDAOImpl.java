@@ -21,7 +21,7 @@ public class StatDAOImpl implements StatDAO {
 
 	// 매출 목록 조회
 	@Override
-	public List<StatDTO> listStat() throws Exception {
-		return sql.selectList(NAMESPACE + ".statList");
+	public List<StatDTO> listStat(StatDTO stat) throws Exception {
+		return sql.selectList(NAMESPACE + ".statList", stat);
 	}
 }
