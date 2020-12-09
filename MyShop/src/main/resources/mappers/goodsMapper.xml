@@ -41,4 +41,10 @@
       delete from goods
       where gdsCode = #{gdsCode}
    </delete>
+   
+   <!-- 총상품 개수  -->
+   <select id="productCount" resultType="int">
+   		select count(*)
+   		from goods
+   </select>
 </mapper>

@@ -47,4 +47,10 @@ public class GoodsDAOImpl implements GoodsDAO {
 		sql.delete(NAMESPACE + ".deleteGoods", gdsCode);
 	}
 	
+	@Override
+	//상품 총 개수
+	public int productCount() throws Exception {
+		return sql.selectOne(NAMESPACE + ".productCount");
+	}
+	
 }

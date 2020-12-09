@@ -44,4 +44,10 @@ public class MemberServiceImpl implements MemberService {
 	public List<GoodsMemberDTO> goodsMember(String gdsCode) throws Exception {
 		return dao.goodsMember(gdsCode);
 	}
+	
+	//회원 총 수
+	@Override
+	public int memberCount() throws Exception {
+		return dao.memberCount();
+	}
 }

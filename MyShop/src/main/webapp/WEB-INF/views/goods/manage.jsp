@@ -59,7 +59,7 @@ pageEncoding="UTF-8"%>
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">쇼핑몰에 등록된 상품의 정보</h3>
-                <input type="button" id="btn_add" value="상품추가" onclick="goaddwindow()" />
+                <button id="addwindow" onclick="addwindow();">상품추가</button>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -159,8 +159,8 @@ $('#goods tbody').on('click', 'tr', function() {
 	location.href="detail?gdsCode=" + table.row(this).data().gdsCode;
 });
 
-function goaddwindow() {
-	location.href="/add";
+function addwindow() {
+	location.href="../goods/addwindow";
 }
 </script>
 </body>

@@ -47,4 +47,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<GoodsMemberDTO> goodsMember(String gdsCode) throws Exception {
 		return sql.selectList(NAMESPACE + ".goodsmember", gdsCode);
 	}
+	
+	@Override
+	public int memberCount() throws Exception {
+		return sql.selectOne(NAMESPACE + ".memberCount");
+	}
 }

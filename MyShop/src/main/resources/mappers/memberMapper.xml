@@ -45,4 +45,10 @@
       inner join goods g on d.gdsCode = g.gdsCode
       where g.gdsCode = #{gdsCode}
    </select>
+   
+   <!--멤버 총 수  -->
+   <select id="memberCount" resultType="int">
+   		select count(*) 
+   		from member
+   </select>
 </mapper>

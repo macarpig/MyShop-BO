@@ -20,4 +20,6 @@ public interface MemberService {
 	
 	// 특정 상품을 구매한 회원정보 조회
 	public List<GoodsMemberDTO> goodsMember(String gdsCode) throws Exception;
+	
+	public int memberCount() throws Exception;
 }

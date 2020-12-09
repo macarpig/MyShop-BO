@@ -43,4 +43,10 @@ public class GoodsServiceImpl implements GoodsService {
 	public void deleteGoods(String gdsCode) throws Exception {
 		dao.deleteGoods(gdsCode);
 	}
+	
+	//상품 총 개수
+	@Override
+	public int productCount() throws Exception {
+		return dao.productCount();
+	}
 }
