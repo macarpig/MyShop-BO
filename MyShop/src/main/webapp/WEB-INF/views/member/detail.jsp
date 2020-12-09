@@ -184,6 +184,18 @@ pageEncoding="UTF-8"%>
                   </thead>
                 </table>
               </div>
+              <table id="memo" class="table table-bordered table-hover">
+                  <thead>
+	                  <tr>
+	                    <th>메모</th>
+	                  </tr>
+                  </thead>
+                  <tbody>
+                  	<tr>
+                  		<td>${member.userMemo}</td>
+                  	</tr>
+                  </tbody>
+                </table>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -289,6 +301,9 @@ var qna = $('#qna').DataTable({
 
 $('#qna tbody').on('click', 'tr', function() {
 	location.href="<%=request.getContextPath()%>/qna/view?idx=" + qna.row(this).data().idx;
+});
+$('#memo tbody').on('click','tr',function() {
+	location.href="<%=request.getContextPath()%>/member/memo?userId="+userId;
 });
 </script>
 </body>

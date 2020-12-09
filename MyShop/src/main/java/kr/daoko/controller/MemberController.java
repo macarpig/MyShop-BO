@@ -1,11 +1,14 @@
 package kr.daoko.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,5 +106,20 @@ public class MemberController {
 		return "member/detail";
 	}*/
 	
+	@GetMapping("/memo")
+	public String getMemberMemo(@RequestParam("userId") String userId, Model model) throws Exception {
+		MemberDTO member = memberService.viewMember(userId);
+		
+		model.addAttribute("member", member);
+		
+		return "member/memo";
+	}
 	
+	@PostMapping("/memo")
+	public String postMemberMemo(HttpServletRequest request, MemberDTO dto) throws Exception {
+		memberService.modifyMember(dto);
+		
+		String referer = request.getHeader("Referer");
+		return "redirect:"+referer;
+	}
 }

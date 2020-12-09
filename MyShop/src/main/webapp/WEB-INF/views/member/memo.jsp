@@ -59,52 +59,39 @@
 	              <h3 class="card-title">General</h3>
 	            </div>
 	            <div class="card-body">
-	              <div class="form-group">
-	                <label for="userId">회원 ID</label>
-	                <input type="text" id="userId" name="userId" class="form-control" value="${member.userId}" readonly="readonly">
-	              </div>
-	              <div class="form-group">
-	                <label for="userName">이름</label>
-	                <input type="text" id="userName" name="userName" class="form-control" value="${member.userName}">
-	              </div>
-	              <div class="form-group">
-	                <label for="userEmail">이메일</label>
-	                <input type="text" id="userEmail" name="userEmail" class="form-control" value="${member.userEmail}">
-	              </div>
-	              <div class="form-group">
-	                <label for="userTel">연락처</label>
-	                <input type="text" id="userTel" name="userTel" class="form-control" value="${member.userTel}">
-	              </div>
-	              <div class="form-group">
-	                <label for="userZipcode">우편번호</label>
-	                <input type="text" id="userZipcode" name="userZipcode" class="form-control" value="${member.userZipcode}">
-	              </div>
-	              <div class="form-group">
-	                <label for="userAddr1">주소</label>
-	                <input type="text" id="userAddr1" name="userAddr1" class="form-control" value="${member.userAddr1}">
-	              </div>
-	              <div class="form-group">
-	                <label for="userAddr2">상세 주소</label>
-	                <input type="text" id="userAddr2" name="userAddr2" class="form-control" value="${member.userAddr2}">
-	              </div>
-	              <div class="form-group">
-	                <label>등급</label>
-	                <select name="userRank" class="form-control custom-select">
-	                  <option selected disabled>선택</option>
-	                  <option value="VIP" <c:if test="${member.userRank == 'VIP'}">selected</c:if>>VIP</option>
-	                  <option value="우수회원" <c:if test="${member.userRank == '우수회원'}">selected</c:if>>우수회원</option>
-	                  <option value="일반회원" <c:if test="${member.userRank == '일반회원'}">selected</c:if>>일반회원</option>
-	                </select>
-	              </div>
-	              <div class="form-group">
-	                <label>권한</label>
-	                <select name="userAuth" class="form-control custom-select">
-	                  <option selected disabled>선택</option>
-	                  <option value=false <c:if test="${member.userAuth == false}">selected</c:if>>사용자</option>
-	                  <option value=true <c:if test="${member.userAuth == true}">selected</c:if>>관리자</option>
-	                </select>
-	              </div>
-	              <input type="hidden" name="memo" value="${member.userMemo}"/>
+	              
+	              
+	                <input type="hidden" id="userId" name="userId" class="form-control" value="${member.userId}" readonly="readonly">
+	              
+	              
+	              
+	                <input type="hidden" id="userName" name="userName" class="form-control" value="${member.userName}">
+	              
+	              
+	              
+	                <input type="hidden" id="userEmail" name="userEmail" class="form-control" value="${member.userEmail}">
+	              
+	              
+	              
+	                <input type="hidden" id="userTel" name="userTel" class="form-control" value="${member.userTel}">
+	              
+	              
+	              
+	                <input type="hidden" id="userZipcode" name="userZipcode" class="form-control" value="${member.userZipcode}">
+	              
+	              
+	              
+	                <input type="hidden" id="userAddr1" name="userAddr1" class="form-control" value="${member.userAddr1}">
+	              
+	              
+	              
+	                <input type="hidden" id="userAddr2" name="userAddr2" class="form-control" value="${member.userAddr2}">
+	                <input type="hidden" id="userRank" name="userRank" class="form-control" value="${member.userRank}">
+	                <input type="hidden" id="userAuth" name="userAuth" class="form-control" value="${member.userAuth}">
+	                
+	              <label for="userMemo">특이사항</label>
+	              <textarea rows="5" cols="50" id="userMemo" name="userMemo" class="form-control">${member.userMemo}</textarea>
+	              <!-- <input type="text" id="userMemo" name="userMemo" value="${member.userMemo}"/> -->
 	            </div>
 	            <!-- /.card-body -->
 	          </div>

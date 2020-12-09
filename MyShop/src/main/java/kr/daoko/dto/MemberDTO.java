@@ -11,7 +11,14 @@ public class MemberDTO {
 	private String userAddr2;
 	private String userRank;
 	private boolean userAuth;
+	private String userMemo;
 	
+	public String getUserMemo() {
+		return userMemo;
+	}
+	public void setUserMemo(String userMemo) {
+		this.userMemo = userMemo;
+	}
 	public String getUserId() {
 		return userId;
 	}

@@ -9,7 +9,7 @@
    
 	<!-- 회원 정보 조회 -->
 	<select id="viewmember" resultType="kr.daoko.dto.MemberDTO">
-		select userId, userName, userEmail, userTel, userZipcode, userAddr1, userAddr2, userRank, userAuth
+		select userId, userName, userEmail, userTel, userZipcode, userAddr1, userAddr2, userRank, userAuth, userMemo
 		from member
 		where userId = #{userId}
 	</select>
@@ -25,7 +25,8 @@
 			userAddr1 = #{userAddr1},
 			userAddr2 = #{userAddr2},
 			userRank = #{userRank},
-			userAuth = #{userAuth}
+			userAuth = #{userAuth},
+			userMemo = #{userMemo}
 		where userId = #{userId}
 	</update>
 
