@@ -137,7 +137,7 @@
                   <i class="fas fa-chart-pie mr-1"></i>
                   Sales
                 </h3>
-                <div class="card-tools">
+                <!-- <div class="card-tools">
                   <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
                       <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
@@ -146,11 +146,11 @@
                       <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
                     </li>
                   </ul>
-                </div>
+                </div> -->
               </div><!-- /.card-header -->
               <div class="card-body">
-                <div class="tab-content p-0">
-                  <!-- Morris chart - Sales -->
+                <!-- <div class="tab-content p-0">
+                  Morris chart - Sales
                   <div class="chart tab-pane active" id="revenue-chart"
                        style="position: relative; height: 300px;">
                       <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>                         
@@ -158,7 +158,8 @@
                   <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
                     <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>                         
                   </div>  
-                </div>
+                </div> -->
+                <canvas id="chart"></canvas>
               </div><!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -695,5 +696,67 @@
 <script src="<%=request.getContextPath()%>/resources/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=request.getContextPath()%>/resources/dist/js/demo.js"></script>
+<script>
+
+var chartLabels = [];
+var chartData1=[], chartData2=[], chartData3=[];
+var txtTitle = '전체 매출 차트';
+
+window.onload = function() {
+	$.getJSON("<%=request.getContextPath()%>/api/stat/manageChart",
+			function(data) {
+	  $.each(data, function(idx, obj) {
+		 chartLabels.push(obj.period);
+	     chartData1.push(obj.totalPrice);
+	     chartData2.push(obj.orderCnt);
+	     chartData3.push(obj.cancleCnt);
+	  });
+	  createChart();
+	});
+};
+
+function createChart() {
+	var ctx = document.getElementById('chart').getContext('2d');
+	var chartData = {
+			labels: chartLabels,
+			datasets: [{
+				type: 'line',
+				label: '총 주문금액(단위:10만원)',
+				borderColor: '#FF5E00',
+				borderWidth: 2,
+				fill: false,
+				data: chartData1
+			}, {
+				type: 'bar',
+				label: '주문 수',
+				backgroundColor: '#1DDB16',
+				data: chartData2,
+				borderColor: 'white',
+				borderWidth: 2
+			}, {
+				type: 'bar',
+				label: '취소/교환/반품 수',
+				backgroundColor: '#FF00DD',
+				data: chartData3
+			}]
+
+		};
+	window.myMixedChart = new Chart(ctx, {
+		type: 'bar',
+		data: chartData,
+		options: {
+			responsive: true,
+			title: {
+				display: true,
+				text: txtTitle
+			},
+			tooltips: {
+				mode: 'index',
+				intersect: true
+			}
+		}
+	});
+}
+</script>
 </body>
 </html>
