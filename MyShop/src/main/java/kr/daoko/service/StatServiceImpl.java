@@ -26,4 +26,9 @@ public class StatServiceImpl implements StatService {
 		return dao.statChart(stat);
 	}
 
+	@Override
+	public int statMonth() throws Exception {
+		return dao.statMonth();
+	}
+
 }

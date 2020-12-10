@@ -32,4 +32,10 @@ public class StatDAOImpl implements StatDAO {
 	public List<StatChartDTO> statChart(StatDTO stat) throws Exception {
 		return sql.selectList(NAMESPACE + ".statChart", stat);
 	}
+
+
+	@Override
+	public int statMonth() throws Exception {
+		return sql.selectOne(NAMESPACE + ".statMonth");
+	}
 }

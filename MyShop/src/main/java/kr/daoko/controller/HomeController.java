@@ -19,6 +19,7 @@ import kr.daoko.dto.OrderStatusDTO;
 import kr.daoko.service.GoodsService;
 import kr.daoko.service.MemberService;
 import kr.daoko.service.OrderService;
+import kr.daoko.service.StatService;
 
 @Controller
 public class HomeController {
@@ -35,6 +36,9 @@ public class HomeController {
 	
 	@Inject
 	private GoodsService goodsService;
+	
+	@Inject
+	private StatService statService;
 	
 	// 濡쒓렇�씤 �럹�씠吏� 異쒕젰
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -85,11 +89,13 @@ public class HomeController {
 		
 		int m_count = memberService.memberCount();
 		int g_count = goodsService.productCount();
+		int statMonth = statService.statMonth();
 		
 		OrderStatusDTO states = orderService.orderStates();
 		model.addAttribute("goods", g_count);
 		model.addAttribute("states", states);
 		model.addAttribute("member", m_count);
+		model.addAttribute("statMon", statMonth);
 		return "main";
 	}
 }

@@ -83,7 +83,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h5>전월 대비 이번월 매출:${statMon}<sup style="font-size: 20px">%</sup></h5>
 
                 <p>매출 조회</p>
               </div>

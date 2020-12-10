@@ -12,4 +12,7 @@ public interface StatService {
 	
 	// 매출 차트 조회
 	public List<StatChartDTO> statChart(StatDTO stat) throws Exception;
+	
+	//매출 전월 이번월 비교
+		public int statMonth() throws Exception;
 }

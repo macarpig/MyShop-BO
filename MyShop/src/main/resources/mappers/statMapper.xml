@@ -33,4 +33,9 @@
 		</if>
 		group by date_format(orderDate, '%Y-%m-%d')
 	</select>
+	
+	<select id="statMonth" resultType="int">
+		select count(case when date_format(orderDate, '%Y-%m') = date_format(current_date(), '%Y-%m') then 1 end)/count(case when date_format(orderDate, '%Y-%m') = date_format(date_sub(current_date(), INTERVAL 1 month), '%Y-%m') then 1 end)*100 as statMonth
+		from ordertbl
+	</select>
 </mapper>
