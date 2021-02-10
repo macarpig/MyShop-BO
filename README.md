@@ -30,15 +30,15 @@
 ---
 # Run Video
 상품 등록 및 관리 ↓click!  
-[![Watch the video](https://img.youtube.com/vi/oRt13QkbKSs/0.jpg)](https://www.youtube.com/watch?v=oRt13QkbKSs)
+[![Watch the video](https://img.youtube.com/vi/oRt13QkbKSs/0.jpg)](https://www.youtube.com/watch?v=oRt13QkbKSs)<br/>
 주문 관리 ↓click!  
-[![Watch the video](https://img.youtube.com/vi/rQMbEzrlqd4/0.jpg)](https://www.youtube.com/watch?v=rQMbEzrlqd4)
+[![Watch the video](https://img.youtube.com/vi/rQMbEzrlqd4/0.jpg)](https://www.youtube.com/watch?v=rQMbEzrlqd4)<br/>
 매출 관리 ↓click!  
-[![Watch the video](https://img.youtube.com/vi/OtOdKJ7wvoc/0.jpg)](https://www.youtube.com/watch?v=OtOdKJ7wvoc)
+[![Watch the video](https://img.youtube.com/vi/OtOdKJ7wvoc/0.jpg)](https://www.youtube.com/watch?v=OtOdKJ7wvoc)<br/>
 회원 관리 ↓click!  
-[![Watch the video](https://img.youtube.com/rcMKF4nCnBo/0.jpg)](https://www.youtube.com/watch?v=rcMKF4nCnBo)
+[![Watch the video](https://img.youtube.com/vi/rcMKF4nCnBo/0.jpg)](https://www.youtube.com/watch?v=rcMKF4nCnBo)<br/>
 문의 관리 ↓click!  
-[![Watch the video](https://img.youtube.com/F5tPrIV3SFE/0.jpg)](https://www.youtube.com/watch?v=F5tPrIV3SFE)
+[![Watch the video](https://img.youtube.com/vi/F5tPrIV3SFE/0.jpg)](https://www.youtube.com/watch?v=F5tPrIV3SFE)<br/>
 
 
 
