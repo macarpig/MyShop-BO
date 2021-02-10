@@ -33,11 +33,11 @@
 [![Watch the video](https://img.youtube.com/vi/oRt13QkbKSs/0.jpg)](https://www.youtube.com/watch?v=oRt13QkbKSs)
 주문 관리 ↓click!  
 [![Watch the video](https://img.youtube.com/vi/rQMbEzrlqd4/0.jpg)](https://www.youtube.com/watch?v=rQMbEzrlqd4)
-매출 관리 ↓click!
+매출 관리 ↓click!  
 [![Watch the video](https://img.youtube.com/vi/OtOdKJ7wvoc/0.jpg)](https://www.youtube.com/watch?v=OtOdKJ7wvoc)
-회원 관리
+회원 관리 ↓click!  
 [![Watch the video](https://img.youtube.com/rcMKF4nCnBo/0.jpg)](https://www.youtube.com/watch?v=rcMKF4nCnBo)
-문의 관리
+문의 관리 ↓click!  
 [![Watch the video](https://img.youtube.com/F5tPrIV3SFE/0.jpg)](https://www.youtube.com/watch?v=F5tPrIV3SFE)
 
 
