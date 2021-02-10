@@ -30,8 +30,8 @@
 
 ---
 # Run Video
-↓click!
-[![Watch the video](https://img.youtube.com/vi/watch?v=oRt13QkbKSs/0.jpg)](https://www.youtube.com/watch?v=oRt13QkbKSs)
+↓click!  
+[![Watch the video](https://img.youtube.com/vi/oRt13QkbKSs/0.jpg)](https://www.youtube.com/watch?v=oRt13QkbKSs)
 ↓click!
 [![Watch the video](https://user-images.githubusercontent.com/65270992/107238570-58469e00-6a6b-11eb-8dbf-9e9e3fe80219.png)](https://user-images.githubusercontent.com/65270992/107238046-bfb01e00-6a6a-11eb-8791-d3132657f806.mp4)
 ↓click!
